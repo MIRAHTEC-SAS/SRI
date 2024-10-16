@@ -1,0 +1,48 @@
+<?php
+
+//  ------------------------ API - GET ==> Action read -------------------------------
+
+// GET Batiments
+
+    if ($action == 'getBatiments') {
+        $sql = $con->query("SELECT * FROM batiments ORDER BY id DESC");
+
+        if (!$sql) {
+            $result['error'] = "Impossible de lire les donnees ";
+            $result['message'] = "Impossible de lire les donnees !";
+        } 
+        else {
+            $result['error'] = false;
+            $batiments = [];
+
+            while ($row = $sql->fetch_assoc()) {
+                array_push($batiments, $row);
+            }
+
+            $result['batiments'] = $batiments;
+        }
+    }
+
+// GET Etages
+
+    if ($action == 'getEtages') {
+        $sql = $con->query("SELECT * FROM etages ORDER BY id DESC");
+
+        if (!$sql) {
+            $result['error'] = "Impossible de lire les donnees ";
+            $result['message'] = "Impossible de lire les donnees !";
+        } 
+        else {
+            $result['error'] = false;
+            $etages = [];
+
+            while ($row = $sql->fetch_assoc()) {
+                array_push($etages, $row);
+            }
+
+            $result['etages'] = $etages;
+        }
+    }
+
+
+
