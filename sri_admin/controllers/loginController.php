@@ -22,8 +22,9 @@ $pwdH = hash('sha256', $pass);
 
 
 
-$query1 = " SELECT * FROM users  WHERE email ='" . $login . "' and password='" . $pwdH . "'";
+$query1 = "SELECT * from users where statut = 1 AND email ='$login' AND password = '$pwdH'";
 $result1 = mysqli_query($con, $query1);
+
 while ($row = mysqli_fetch_array($result1)) {
     $emailUser = $row['email'];
     $passUser = $row['password'];
@@ -40,10 +41,8 @@ if (isset($_POST['login'])) {
         $_SESSION['message'] = "Veuillez remplir tous les champs ! ";
         header('Location: ../sri_admin');
     } else {
-        $query = "SELECT * from users where email ='" . $login . "' and password = '" . $pwdH . "'";
+        $query = "SELECT * from users where statut = 1 AND email ='$login' AND password = '$pwdH'";
         $result = mysqli_query($con, $query);
-
-
         if (mysqli_fetch_assoc($result)) {
             $_SESSION['User'] = $login;
             $_SESSION['UserPass'] = $passUser;
@@ -83,6 +82,8 @@ if (isset($_POST['login'])) {
                             break;
                         case 'Responsable':
                             header('Location: ../dashboard');
+                        case 'Gestionnaire':
+                            header('Location: ../dashboard');
                             break;
                     }
                 } else {
@@ -96,7 +97,7 @@ if (isset($_POST['login'])) {
             $_SESSION['errorMsg'] = true;
             $_SESSION['successMsg'] = false;
             $_SESSION['message'] = "Email ou mot de passe incorrecte ! ";
-            header('Location: ../sri_admin');
+            header('Location: ../');
         }
     }
 } else {

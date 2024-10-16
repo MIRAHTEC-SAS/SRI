@@ -3,8 +3,6 @@
 		<div class="col-md-5 col-sm-6">
 			<div class="box box-body b-1 text-center no-shadow">
 				<div id="image-popups">
-					<!-- <a><img src="../<?php //echo $image; 
-																?>" id="product-image" class="img-fluid" alt="" /></a> -->
 					<a href="../sri_client/notifications/<?php echo $image; ?>" data-effect="mfp-3d-unfold"><img src="../sri_client/notifications/<?php echo $image; ?>" class="img-fluid" alt="" /></a>
 				</div>
 			</div>
@@ -25,11 +23,17 @@
 				</div>
 			</div>
 			<hr>
-			<div class="gap-items">
-				<button class="btn btn-success"><a href="details_signalements?numero_incident=<?php echo $numero_incident; ?>&amp;affect=1" style="color:white"><i class="mdi mdi-share"></i> Affecter</a></button>
-				<button class="btn btn-warning"><a href="details_signalements?numero_incident=<?php echo $numero_incident; ?>&amp;edit=1" style="color:white"><i class="mdi mdi-pencil"></i> Editer</a></button>
-				<button class="btn btn-danger"><a href="details_signalements?numero_incident=<?php echo $numero_incident; ?>&amp;rejet=1" style="color:white"><i class="mdi mdi-close"></i> Rejeter</a></button>
-			</div>
+			<?php
+			$utilisateurConnecte = $_SESSION['prenom'] . ' ' . $_SESSION['nom'];
+			$role = $_SESSION['role'];
+			if (($role == 'Responsable' && $utilisateurConnecte == $responsableDage) && $statut == 'en attente') :
+			?>
+				<div class="gap-items">
+					<button class="btn btn-success"><a href="details_signalements?numero_incident=<?php echo $numero_incident; ?>&amp;affect=1" style="color:white"><i class="mdi mdi-share"></i> Affecter</a></button>
+					<button class="btn btn-warning"><a href="details_signalements?numero_incident=<?php echo $numero_incident; ?>&amp;edit=1" style="color:white"><i class="mdi mdi-pencil"></i> Editer</a></button>
+					<button class="btn btn-danger"><a href="details_signalements?numero_incident=<?php echo $numero_incident; ?>&amp;rejet=1" style="color:white"><i class="mdi mdi-close"></i> Rejeter</a></button>
+				</div>
+			<?php endif; ?>
 
 		</div>
 		<div class="col-lg-12 col-md-12 col-sm-12">

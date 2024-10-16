@@ -203,7 +203,6 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 		$getIncidentsE = mysqli_query($con, "SELECT * FROM `signalements` INNER JOIN services on services.code_service=signalements.code_service where signalements.numero_incident='$numero_incident'");
 
 		while ($row = mysqli_fetch_array($getIncidentsE)) {
-
 			$service = $row['libelle'];
 			$descriptionEdit = $row['description'];
 			$code_service = $row['code_service'];
@@ -212,6 +211,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 			$heure_reception = date('H:i', strtotime($row['date_reception']));
 			$image = $row['photo'];
 			$contact = $row['telephone'];
+			$statut = $row['statut'];
 			// date("Y-m-d H:i:s");
 		}
 
@@ -265,7 +265,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 										<ol class="breadcrumb">
 											<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
 											<li class="breadcrumb-item" aria-current="page">Signalements</li>
-											<li class="breadcrumb-item active" aria-current="page">En attente</li>
+											<!-- <li class="breadcrumb-item active" aria-current="page">En attente</li> -->
 										</ol>
 									</nav>
 								</div>

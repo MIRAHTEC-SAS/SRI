@@ -152,7 +152,8 @@ $prenomsNomsResp = [];
 // $code_incident='201';
 
 // Responsables de domaines  
-$reqInfosRespDage = $con->query("SELECT * FROM `responsables_incidents` inner JOIN responsables_dage ON responsables_dage.matricule=responsables_incidents.matricule_responsable WHERE responsables_incidents.code_incident='$code_incident'");
+$reqInfosRespDage = $con->query("SELECT * FROM `responsables_incidents` inner JOIN responsables_dage ON responsables_dage.matricule=responsables_incidents.matricule_responsable INNER JOIN users ON responsables_dage.email=users.email
+ WHERE users.statut=1 AND responsables_incidents.code_incident='$code_incident'");
 
 while ($row = mysqli_fetch_array($reqInfosRespDage)) {
     $telephonesResp[] = $row['telephone'];
@@ -217,7 +218,8 @@ $prenomsNomsGest = [];
 // $code_service='43100000';
 
 // Responsables de domaines  
-$reqInfosGest = $con->query("SELECT * FROM `gestionnaires_services` INNER JOIN gestionnaires ON gestionnaires.matricule_gestionnaire=gestionnaires_services.matricule_gestionnaire WHERE gestionnaires_services.code_service='$code_service'");
+$reqInfosGest = $con->query("SELECT * FROM `gestionnaires_services` INNER JOIN      gestionnaires ON gestionnaires.matricule_gestionnaire=gestionnaires_services.matricule_gestionnaire INNER JOIN users ON gestionnaires.email=users.email
+ WHERE users.statut=1 AND gestionnaires_services.code_service='$code_service'");
 
 while ($row = mysqli_fetch_array($reqInfosGest)) {
     $telephonesGest[] = $row['telephone'];

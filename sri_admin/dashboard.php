@@ -1,6 +1,6 @@
 ﻿<?php
 include('config/app.php');
-if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'] == 'Administrateur' || $_SESSION['role'] == 'Responsable') {
+if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'] == 'Administrateur' || $_SESSION['role'] == 'Responsable' || $_SESSION['role'] == 'Gestionnaire') {
 
 	$emailUser = $_SESSION['email'];
 ?>
@@ -148,7 +148,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 	$getIncidents = mysqli_query($con, "SELECT * FROM `signalements` 
 	INNER JOIN services on services.code_service=signalements.code_service 
 	INNER JOIN type_incidents on type_incidents.code_incident=signalements.code_incident
-	order by signalements.id desc limit 10");
+	 ORDER BY signalements.id DESC limit 10");
 
 	// while ($row = mysqli_fetch_array($getIncidents)) { 
 	//     $service = $row['sigle'];
@@ -188,9 +188,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 	interventions.type_intervenant
 	FROM `interventions`
 	INNER JOIN services ON services.code_service=interventions.service
-	INNER JOIN type_incidents ON type_incidents.code_incident=interventions.code_incident");
-
-
+	INNER JOIN type_incidents ON type_incidents.code_incident=interventions.code_incident ORDER BY interventions.id DESC");
 	?>
 
 	<body class="hold-transition light-skin sidebar-mini theme-primary fixed">

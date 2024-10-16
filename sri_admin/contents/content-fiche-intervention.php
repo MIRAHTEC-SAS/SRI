@@ -138,36 +138,20 @@
 			<!-- <button class="btn btn-danger"><i class="mdi mdi-close"></i></button> -->
 			<!-- <a class="popup-with-form btn btn-danger" href="#test-form"><i class="mdi mdi-close"></i> Annuler l'intervention</a> -->
 
+
+
+
+
+			<!-- Option pour faire une préapprobation -->
+			<!-- <a class="popup-with-form btn btn-info" href="#preapprobation"><i class="mdi mdi-check"></i> Préapprobation</a>
+				 <a class="popup-with-form btn btn-warning" href="#relance"><i class="mdi mdi-format-rotate-90"></i> Relancer l'intervenant</a>
+				 <a class="popup-with-form btn btn-danger" href="#test-form"><i class="mdi mdi-close"></i> Annuler l'intervention</a>
+	 -->
+
 			<?php
 			$utilisateurConnecte = $_SESSION['prenom'] . ' ' . $_SESSION['nom'];
 			$role = $_SESSION['role'];
-
-			if ((($role == 'Intervenant' && $utilisateurConnecte == $intervenant_incident) || ($role == 'Responsable' && $utilisateurConnecte == $responsableDage) || $role == 'Administrateur') && $statut == 'planifiee') : ?>
-
-				<!-- Option pour faire une préapprobation -->
-				<a class="popup-with-form btn btn-info" href="#preapprobation"><i class="mdi mdi-check"></i> Préapprobation</a>
-				<a class="popup-with-form btn btn-warning" href="#relance"><i class="mdi mdi-format-rotate-90"></i> Relancer l'intervenant</a>
-				<a class="popup-with-form btn btn-danger" href="#test-form"><i class="mdi mdi-close"></i> Annuler l'intervention</a>
-			<?php endif; ?>
-
-			<?php
-			$gestionnaireDuService =	$con->query("SELECT 
-							gestionnaires_services.id,
-							gestionnaires.matricule_gestionnaire,
-							gestionnaires.prenom,
-							gestionnaires.nom,
-							gestionnaires.email,
-							gestionnaires.telephone
-							FROM 
-							gestionnaires_services
-							INNER JOIN 
-							gestionnaires ON gestionnaires.matricule_gestionnaire = gestionnaires_services.matricule_gestionnaire
-							WHERE 
-							gestionnaires_services.code_service = '$code_service'
-					");
-			$gestionnaireDuService = $gestionnaireDuService->fetch_assoc();
-			$NomCompletGestionnaire = $gestionnaireDuService['prenom'] . '' . $gestionnaireDuService['nom'];
-			if ((($role == 'Gestionnaire' && $NomCompletGestionnaire == $utilisateurConnecte) || $role == 'Administrateur') && $statut == 'Approuvée par le responsable') : ?>
+			if (($role == 'Responsable' && $utilisateurConnecte == $responsableDage) && $statut == 'planifiee') : ?>
 				<!-- Option pour clore l'incident -->
 				<a class="popup-with-form btn btn-success" href="#cloture"><i class="mdi mdi-check"></i> Clôturer l'incident</a>
 				<a class="popup-with-form btn btn-warning" href="#relance"><i class="mdi mdi-format-rotate-90"></i> Relancer l'intervenant</a>
