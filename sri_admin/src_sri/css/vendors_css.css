@@ -4,8 +4,8 @@
 @import url(../../assets_sri/vendor_components/bootstrap/dist/css/bootstrap.css);
 @import url(../../assets_sri/vendor_components/perfect-scrollbar/css/perfect-scrollbar.css);
 @import url(../../assets_sri/vendor_components/morris.js/morris.css);
-@import url(../../assets_sri/vendor_components/OwlCarousel2/dist/../../assets_sri/owl.carousel.css);
-@import url(../../assets_sri/vendor_components/OwlCarousel2/dist/../../assets_sri/owl.theme.default.min.css);
+@import url(../../assets_sri/vendor_components/OwlCarousel2/dist/assets/owl.carousel.css);
+@import url(../../assets_sri/vendor_components/OwlCarousel2/dist/assets/owl.theme.default.min.css);
 @import url(../../assets_sri/vendor_components/horizontal-timeline/css/horizontal-timeline.css);
 @import url(../../assets_sri/vendor_components/flexslider/flexslider.css);
 @import url(../../assets_sri/vendor_components/prism/prism.css);
@@ -43,7 +43,8 @@
 @import url(../../assets_sri/vendor_plugins/timepicker/bootstrap-timepicker.min.css);
 @import url(../../assets_sri/vendor_plugins/pace/pace.min.css);
 @import url(../../assets_sri/vendor_components/fullcalendar/fullcalendar.min.css);
-@import "../../assets_sri/vendor_components/fullcalendar/fullcalendar.print.min.css" print;
+@import "../../assets_sri/vendor_components/fullcalendar/fullcalendar.print.min.css"
+  print;
 @import url(../../assets_sri/vendor_components/weather-icons/weather-icons.css);
 
 /*# sourceMappingURL=vendors_css.css.map */

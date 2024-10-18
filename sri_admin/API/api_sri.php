@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include('../config/app.php');
 
 
@@ -15,7 +15,6 @@ if (isset($_GET['action'])) {
     include('update.php');
     // --------------------- DELETE ----------------------------------  
     include('delete.php');
-
 }
 
 // On ferme la connexion

@@ -87,12 +87,14 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 				$responsable = $row['prenom'] . '' . $row['nom'];
 				$liste_codes_incident_resp[] = $row['code_incident'];
 			}
-
-			$t_i_1 = $liste_codes_incident_resp[0];
-			$t_i_2 = $liste_codes_incident_resp[1];
-			$t_i_3 = $liste_codes_incident_resp[2];
-			$t_i_4 = $liste_codes_incident_resp[3];
-			$t_i_5 = $liste_codes_incident_resp[4];
+			$t_i_0 = '';
+			$t_i_1 = '';
+			$t_i_2 = '';
+			$t_i_3 = '';
+			$t_i_4 = '';
+			for ($i = 0; $i < count($liste_codes_incident_resp); $i++) {
+				${'t_i_' . $i} = $liste_codes_incident_resp[$i];
+			}
 			$getSignalements = mysqli_query($con, "SELECT 
 			signalements.date_reception,
 			signalements.numero_incident,
@@ -113,7 +115,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 			INNER JOIN type_incidents ON type_incidents.code_incident=signalements.code_incident 
 			INNER JOIN code_priorite ON code_priorite.code=signalements.code_priorite 
 			INNER JOIN interventions ON interventions.numero_incident=signalements.numero_incident
-			WHERE signalements.statut='termine' AND signalements.code_incident IN ('$t_i_1','$t_i_2','$t_i_3','$t_i_4','$t_i_5')");
+			WHERE signalements.statut='termine' AND signalements.code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
 			break;
 		case 'Gestionnaire':
 			$getSignalements = mysqli_query($con, "SELECT 

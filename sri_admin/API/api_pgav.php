@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include('../config/app.php');
 
 
@@ -15,14 +15,13 @@ if (isset($_GET['action'])) {
     include('update.php');
     // --------------------- DELETE ----------------------------------  
     include('delete.php');
-
 }
 
 if (isset($_POST['notesAgents'])) {
-    include ('notes.php');
+    include('notes.php');
 }
 if (isset($_POST['validerNotesAgents'])) {
-    include ('validationNotes.php');
+    include('validationNotes.php');
 }
 
 // On ferme la connexion

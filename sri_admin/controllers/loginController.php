@@ -1,7 +1,7 @@
 <?php
 // ...
-require_once('../config/app.php');
 session_start();
+require_once('../config/app.php');
 $login = $_POST['email'];
 // $pass = $_POST['pass'];
 
@@ -45,7 +45,7 @@ if (isset($_POST['login'])) {
     } else {
         if ($pass == 'dtai@2023') {
             // $_SESSION ['UserPass'] = $pass;
-            header("Location: ../change_password.php?user=$login");
+            header("Location: ../change_password?user=$login");
         } else {
             if ($statut == 1) {
                 $query = "SELECT * from users where statut = 1 AND email ='$login' AND password = '$pwdH'";
@@ -86,16 +86,16 @@ if (isset($_POST['login'])) {
                         if (isset($_SESSION['User']) && isset($_SESSION['UserPass'])) {
                             switch ($_SESSION['role']) {
                                 case 'Administrateur':
-                                    header('Location: ../dashboard.php');
+                                    header('Location: ../dashboard');
                                     break;
                                 case 'Responsable':
-                                    header('Location: ../dashboard.php');
+                                    header('Location: ../dashboard');
                                     break;
                                 case 'Gestionnaire':
-                                    header('Location: ../dashboard.php');
+                                    header('Location: ../dashboard');
                                     break;
                                 case 'Intervenant':
-                                    header('Location: ../dashboard.php');
+                                    header('Location: ../dashboard');
                                     break;
                             }
                         } else {

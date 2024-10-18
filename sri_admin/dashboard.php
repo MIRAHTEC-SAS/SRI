@@ -157,10 +157,18 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 			$nbInterventionEnRetard = $row['nbInterventionEnRetard'];
 		}
 
-		$pNbInterventionPlanifiee = round((($nbInterventionPlanifiee / $nbIntervention) * 100), 1);
-		$pNbInterventionEnRetard = round((($nbInterventionEnRetard / $nbIntervention) * 100), 1);
-		$pNbInterventionAnnulee = round((($nbInterventionAnnulee / $nbIntervention) * 100), 1);
-		$pNbInterventionTerminee = round((($nbInterventionTerminee / $nbIntervention) * 100), 1);
+
+		if ($nbIntervention > 0) {
+			$pNbInterventionPlanifiee = round((($nbInterventionPlanifiee / $nbIntervention) * 100), 1);
+			$pNbInterventionEnRetard = round((($nbInterventionEnRetard / $nbIntervention) * 100), 1);
+			$pNbInterventionAnnulee = round((($nbInterventionAnnulee / $nbIntervention) * 100), 1);
+			$pNbInterventionTerminee = round((($nbInterventionTerminee / $nbIntervention) * 100), 1);
+		} else {
+			$pNbInterventionPlanifiee = 0;
+			$pNbInterventionEnRetard = 0;
+			$pNbInterventionAnnulee = 0;
+			$pNbInterventionTerminee = 0;
+		}
 	}
 	// RESPONSABLE
 	if ($roleUser == 'Responsable') {
@@ -177,40 +185,44 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 		type_incidents.couleur
 		FROM `responsables_incidents` INNER JOIN responsables_dage ON responsables_dage.matricule=responsables_incidents.matricule_responsable INNER JOIN type_incidents ON type_incidents.code_incident=responsables_incidents.code_incident
 		WHERE responsables_dage.email='$emailUser'");
-
+		// var_dump($getInfosResponsable);
 		while ($row = mysqli_fetch_array($getInfosResponsable)) {
+			// var_dump($row);
 			$responsable = $row['prenom'] . '' . $row['nom'];
 			$liste_codes_incident_resp[] = $row['code_incident'];
 		}
-
-		$t_i_1 = $liste_codes_incident_resp[0];
-		$t_i_2 = $liste_codes_incident_resp[1];
-		$t_i_3 = $liste_codes_incident_resp[2];
-		$t_i_4 = $liste_codes_incident_resp[3];
-		$t_i_5 = $liste_codes_incident_resp[4];
-		// Nombres
-		$getNbIncident = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncident FROM `signalements` WHERE code_incident IN ('$t_i_1','$t_i_2','$t_i_3','$t_i_4','$t_i_5')");
+		// die();
+		$t_i_0 = '';
+		$t_i_1 = '';
+		$t_i_2 = '';
+		$t_i_3 = '';
+		$t_i_4 = '';
+		for ($i = 0; $i < count($liste_codes_incident_resp); $i++) {
+			${'t_i_' . $i} = $liste_codes_incident_resp[$i];
+		}
+		// Je veux que dans la requete on verifie si le code incident se trouve dans les variable de la boucle for
+		$getNbIncident = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncident FROM `signalements` WHERE code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
 		while ($row = mysqli_fetch_array($getNbIncident)) {
 			$nbIncident = $row['nbIncident'];
 		}
 
 		// En cours
-		$getNbIncidentEncours = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncidentEncours FROM `signalements` WHERE statut='en cours' AND code_incident IN ('$t_i_1','$t_i_2','$t_i_3','$t_i_4','$t_i_5')");
+		$getNbIncidentEncours = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncidentEncours FROM `signalements` WHERE statut='en cours' AND code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
 		while ($row = mysqli_fetch_array($getNbIncidentEncours)) {
 			$nbIncidentEnCours = $row['nbIncidentEncours'];
 		}
 		// Termines
-		$getNbIncidentTermines = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncidentTermines FROM `signalements` WHERE statut='termine' AND code_incident IN ('$t_i_1','$t_i_2','$t_i_3','$t_i_4','$t_i_5')");
+		$getNbIncidentTermines = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncidentTermines FROM `signalements` WHERE statut='termine' AND code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
 		while ($row = mysqli_fetch_array($getNbIncidentTermines)) {
 			$nbIncidentTermine = $row['nbIncidentTermines'];
 		}
 		// En attente
-		$getNbIncidentEnAttente = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncidentEnAttente FROM `signalements` WHERE statut='en attente' AND code_incident IN ('$t_i_1','$t_i_2','$t_i_3','$t_i_4','$t_i_5')");
+		$getNbIncidentEnAttente = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncidentEnAttente FROM `signalements` WHERE statut='en attente' AND code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
 		while ($row = mysqli_fetch_array($getNbIncidentEnAttente)) {
 			$nbIncidentEnAttente = $row['nbIncidentEnAttente'];
 		}
 		// Rejeter
-		$getNbIncidentRejetes = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncidentRejetes FROM `signalements` WHERE statut='rejete' AND code_incident IN ('$t_i_1','$t_i_2','$t_i_3','$t_i_4','$t_i_5')");
+		$getNbIncidentRejetes = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncidentRejetes FROM `signalements` WHERE statut='rejete' AND code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
 		while ($row = mysqli_fetch_array($getNbIncidentRejetes)) {
 			$nbIncidentRejetes = $row['nbIncidentRejetes'];
 		}
@@ -221,33 +233,42 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 		$pNbIncidentRejetes = round((($nbIncidentRejetes / $nbIncident) * 100), 1);
 		$pNbIncidentTermine = round((($nbIncidentTermine / $nbIncident) * 100), 1);
 
-		$getNbIntervention = mysqli_query($con, "SELECT COUNT(code_intervention) as nbIntervention FROM `interventions` WHERE code_incident IN ('$t_i_1','$t_i_2','$t_i_3','$t_i_4','$t_i_5')");
+		$getNbIntervention = mysqli_query($con, "SELECT COUNT(code_intervention) as nbIntervention FROM `interventions` WHERE code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
 		while ($row = mysqli_fetch_array($getNbIntervention)) {
 			$nbIntervention = $row['nbIntervention'];
+			$nbInterventionBon = $row['nbIntervention'];
 		}
-		$getNbInterventionPlanifiee = mysqli_query($con, "SELECT COUNT(code_intervention) as nbInterventionEncours FROM `interventions` WHERE statut='planifiee' AND code_incident IN ('$t_i_1','$t_i_2','$t_i_3','$t_i_4','$t_i_5')");
+		$getNbInterventionPlanifiee = mysqli_query($con, "SELECT COUNT(code_intervention) as nbInterventionEncours FROM `interventions` WHERE statut='planifiee' AND code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
 		while ($row = mysqli_fetch_array($getNbInterventionPlanifiee)) {
 			$nbInterventionPlanifiee = $row['nbInterventionEncours'];
 		}
-		$getInterventionTermines = mysqli_query($con, "SELECT COUNT(code_intervention) as nbInterventionTermines FROM `interventions` WHERE statut='terminee' AND code_incident IN ('$t_i_1','$t_i_2','$t_i_3','$t_i_4','$t_i_5')");
+		$getInterventionTermines = mysqli_query($con, "SELECT COUNT(code_intervention) as nbInterventionTermines FROM `interventions` WHERE statut='terminee' AND code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
 		while ($row = mysqli_fetch_array($getInterventionTermines)) {
 			$nbInterventionTerminee = $row['nbInterventionTermines'];
 		}
 		// Annulee
-		$getInterventionAnnulee = mysqli_query($con, "SELECT COUNT(code_intervention) as nbInterventionAnnulee FROM `interventions` WHERE statut='annulee' AND code_incident IN ('$t_i_1','$t_i_2','$t_i_3','$t_i_4','$t_i_5')");
+		$getInterventionAnnulee = mysqli_query($con, "SELECT COUNT(code_intervention) as nbInterventionAnnulee FROM `interventions` WHERE statut='annulee' AND code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
 		while ($row = mysqli_fetch_array($getInterventionAnnulee)) {
 			$nbInterventionAnnulee = $row['nbInterventionAnnulee'];
 		}
 		// En retard
-		$getInterventionEnRetard = mysqli_query($con, "SELECT COUNT(code_intervention) as nbInterventionEnRetard FROM `interventions` WHERE statut='en retard' AND code_incident IN ('$t_i_1','$t_i_2','$t_i_3','$t_i_4','$t_i_5')");
+		$getInterventionEnRetard = mysqli_query($con, "SELECT COUNT(code_intervention) as nbInterventionEnRetard FROM `interventions` WHERE statut='en retard' AND code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
 		while ($row = mysqli_fetch_array($getInterventionEnRetard)) {
 			$nbInterventionEnRetard = $row['nbInterventionEnRetard'];
 		}
 
-		$pNbInterventionPlanifiee = round((($nbInterventionPlanifiee / $nbIntervention) * 100), 1);
-		$pNbInterventionEnRetard = round((($nbInterventionEnRetard / $nbIntervention) * 100), 1);
-		$pNbInterventionAnnulee = round((($nbInterventionAnnulee / $nbIntervention) * 100), 1);
-		$pNbInterventionTerminee = round((($nbInterventionTerminee / $nbIntervention) * 100), 1);
+
+		if ($nbIntervention > 0) {
+			$pNbInterventionPlanifiee = round((($nbInterventionPlanifiee / $nbIntervention) * 100), 1);
+			$pNbInterventionEnRetard = round((($nbInterventionEnRetard / $nbIntervention) * 100), 1);
+			$pNbInterventionAnnulee = round((($nbInterventionAnnulee / $nbIntervention) * 100), 1);
+			$pNbInterventionTerminee = round((($nbInterventionTerminee / $nbIntervention) * 100), 1);
+		} else {
+			$pNbInterventionPlanifiee = 0;
+			$pNbInterventionEnRetard = 0;
+			$pNbInterventionAnnulee = 0;
+			$pNbInterventionTerminee = 0;
+		}
 	}
 	// GESTIONNAIRE
 	if ($roleUser == 'Gestionnaire') {
@@ -287,6 +308,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 		$getNbIntervention = mysqli_query($con, "SELECT COUNT(code_intervention) as nbIntervention FROM `interventions` WHERE service='$code_service'");
 		while ($row = mysqli_fetch_array($getNbIntervention)) {
 			$nbIntervention = $row['nbIntervention'];
+			$nbInterventionBon = $row['nbIntervention'];
 		}
 		$getNbInterventionPlanifiee = mysqli_query($con, "SELECT COUNT(code_intervention) as nbInterventionEncours FROM `interventions` WHERE statut='planifiee' AND service='$code_service'");
 		while ($row = mysqli_fetch_array($getNbInterventionPlanifiee)) {
@@ -307,10 +329,18 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 			$nbInterventionEnRetard = $row['nbInterventionEnRetard'];
 		}
 
-		$pNbInterventionPlanifiee = round((($nbInterventionPlanifiee / $nbIntervention) * 100), 1);
-		$pNbInterventionEnRetard = round((($nbInterventionEnRetard / $nbIntervention) * 100), 1);
-		$pNbInterventionAnnulee = round((($nbInterventionAnnulee / $nbIntervention) * 100), 1);
-		$pNbInterventionTerminee = round((($nbInterventionTerminee / $nbIntervention) * 100), 1);
+
+		if ($nbIntervention > 0) {
+			$pNbInterventionPlanifiee = round((($nbInterventionPlanifiee / $nbIntervention) * 100), 1);
+			$pNbInterventionEnRetard = round((($nbInterventionEnRetard / $nbIntervention) * 100), 1);
+			$pNbInterventionAnnulee = round((($nbInterventionAnnulee / $nbIntervention) * 100), 1);
+			$pNbInterventionTerminee = round((($nbInterventionTerminee / $nbIntervention) * 100), 1);
+		} else {
+			$pNbInterventionPlanifiee = 0;
+			$pNbInterventionEnRetard = 0;
+			$pNbInterventionAnnulee = 0;
+			$pNbInterventionTerminee = 0;
+		}
 	}
 	// INTERVENANT
 	if ($roleUser == 'Intervenant') {
@@ -324,34 +354,37 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 			$liste_codes_incident_resp[] = $row['code_incident'];
 		}
 
-		$t_i_1 = $liste_codes_incident_resp[0];
-		$t_i_2 = $liste_codes_incident_resp[1];
-		$t_i_3 = $liste_codes_incident_resp[2];
-		$t_i_4 = $liste_codes_incident_resp[3];
-		$t_i_5 = $liste_codes_incident_resp[4];
-		// Nombres
-		$getNbIncident = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncident FROM `signalements` WHERE code_incident IN ('$t_i_1','$t_i_2','$t_i_3','$t_i_4','$t_i_5')");
+		$t_i_0 = '';
+		$t_i_1 = '';
+		$t_i_2 = '';
+		$t_i_3 = '';
+		$t_i_4 = '';
+		for ($i = 0; $i < count($liste_codes_incident_resp); $i++) {
+			${'t_i_' . $i} = $liste_codes_incident_resp[$i];
+		}
+		// Je veux que dans la requete on verifie si le code incident se trouve dans les variable de la boucle for
+		$getNbIncident = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncident FROM `signalements` WHERE code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
 		while ($row = mysqli_fetch_array($getNbIncident)) {
 			$nbIncident = $row['nbIncident'];
 		}
 
 		// En cours
-		$getNbIncidentEncours = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncidentEncours FROM `signalements` WHERE statut='en cours' AND code_incident IN ('$t_i_1','$t_i_2','$t_i_3','$t_i_4','$t_i_5')");
+		$getNbIncidentEncours = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncidentEncours FROM `signalements` WHERE statut='en cours' AND code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
 		while ($row = mysqli_fetch_array($getNbIncidentEncours)) {
 			$nbIncidentEnCours = $row['nbIncidentEncours'];
 		}
 		// Termines
-		$getNbIncidentTermines = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncidentTermines FROM `signalements` WHERE statut='termine' AND code_incident IN ('$t_i_1','$t_i_2','$t_i_3','$t_i_4','$t_i_5')");
+		$getNbIncidentTermines = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncidentTermines FROM `signalements` WHERE statut='termine' AND code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
 		while ($row = mysqli_fetch_array($getNbIncidentTermines)) {
 			$nbIncidentTermine = $row['nbIncidentTermines'];
 		}
 		// En attente
-		$getNbIncidentEnAttente = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncidentEnAttente FROM `signalements` WHERE statut='en attente' AND code_incident IN ('$t_i_1','$t_i_2','$t_i_3','$t_i_4','$t_i_5')");
+		$getNbIncidentEnAttente = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncidentEnAttente FROM `signalements` WHERE statut='en attente' AND code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
 		while ($row = mysqli_fetch_array($getNbIncidentEnAttente)) {
 			$nbIncidentEnAttente = $row['nbIncidentEnAttente'];
 		}
 		// Rejeter
-		$getNbIncidentRejetes = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncidentRejetes FROM `signalements` WHERE statut='rejete' AND code_incident IN ('$t_i_1','$t_i_2','$t_i_3','$t_i_4','$t_i_5')");
+		$getNbIncidentRejetes = mysqli_query($con, "SELECT COUNT(numero_incident) as nbIncidentRejetes FROM `signalements` WHERE statut='rejete' AND code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
 		while ($row = mysqli_fetch_array($getNbIncidentRejetes)) {
 			$nbIncidentRejetes = $row['nbIncidentRejetes'];
 		}
@@ -365,6 +398,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 		$getNbIntervention = mysqli_query($con, "SELECT COUNT(code_intervention) as nbIntervention FROM `interventions` WHERE intervenant='$matricule'");
 		while ($row = mysqli_fetch_array($getNbIntervention)) {
 			$nbIntervention = $row['nbIntervention'];
+			$nbInterventionBon = $row['nbIntervention'];
 		}
 		$getNbInterventionPlanifiee = mysqli_query($con, "SELECT COUNT(code_intervention) as nbInterventionEncours FROM `interventions` WHERE statut='planifiee' AND intervenant='$matricule'");
 		while ($row = mysqli_fetch_array($getNbInterventionPlanifiee)) {
@@ -385,10 +419,18 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 			$nbInterventionEnRetard = $row['nbInterventionEnRetard'];
 		}
 
-		$pNbInterventionPlanifiee = round((($nbInterventionPlanifiee / $nbIntervention) * 100), 1);
-		$pNbInterventionEnRetard = round((($nbInterventionEnRetard / $nbIntervention) * 100), 1);
-		$pNbInterventionAnnulee = round((($nbInterventionAnnulee / $nbIntervention) * 100), 1);
-		$pNbInterventionTerminee = round((($nbInterventionTerminee / $nbIntervention) * 100), 1);
+
+		if ($nbIntervention > 0) {
+			$pNbInterventionPlanifiee = round((($nbInterventionPlanifiee / $nbIntervention) * 100), 1);
+			$pNbInterventionEnRetard = round((($nbInterventionEnRetard / $nbIntervention) * 100), 1);
+			$pNbInterventionAnnulee = round((($nbInterventionAnnulee / $nbIntervention) * 100), 1);
+			$pNbInterventionTerminee = round((($nbInterventionTerminee / $nbIntervention) * 100), 1);
+		} else {
+			$pNbInterventionPlanifiee = 0;
+			$pNbInterventionEnRetard = 0;
+			$pNbInterventionAnnulee = 0;
+			$pNbInterventionTerminee = 0;
+		}
 	}
 
 
@@ -427,24 +469,9 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 			<!-- Page Content overlay -->
 
 
-			<!-- Vendor JS -->
-			<script src="../src/js/vendors.min.js"></script>
-			<!-- <script src="../src/js/pages/chat-popup.js"></script> -->
-			<script src="../../../assets/icons/feather-icons/feather.min.js"></script>
 
-			<script src="assets/vendor_components/apexcharts-bundle/dist/apexcharts.js"></script>
-
-			<!-- CRMi App -->
-			<script src="../src/js/template.js"></script>
-			<script src="../src/js/pages/dashboard.js"></script>
-			<script src="../src/js/pages/data-table.js"></script>
-			<script src="../src/js/pages/chart-widgets.js"></script>
-			<script src="../src/js/pages/chartjs-int.js"></script>
-
-
-			<?php include('layouts/js.php'); ?>
-
-
+			<?php include('layouts/js.php');
+			?>
 	</body>
 
 	</html>

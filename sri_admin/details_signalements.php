@@ -10,6 +10,22 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 	<?php
 	include('config/app.php');
 
+	switch ($_SESSION['role']) {
+		case "Responsable":
+			$getMatriculeRes = mysqli_query($con, "SELECT matricule FROM responsables_dage WHERE email='$emailUser'");
+
+			while ($row = mysqli_fetch_array($getMatriculeRes)) {
+				$matricule = $row['matricule'];
+			}
+			break;
+		case "Gestionnaire":
+			$getMatriculeGes = mysqli_query($con, "SELECT matricule_gestionnaire FROM gestionnaires WHERE email='$emailUser'");
+
+			while ($row = mysqli_fetch_array($getMatriculeGes)) {
+				$matricule = $row['matricule_gestionnaire'];
+			}
+			break;
+	}
 
 	if (isset($_GET['numero_incident'])) {
 		$numero_incident = $_GET['numero_incident'];
@@ -65,6 +81,8 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 			// $contact=$row['contact'];
 			// date("Y-m-d H:i:s");
 		}
+		// var_dump($code_service);
+		// die();
 
 		// GET gestionnaire...
 		$getGestionnaire = mysqli_query($con, "SELECT * FROM `gestionnaires_services` INNER JOIN gestionnaires ON gestionnaires.matricule_gestionnaire=gestionnaires_services.matricule_gestionnaire WHERE gestionnaires_services.code_service='$code_service'");
@@ -134,22 +152,22 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 		$showEdit = 1;
 
 		$getIncidents = mysqli_query($con, "SELECT 
-	signalements.date_reception,
-	signalements.numero_incident,
-	signalements.code_incident,
-	signalements.auteur,
-	signalements.statut,
-	signalements.telephone,
-	signalements.email,
-	signalements.photo,
-	signalements.description,
-	services.sigle,
-	services.libelle,
-	type_incidents.type_incident,
-	type_incidents.couleur as couleur_type,
-	code_priorite.priorite,
-	code_priorite.code as code_priorite,
-	code_priorite.couleur_priorite
+			signalements.date_reception,
+			signalements.numero_incident,
+			signalements.code_incident,
+			signalements.auteur,
+			signalements.statut,
+			signalements.telephone,
+			signalements.email,
+			signalements.photo,
+			signalements.description,
+			services.sigle,
+			services.libelle,
+			type_incidents.type_incident,
+			type_incidents.couleur as couleur_type,
+			code_priorite.priorite,
+			code_priorite.code as code_priorite,
+			code_priorite.couleur_priorite
 	
 	FROM `signalements` INNER JOIN services on services.code_service=signalements.code_service INNER JOIN type_incidents ON type_incidents.code_incident=signalements.code_incident INNER JOIN code_priorite ON code_priorite.code=signalements.code_priorite where signalements.numero_incident='$numero_incident'");
 

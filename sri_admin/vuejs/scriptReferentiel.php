@@ -15,15 +15,15 @@
             urlGetIntervenants: "API/api_sri.php?action=getIntervenants",
             batiments: [],
             etages: [],
-            roles:[],
-            intervenants:[],
-            gestionnaires:[],
-            responsables:[],
+            roles: [],
+            intervenants: [],
+            gestionnaires: [],
+            responsables: [],
             choixSms: [],
-            newBatiment:{},
-            newUser:{},
-            newEtage:{},
-            newPiece:{}
+            newBatiment: {},
+            newUser: {},
+            newEtage: {},
+            newPiece: {}
         },
         computed: {
             selectedEtages() {
@@ -85,8 +85,7 @@
                     .then((resultat) => {
                         if (resultat.error) {
                             this.errorMsg = resultat.error
-                        } 
-                        else {
+                        } else {
                             this.roles = resultat.roles;
 
                         }
@@ -99,8 +98,7 @@
                     .then((resultat) => {
                         if (resultat.error) {
                             this.errorMsg = resultat.error
-                        } 
-                        else {
+                        } else {
                             this.gestionnaires = resultat.gestionnaires;
 
                         }
@@ -113,15 +111,14 @@
                     .then((resultat) => {
                         if (resultat.error) {
                             this.errorMsg = resultat.error
-                        } 
-                        else {
+                        } else {
                             this.responsables = resultat.responsables;
 
                         }
 
                     })
             },
-            
+
             hideMsg() {
                 this.errorMsg = false,
                     this.successMsg = false

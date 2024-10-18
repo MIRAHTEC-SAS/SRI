@@ -79,12 +79,14 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 				$responsable = $row['prenom'] . '' . $row['nom'];
 				$liste_codes_incident_resp[] = $row['code_incident'];
 			}
-
-			$t_i_1 = $liste_codes_incident_resp[0];
-			$t_i_2 = $liste_codes_incident_resp[1];
-			$t_i_3 = $liste_codes_incident_resp[2];
-			$t_i_4 = $liste_codes_incident_resp[3];
-			$t_i_5 = $liste_codes_incident_resp[4];
+			$t_i_0 = '';
+			$t_i_1 = '';
+			$t_i_2 = '';
+			$t_i_3 = '';
+			$t_i_4 = '';
+			for ($i = 0; $i < count($liste_codes_incident_resp); $i++) {
+				${'t_i_' . $i} = $liste_codes_incident_resp[$i];
+			}
 			$getInterventionsAnnulees = mysqli_query($con, "SELECT 
 			interventions.code_intervention,
 			interventions.code_incident,
@@ -104,7 +106,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 			INNER JOIN services ON services.code_service=interventions.service
 			INNER JOIN signalements ON signalements.numero_incident=interventions.numero_incident
 			INNER JOIN type_incidents ON type_incidents.code_incident=interventions.code_incident 
-			WHERE interventions.statut='annulee' AND interventions.code_incident IN ('$t_i_1','$t_i_2','$t_i_3','$t_i_4','$t_i_5')");
+			WHERE interventions.statut='annulee' AND interventions.code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
 			break;
 		case 'Gestionnaire':
 			$getInterventionsAnnulees = mysqli_query($con, "SELECT 

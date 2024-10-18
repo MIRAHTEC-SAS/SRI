@@ -8,7 +8,22 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 ?>
 	<?php
 	include('config/app.php');
+	switch ($roleUser) {
+		case "Responsable":
+			$getMatriculeRes = mysqli_query($con, "SELECT matricule FROM responsables_dage WHERE email='$emailUser'");
 
+			while ($row = mysqli_fetch_array($getMatriculeRes)) {
+				$matricule = $row['matricule'];
+			}
+			break;
+		case "Gestionnaire":
+			$getMatriculeGes = mysqli_query($con, "SELECT matricule_gestionnaire FROM gestionnaires WHERE email='$emailUser'");
+
+			while ($row = mysqli_fetch_array($getMatriculeGes)) {
+				$matricule = $row['matricule_gestionnaire'];
+			}
+			break;
+	}
 	if (isset($_GET['code_intervention'])) {
 		$code_intervention = $_GET['code_intervention'];
 		// echo $code_intervention;die;

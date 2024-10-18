@@ -275,7 +275,9 @@
 										<!-- <th style="width:20%">Responsable</th> -->
 										<!-- <th>Responsable</th> -->
 										<!-- <th>Status</th> -->
-										<th style="width:10%;text-align:center">Action</th>
+										<?php if ($roleUser == 'Administrateur') { ?>
+											<th style="width:10%;text-align:center">Action</th>
+										<?php }; ?>
 									</tr>
 								</thead>
 								<tbody>
@@ -350,18 +352,21 @@
 																												break;
 																										}
 																										?>-light"><?php echo $statut; ?></span></td>
+											<?php if ($roleUser == 'Administrateur') { ?>
 
-											<td style="text-align:center">
-												<!-- <a href="fiche_intervention?code_intervention=<?php echo  $code_intervention; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+												<td style="text-align:center">
+													<!-- <a href="fiche_intervention?code_intervention=<?php //echo  $code_intervention; 
+																																							?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
 										<i class="fa fa-eye" style="font-size:16px;color:black"></i>
 									</a>  -->
-												<a href="fiche_intervention.php?code_intervention=<?php echo  $code_intervention; ?>" class="waves-effect waves-light btn btn-primary-light btn-circle"><span class="icon-Settings-1 fs-18"><span class="path1"></span><span class="path2"></span></span></a>
-												<!-- <a href="#" class="waves-effect waves-light btn btn-primary-light btn-circle mx-5"><span class="icon-Write"><span class="path1"></span><span class="path2"></span></span></a>
+													<a href="fiche_intervention.php?code_intervention=<?php echo  $code_intervention; ?>" class="waves-effect waves-light btn btn-primary-light btn-circle"><span class="icon-Settings-1 fs-18"><span class="path1"></span><span class="path2"></span></span></a>
+													<!-- <a href="#" class="waves-effect waves-light btn btn-primary-light btn-circle mx-5"><span class="icon-Write"><span class="path1"></span><span class="path2"></span></span></a>
 										<a href="#" class="waves-effect waves-light btn btn-primary-light btn-circle"><span class="icon-Trash1 fs-18"><span class="path1"></span><span class="path2"></span></span></a> -->
-												<!-- <a href="javascript:void(0)" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
+													<!-- <a href="javascript:void(0)" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
 										<i class="ti-trash"></i>
 									</a> -->
-											</td>
+												</td>
+											<?php }; ?>
 										</tr>
 									<?php } ?>
 								</tbody>
