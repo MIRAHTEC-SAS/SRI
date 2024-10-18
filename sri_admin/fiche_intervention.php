@@ -28,21 +28,21 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 		$code_intervention = $_GET['code_intervention'];
 		// echo $code_intervention;die;
 		$getInterventions = mysqli_query($con, "SELECT 
-	interventions.code_intervention,
-	interventions.code_incident,
-	interventions.intervenant,
-	interventions.numero_incident,
-	interventions.date_intervention,
-	interventions.date_saisie,
-	interventions.statut,
-	services.code_service,
-	services.libelle,
-	services.sigle,
-	type_incidents.type_incident,
-	interventions.type_intervenant
-	FROM `interventions`
-	INNER JOIN services ON services.code_service=interventions.service
-	INNER JOIN type_incidents ON type_incidents.code_incident=interventions.code_incident WHERE interventions.code_intervention='$code_intervention'");
+			interventions.code_intervention,
+			interventions.code_incident,
+			interventions.intervenant,
+			interventions.numero_incident,
+			interventions.date_intervention,
+			interventions.date_saisie,
+			interventions.statut,
+			services.code_service,
+			services.libelle,
+			services.sigle,
+			type_incidents.type_incident,
+			interventions.type_intervenant
+			FROM `interventions`
+			INNER JOIN services ON services.code_service=interventions.service
+			INNER JOIN type_incidents ON type_incidents.code_incident=interventions.code_incident WHERE interventions.code_intervention='$code_intervention'");
 
 		while ($row = mysqli_fetch_array($getInterventions)) {
 			$intervenant = $row['intervenant'];
@@ -127,17 +127,17 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 
 		// Get localisation 
 		$getLoc = mysqli_query($con, "SELECT 
-	signalements.numero_incident,
-	batiments.nom_batiment,
-	batiments.adresse,
-	batiments.contact,
-	etages.nom_etage,
-	types_localisation_c.type
-	FROM `signalements` 
-	INNER JOIN batiments ON batiments.code_batiment=signalements.code_batiment 
-	INNER JOIN etages ON signalements.code_etage=etages.code_etage
-	INNER JOIN types_localisation_c ON types_localisation_c.code_localisation=signalements.piece
-	WHERE signalements.numero_incident='$numero_incident' AND signalements.code_batiment='$code_batiment' AND signalements.code_etage='$code_etage' AND signalements.piece='$code_piece';");
+			signalements.numero_incident,
+			batiments.nom_batiment,
+			batiments.adresse,
+			batiments.contact,
+			etages.nom_etage,
+			types_localisation_c.type
+			FROM `signalements` 
+			INNER JOIN batiments ON batiments.code_batiment=signalements.code_batiment 
+			INNER JOIN etages ON signalements.code_etage=etages.code_etage
+			INNER JOIN types_localisation_c ON types_localisation_c.code_localisation=signalements.piece
+			WHERE signalements.numero_incident='$numero_incident' AND signalements.code_batiment='$code_batiment' AND signalements.code_etage='$code_etage' AND signalements.piece='$code_piece';");
 
 		while ($row = mysqli_fetch_array($getLoc)) {
 			$batiment = $row['nom_batiment'];
@@ -317,10 +317,10 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 
 			<!-- Vendor JS -->
 			<?php include('layouts/js.php'); ?>
-			<script src="../src/js/pages/chat-popup.js"></script>
-			<script src="../../../assets/icons/feather-icons/feather.min.js"></script>
-			<script src="../../../assets/vendor_components/Magnific-Popup-master/dist/jquery.magnific-popup.min.js"></script>
-			<script src="../../../assets/vendor_components/Magnific-Popup-master/dist/jquery.magnific-popup-init.js"></script>
+			<script src="src/js/pages/chat-popup.js"></script>
+			<script src="assets/icons/feather-icons/feather.min.js"></script>
+			<script src="assets/vendor_components/Magnific-Popup-master/dist/jquery.magnific-popup.min.js"></script>
+			<script src="assets/vendor_components/Magnific-Popup-master/dist/jquery.magnific-popup-init.js"></script>
 
 	</body>
 
