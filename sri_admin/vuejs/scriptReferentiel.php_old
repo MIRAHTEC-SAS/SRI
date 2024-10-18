@@ -1,0 +1,77 @@
+<!--  Script Referentiel  -->
+<script>
+    const vue = new Vue({
+        data: {
+            errorMsg: false,
+            successMsg: false,
+            showAddModal: false,
+            showUpdateModal: false,
+            showDeleteModal: false,
+            urlGetBatiments: "API/api_sri.php?action=getBatiments",
+            urlGetEtages: "API/api_sri.php?action=getEtages",
+            batiments: [],
+            etages: [],
+            choixSms: [],
+            newBatiment:{},
+            newEtage:{},
+            newPiece:{}
+        },
+        computed: {
+            selectedEtages() {
+                return this.etages.filter(etage => etage.code_batiment === this.newPiece.code_batiment);
+            }
+        },
+        mounted() {
+            this.getAllBatiments();
+            this.getAllEtages();
+
+            
+        },
+        methods: {
+            getAllBatiments() {
+                axios.get(this.urlGetBatiments)
+                    .then((resultat) => resultat.data)
+                    .then((resultat) => {
+                        if (resultat.error) {
+                            this.errorMsg = resultat.error
+                        } else {
+                            this.batiments = resultat.batiments;
+
+                        }
+
+                    })
+            },
+            getAllEtages() {
+                axios.get(this.urlGetEtages)
+                    .then((resultat) => resultat.data)
+                    .then((resultat) => {
+                        if (resultat.error) {
+                            this.errorMsg = resultat.error
+                        } else {
+                            this.etages = resultat.etages;
+
+                        }
+
+                    })
+            },
+            
+            hideMsg() {
+                this.errorMsg = false,
+                    this.successMsg = false
+            },
+
+            toFormData(obj) {
+                var fd = new FormData();
+                for (var i in obj) {
+                    fd.append(i, obj[i]);
+                }
+
+                return fd;
+            }
+
+
+        }
+
+
+    }).$mount('#app')
+</script>
