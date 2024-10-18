@@ -18,13 +18,13 @@
 			<?php while ($row = mysqli_fetch_array($getInterventionsAnnulees)) {
 				$intervenant = $row['intervenant'];
 				$service = $row['sigle'];
-				$couleur = $row['couleur'];
+				// $couleur = $row['couleur'];
 				$categorie = $row['type_incident'];
 				$date_annulation = $row['date_saisie'];
 				$code_intervention = $row['code_intervention'];
 				$type_intervenant = $row['type_intervenant'];
 				$numero_incident = $row['numero_incident'];
-				$statut_incident = $row['statut_incident'];
+				$statut_incident = $row['statut'];
 
 
 				// get couleur

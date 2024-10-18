@@ -27,6 +27,12 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 				$matricule = $row['matricule_gestionnaire'];
 			}
 			break;
+		case 'Intervenant':
+			$getMatriculeInt = mysqli_query($con, "SELECT matricule_intervenant FROM intervenants_interne WHERE email='$emailUser'");
+			while ($row = mysqli_fetch_array($getMatriculeInt)) {
+				$matricule = $row['matricule_intervenant'];
+			}
+			break;
 	}
 
 	// Get service...
@@ -129,6 +135,24 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 			INNER JOIN signalements ON signalements.numero_incident=interventions.numero_incident
 			INNER JOIN type_incidents ON type_incidents.code_incident=interventions.code_incident 
 			WHERE interventions.statut='annulee' AND services.code_service='$code_service'");
+			break;
+		case 'Intervenant':
+			$getInterventionsAnnulees = mysqli_query($con, "SELECT 
+			interventions.code_intervention,
+			interventions.code_incident,
+			interventions.intervenant,
+			interventions.numero_incident,
+			interventions.date_intervention,
+			interventions.date_saisie,
+			interventions.statut,
+			services.code_service,
+			services.libelle,
+			services.sigle,
+			type_incidents.type_incident,
+			interventions.type_intervenant
+			FROM `interventions`
+			INNER JOIN services ON services.code_service=interventions.service
+			INNER JOIN type_incidents ON type_incidents.code_incident=interventions.code_incident WHERE interventions.statut='annulee' AND intervenant='$matricule'");
 			break;
 	}
 

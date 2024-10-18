@@ -23,7 +23,7 @@
 				$code_intervention = $row['code_intervention'];
 				$type_intervenant = $row['type_intervenant'];
 				$numero_incident = $row['numero_incident'];
-				$couleur_type_incident = $row['couleur_type'];
+				// $couleur_type_incident = $row['couleur_type'];
 				$date_reception = $row['date_reception'];
 				$description = $row['description'];
 

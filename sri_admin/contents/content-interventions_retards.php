@@ -5,7 +5,7 @@
 
 // $getTypeIntervenant = mysqli_query($con, "SELECT type_intervenant FROM interventions");
 
-$getInterventionsPlanifiees = mysqli_query($con, "SELECT 
+$getInterventionsRetard = mysqli_query($con, "SELECT 
 interventions.code_intervention,
 interventions.code_incident,
 interventions.intervenant,
@@ -49,7 +49,7 @@ INNER JOIN type_incidents ON type_incidents.code_incident=interventions.code_inc
 		<tbody>
 			<?php while ($row = mysqli_fetch_array($getInterventionsRetard)) {
 				$intervenant = $row['intervenant'];
-				$couleur = $row['couleur'];
+				// $couleur = $row['couleur'];
 				$service = $row['sigle'];
 				$categorie = $row['type_incident'];
 				$date_intervention = $row['date_intervention'];
@@ -60,6 +60,7 @@ INNER JOIN type_incidents ON type_incidents.code_incident=interventions.code_inc
 				// get couleur
 				$getCouleur = mysqli_query($con, "SELECT * FROM signalements INNER JOIN type_incidents on type_incidents.code_incident=signalements.code_incident where signalements.numero_incident='$numero_incident'");
 				while ($row = mysqli_fetch_array($getCouleur)) {
+					// var_dump($row);
 					$couleur = $row['couleur'];
 				}
 

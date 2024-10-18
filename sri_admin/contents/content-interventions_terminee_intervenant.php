@@ -23,7 +23,7 @@
 				$code_intervention = $row['code_intervention'];
 				$type_intervenant = $row['type_intervenant'];
 				$numero_incident = $row['numero_incident'];
-				$couleur_type_incident = $row['couleur_type'];
+				// $couleur_type_incident = $row['couleur_type'];
 				$date_reception = $row['date_reception'];
 				$description = $row['description'];
 
@@ -67,7 +67,7 @@
 					<td><?php echo $description; ?>
 						<!-- <span class="badge badge-pill" style="background-color:blue<?php //echo $couleur_type_incident;
 																																						?>"><?php //echo $categorie; 
-																																																										?></span></br> -->
+																																								?></span></br> -->
 
 					</td>
 					<td><?php echo date('d/m/Y', strtotime($date_reception)); ?></td>
