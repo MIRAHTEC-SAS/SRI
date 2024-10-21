@@ -51,7 +51,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 	// get signalements en attente en fonction du profil
 	switch ($profil) {
 		case 'Administrateur':
-			$getInterventionsPlanifiees = mysqli_query($con, "SELECT 
+			$getInterventionsValidees = mysqli_query($con, "SELECT 
 			interventions.code_intervention,
 			interventions.code_incident,
 			interventions.intervenant,
@@ -68,7 +68,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 			FROM `interventions`
 			INNER JOIN services ON services.code_service=interventions.service
 			INNER JOIN type_incidents ON type_incidents.code_incident=interventions.code_incident 
-			WHERE interventions.statut='planifiee'");
+			WHERE interventions.statut='validee'");
 			break;
 		case 'Responsable':
 			$getInfosResponsable = mysqli_query($con, "SELECT 
@@ -94,7 +94,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 			for ($i = 0; $i < count($liste_codes_incident_resp); $i++) {
 				${'t_i_' . $i} = $liste_codes_incident_resp[$i];
 			}
-			$getInterventionsPlanifiees = mysqli_query($con, "SELECT 
+			$getInterventionsValidees = mysqli_query($con, "SELECT 
 			interventions.code_intervention,
 			interventions.code_incident,
 			interventions.intervenant,
@@ -111,10 +111,10 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 			FROM `interventions`
 			INNER JOIN services ON services.code_service=interventions.service
 			INNER JOIN type_incidents ON type_incidents.code_incident=interventions.code_incident 
-			WHERE interventions.statut='planifiee' AND interventions.code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
+			WHERE interventions.statut='validee' AND interventions.code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
 			break;
 		case 'Gestionnaire':
-			$getInterventionsPlanifiees = mysqli_query($con, "SELECT 
+			$getInterventionsValidees = mysqli_query($con, "SELECT 
 			interventions.code_intervention,
 			interventions.code_incident,
 			interventions.intervenant,
@@ -131,7 +131,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 			FROM `interventions`
 			INNER JOIN services ON services.code_service=interventions.service
 			INNER JOIN type_incidents ON type_incidents.code_incident=interventions.code_incident 
-			WHERE interventions.statut='planifiee' AND services.code_service='$code_service'");
+			WHERE interventions.statut='validee' AND services.code_service='$code_service'");
 			break;
 		case 'Intervenant':
 			$getInterventionsValidees = mysqli_query($con, "SELECT 

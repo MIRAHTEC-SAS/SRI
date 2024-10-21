@@ -5,22 +5,22 @@
 
 // $getTypeIntervenant = mysqli_query($con, "SELECT type_intervenant FROM interventions");
 
-$getInterventionsRetard = mysqli_query($con, "SELECT 
-interventions.code_intervention,
-interventions.code_incident,
-interventions.intervenant,
-interventions.numero_incident,
-interventions.date_intervention,
-interventions.date_saisie,
-interventions.statut,
-services.code_service,
-services.libelle,
-services.sigle,
-type_incidents.type_incident,
-interventions.type_intervenant
-FROM `interventions`
-INNER JOIN services ON services.code_service=interventions.service
-INNER JOIN type_incidents ON type_incidents.code_incident=interventions.code_incident WHERE interventions.statut='en retard'");
+// $getInterventionsRetard = mysqli_query($con, "SELECT 
+// interventions.code_intervention,
+// interventions.code_incident,
+// interventions.intervenant,
+// interventions.numero_incident,
+// interventions.date_intervention,
+// interventions.date_saisie,
+// interventions.statut,
+// services.code_service,
+// services.libelle,
+// services.sigle,
+// type_incidents.type_incident,
+// interventions.type_intervenant
+// FROM `interventions`
+// INNER JOIN services ON services.code_service=interventions.service
+// INNER JOIN type_incidents ON type_incidents.code_incident=interventions.code_incident WHERE interventions.statut='en retard'");
 
 // $listeAgents=[];
 // $codeDirections=[];

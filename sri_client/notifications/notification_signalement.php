@@ -1,7 +1,7 @@
 
 <?php
 // session_start();
-include('../config/app.php');
+// include('../config/app.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;

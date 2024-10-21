@@ -11,12 +11,13 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 	$update = 0;
 	if (isset($_GET['edit'])) {
 		$update = 1;
-
 		$code_etage = $_GET['edit'];
 
-		$getInfosEtage = mysqli_query($con, "SELECT batiments.nom_batiment, batiments.code_batiment, etages.nom_etage FROM etages inner join batiments on batiments.code_batiment=etages.code_batiment where etages.code_etage='$code_etage'");
+		$getInfosEtage = mysqli_query($con, "SELECT * FROM etages inner join batiments on batiments.code_batiment=etages.code_batiment where etages.code_etage='$code_etage'");
 
 		while ($row = mysqli_fetch_array($getInfosEtage)) {
+			// var_dump($row);
+			// die();
 			$nom_batiment = $row['nom_batiment'];
 			$code_batiment = $row['code_batiment'];
 			$nom_etage = $row['nom_etage'];
@@ -33,6 +34,8 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 		$getInfosEtage = mysqli_query($con, "SELECT batiments.nom_batiment, batiments.code_batiment, etages.nom_etage FROM etages inner join batiments on batiments.code_batiment=etages.code_batiment where etages.code_etage='$code_etage'");
 
 		while ($row = mysqli_fetch_array($getInfosEtage)) {
+			// var_dump($row);
+			// die();
 			$nom_batiment = $row['nom_batiment'];
 			$code_batiment = $row['code_batiment'];
 			$nom_etage = $row['nom_etage'];
@@ -86,7 +89,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 											</div>
 											<div class="modal-body" style="background-color:#F7F5F2">
-												<form action="controllers/referentielController.php" method="POST">
+												<form action="controllers/referentielController" method="POST">
 													<div class="form-group">
 														<label class="col-md-12 form-label">Batiment</label>
 														<div class="col-md-12">
@@ -132,7 +135,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 								<div class="col-12">
 									<div class="box">
 										<div class="box-body">
-											<form action="controllers/referentielController.php" method="POST">
+											<form action="controllers/referentielController" method="POST">
 												<div class="row">
 													<div class="col-6">
 														<select name="code_batiment" class="form-control">
@@ -148,7 +151,8 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 													</div>
 													<div class="col-4">
 														<input type="text" name="nom_etage" value="<?php echo $nom_etage; ?>" class="form-control" <?php if ($update == 2) echo 'disabled'; ?>>
-														<input type="hidden" name="code_piece" value="<?php echo $code_piece; ?>">
+														<!-- <input type="hidden" name="code_piece" value="<?php //echo $code_piece; 
+																																								?>"> -->
 														<input type="hidden" name="code_etage" value="<?php echo $code_etage; ?>">
 
 													</div>

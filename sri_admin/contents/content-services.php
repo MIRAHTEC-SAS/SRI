@@ -1,5 +1,5 @@
 <?php
-// include ('config/app.php');
+// include ('config/app');
 
 $getServices = mysqli_query($con, "SELECT services.code_service, services.libelle, services.sigle, ministeres.libelle as libelleMinistere FROM `services` INNER JOIN ministeres ON ministeres.codeMinistere=services.codeMinistere");
 
@@ -31,10 +31,10 @@ $getServices = mysqli_query($con, "SELECT services.code_service, services.libell
 					<td><?php echo $row['sigle']; ?></td>
 					<td><?php echo $row['libelleMinistere']; ?></td>
 					<td style="text-align:center">
-						<a href="directions.php?edit=<?php echo $row['code_service']; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+						<a href="directions?edit=<?php echo $row['code_service']; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
 							<i class="fa fa-edit" style="font-size:16px;color:orange"></i>
 						</a>
-						<a href="directions.php?delete=<?php echo $row['code_service']; ?>" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
+						<a href="directions?delete=<?php echo $row['code_service']; ?>" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
 							<i class="ti-trash" style="font-size:16px;color:red"></i>
 						</a>
 					</td>

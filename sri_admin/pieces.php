@@ -14,38 +14,40 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 
 		$code_piece = $_GET['edit'];
 
-		$getInfosPiece = mysqli_query($con, "SELECT * FROM `pieces` INNER JOIN etages on etages.code_etage=pieces.code_etage INNER JOIN batiments ON batiments.code_batiment=etages.code_batiment where pieces.code_piece='$code_piece'");
+		$getInfosPiece = mysqli_query($con, "SELECT * FROM `pieces` WHERE code_piece='$code_piece'");
 
 		while ($row = mysqli_fetch_array($getInfosPiece)) {
+			// var_dump($row);
+			// die();
 			$nom_piece = $row['nom_piece'];
-			$code_batiment = $row['code_batiment'];
-			$nom_batiment = $row['nom_batiment'];
-			$nom_etage = $row['nom_etage'];
-			$code_etage = $row['code_etage'];
+			// $code_batiment = $row['code_batiment'];
+			// $nom_batiment = $row['nom_batiment'];
+			// $nom_etage = $row['nom_etage'];
+			// $code_etage = $row['code_etage'];
 		}
 
 		// Liste batiments
-		$getBatiments = mysqli_query($con, "SELECT * FROM batiments");
-		$getEtages = mysqli_query($con, "SELECT * FROM etages");
+		// $getBatiments = mysqli_query($con, "SELECT * FROM batiments");
+		// $getEtages = mysqli_query($con, "SELECT * FROM etages");
 	}
 	if (isset($_GET['delete'])) {
 		$update = 2;
 
 		$code_piece = $_GET['delete'];
 
-		$getInfosPiece = mysqli_query($con, "SELECT * FROM `pieces` INNER JOIN etages on etages.code_etage=pieces.code_etage INNER JOIN batiments ON batiments.code_batiment=etages.code_batiment where pieces.code_piece='$code_piece'");
+		$getInfosPiece = mysqli_query($con, "SELECT * FROM `pieces` where code_piece='$code_piece'");
 
 		while ($row = mysqli_fetch_array($getInfosPiece)) {
 			$nom_piece = $row['nom_piece'];
-			$code_batiment = $row['code_batiment'];
-			$nom_batiment = $row['nom_batiment'];
-			$nom_etage = $row['nom_etage'];
-			$code_etage = $row['code_etage'];
+			// $code_batiment = $row['code_batiment'];
+			// $nom_batiment = $row['nom_batiment'];
+			// $nom_etage = $row['nom_etage'];
+			// $code_etage = $row['code_etage'];
 		}
 
 		// Liste batiments
-		$getBatiments = mysqli_query($con, "SELECT * FROM batiments");
-		$getEtages = mysqli_query($con, "SELECT * FROM etages");
+		// $getBatiments = mysqli_query($con, "SELECT * FROM batiments");
+		// $getEtages = mysqli_query($con, "SELECT * FROM etages");
 	}
 	?>
 
@@ -92,9 +94,9 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 											</div>
 											<div class="modal-body" style="background-color:#F7F5F2">
-												<form action="controllers/referentielController.php" method="POST">
+												<form action="controllers/referentielController" method="POST">
 													<div class="form-group">
-														<label class="col-md-12 form-label">Batiment</label>
+														<!-- <label class="col-md-12 form-label">Batiment</label>
 														<div class="col-md-12">
 															<select name="code_batiment" class="form-control" v-model="newPiece.code_batiment">
 																<option v-for="batiment in batiments" :value="batiment.code_batiment">{{batiment.nom_batiment}}</option>
@@ -107,7 +109,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 																<option v-for="etage in selectedEtages" :value="etage.code_etage">{{etage.nom_etage}}</option>
 															</select>
 														</div>
-														</br>
+														</br> -->
 														<label class="col-md-12 form-label">Piece</label>
 														<div class="col-md-12">
 															<input type="text" name="nom_piece" v-model="newPiece.nom_piece" class="form-control" placeholder="Nom de la piece">
@@ -145,13 +147,13 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 									<div class="col-12">
 										<div class="box">
 											<div class="box-body">
-												<form action="controllers/referentielController.php" method="POST">
+												<form action="controllers/referentielController" method="POST">
 													<div class="row">
 														<div class="col-3">
 															<input type="text" name="nom_piece" value="<?php echo $nom_piece; ?>" class="form-control" <?php if ($update == 2) echo 'disabled'; ?>>
 															<input type="hidden" name="code_piece" value="<?php echo $code_piece; ?>">
 														</div>
-														<div class="col-3">
+														<!-- <div class="col-3">
 															<select name="code_etage" class="form-control" disabled>
 																<option value="<?php echo $code_etage; ?>"><?php echo $nom_etage; ?></option>
 																<?php while ($row = mysqli_fetch_array($getEtages)) {
@@ -162,7 +164,8 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 																} ?>
 
 															</select>
-															<input type="hidden" name="code_etage" value="<?php echo $code_etage; ?>">
+															<input type="hidden" name="code_etage" value="<?php //echo $code_etage; 
+																																						?>">
 														</div>
 														<div class="col-4">
 															<select name="code_batiment" class="form-control" disabled>
@@ -175,7 +178,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 																} ?>
 
 															</select>
-														</div>
+														</div> -->
 														<div class="col-2">
 															<?php if ($update == 1) { ?> <button type="submit" name="modifierPiece" class="btn btn-warning form-control" style="color:black;height:90%"><i class="fa fa-edit"></i> Modifier</button><?php } ?>
 															<?php if ($update == 2) { ?> <button type="submit" name="supprimerPiece" class="btn btn-danger form-control" style="color:white;height:90%"><i class="fa fa-trash"></i> Supprimer</button><?php } ?>

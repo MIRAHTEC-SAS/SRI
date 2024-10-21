@@ -63,74 +63,103 @@
 					</td>
 				</tr>
 				<?php if ($statut == 'validee') {
+					// var_dump($code_intervention);
 					// get commentaires...
-					$getComm = mysqli_query($con, "SELECT * FROM commentaires_validation_intervention WHERE code_intervention='$code_intervention'");
-					while ($row = mysqli_fetch_array($getComm)) {
-						$commentaire = $row['commentaire'];
-						$date_commentaire = date('d / m / Y', strtotime($row['date_validation']));
-						$heure_commentaire = date('H:i', strtotime($row['date_validation']));
-					}
+					$getComm = mysqli_query($con, "SELECT cvi.commentaire, cvi.date_validation,cvi.auteur
+       			 FROM commentaires_validation_intervention cvi
+        			JOIN responsables_dage rd ON cvi.auteur = rd.email
+        			WHERE cvi.code_intervention = '$code_intervention'");
+					if ($getComm->num_rows > 0) {
+						while ($row = mysqli_fetch_array($getComm)) {
+							$commentaire = $row['commentaire'];
+							$date_commentaire = date('d / m / Y', strtotime($row['date_validation']));
+							$heure_commentaire = date('H:i', strtotime($row['date_validation']));
+						}
 				?>
-					<tr>
-						<td style="width: 390px;">Commentaires de l'intervenant</td>
-						<td><strong><?php echo $commentaire; ?></strong></td>
-					</tr>
-					<tr>
-						<td style="width: 390px;">Commentaire rédigé le :</td>
-						<td><strong><?php echo $date_commentaire . ' à ' . $heure_commentaire; ?></strong></td>
-					</tr>
-				<?php } ?>
+						<tr>
+							<td style="width: 390px;">Commentaires de l'intervenant</td>
+							<td><strong><?php echo $commentaire; ?></strong></td>
+						</tr>
+						<tr>
+							<td style="width: 390px;">Commentaire rédigé le :</td>
+							<td><strong><?php echo $date_commentaire . ' à ' . $heure_commentaire; ?></strong></td>
+						</tr>
+				<?php }
+				} ?>
 				<!-- Commentaire Responsable... -->
-				<?php if ($statut == 'terminee') {
+				<?php if ($statut == 'validee') {
 					// Partie Intervenant
 					// get commentaires intervenant...
-					$getComm = mysqli_query($con, "SELECT * FROM commentaires_validation_intervention WHERE code_intervention='$code_intervention'");
-					while ($row = mysqli_fetch_array($getComm)) {
-						$commentaire = $row['commentaire'];
-						$date_commentaire = date('d / m / Y', strtotime($row['date_validation']));
-						$heure_commentaire = date('H:i', strtotime($row['date_validation']));
-					}
+					$getComm = mysqli_query($con, "SELECT cvi.commentaire, cvi.						date_validation, cvi.auteur
+        		FROM commentaires_validation_intervention cvi
+        		JOIN intervenants_interne ii ON cvi.auteur = ii.email
+        		WHERE cvi.code_intervention = '$code_intervention'");
+
+					if ($getComm->num_rows > 0) {
+						while ($row = mysqli_fetch_array($getComm)) {
+							$commentaire = $row['commentaire'];
+							$date_commentaire = date('d / m / Y', strtotime($row['date_validation']));
+							$heure_commentaire = date('H:i', strtotime($row['date_validation']));
+						}
+
 				?>
-					<tr>
-						<td style="width: 390px;">Commentaires de l'intervenant</td>
-						<td><strong><?php echo $commentaire; ?></strong></td>
-					</tr>
-					<tr>
-						<td style="width: 390px;">Commentaire rédigé le :</td>
-						<td><strong><?php echo $date_commentaire . ' à ' . $heure_commentaire; ?></strong></td>
-					</tr>
+						<tr>
+							<td style="width: 390px;">Commentaires de l'intervenant</td>
+							<td><strong><?php echo $commentaire; ?></strong></td>
+						</tr>
+						<tr>
+							<td style="width: 390px;">Commentaire rédigé le :</td>
+							<td><strong><?php echo $date_commentaire . ' à ' . $heure_commentaire; ?></strong></td>
+						</tr>
 					<?php
+					}
+				}
+				if ($statut == 'terminee') {
+
 					// get commentaires...
 					$getCommRes = mysqli_query($con, "SELECT * FROM commentaires_cloture_intervention WHERE code_intervention='$code_intervention'");
-					while ($row = mysqli_fetch_array($getCommRes)) {
-						$commentaire_res = $row['commentaire'];
-						$date_commentaire_res = date('d / m / Y', strtotime($row['date_cloture']));
-						$heure_commentaire_res = date('H:i', strtotime($row['date_cloture']));
-					}
+					if ($getCommRes->num_rows > 0) {
+						while ($row = mysqli_fetch_array($getCommRes)) {
+							$commentaire_res = $row['commentaire'];
+							$date_commentaire_res = date('d / m / Y', strtotime($row['date_cloture']));
+							$heure_commentaire_res = date('H:i', strtotime($row['date_cloture']));
+						}
 					?>
-					<tr>
-						<td style="width: 390px;">Commentaires du Responsable Dage</td>
-						<td><strong><?php echo $commentaire_res; ?></strong></td>
-					</tr>
-					<tr>
-						<td style="width: 390px;">Commentaire rédigé le :</td>
-						<td><strong><?php echo $date_commentaire_res . ' à ' . $heure_commentaire_res; ?></strong></td>
-					</tr>
-				<?php } ?>
-				<?php if ($statut == 'annulee') { ?>
-					<tr>
-						<td style="width: 390px;">Date de l'annulation :</td>
-						<td><strong><?php echo $date_annulation; ?></strong></td>
-					</tr>
-					<tr>
-						<td style="width: 390px;">Raisons :</td>
-						<td><strong><?php echo $raisons_annulation; ?></strong></td>
-					</tr>
-					<tr>
-						<td style="width: 390px;">Auteur (annulation) :</td>
-						<td><strong><?php echo $auteur_annulation; ?></strong></td>
-					</tr>
-				<?php } ?>
+						<tr>
+							<td style="width: 390px;">Commentaires du Responsable Dage</td>
+							<td><strong><?php echo $commentaire_res; ?></strong></td>
+						</tr>
+						<tr>
+							<td style="width: 390px;">Commentaire rédigé le :</td>
+							<td><strong><?php echo $date_commentaire_res . ' à ' . $heure_commentaire_res; ?></strong></td>
+						</tr>
+				<?php }
+				} ?>
+				<?php if ($statut == 'annulee') {
+					// Recuperer les commentaires d'annulation dans la table commentaires_annulation_intervention 
+					$getCommentaireAnnulation = $con->query("SELECT * FROM commentaires_annulation_intervention WHERE code_intervention='$code_intervention'");
+					if ($getCommentaireAnnulation->num_rows > 0) {
+
+						$row = $getCommentaireAnnulation->fetch_assoc();
+						$date_annulation = $row['date_annulation'];
+						$raisons_annulation = $row['commentaire'];
+						$auteur_annulation = $row['matricule_auteur'];
+
+				?>
+						<tr>
+							<td style="width: 390px;">Date de l'annulation :</td>
+							<td><strong><?php echo $date_annulation; ?></strong></td>
+						</tr>
+						<tr>
+							<td style="width: 390px;">Raisons :</td>
+							<td><strong><?php echo $raisons_annulation; ?></strong></td>
+						</tr>
+						<tr>
+							<td style="width: 390px;">Auteur (annulation) :</td>
+							<td><strong><?php echo $auteur_annulation; ?></strong></td>
+						</tr>
+				<?php }
+				} ?>
 
 			</tbody>
 		</table>
@@ -195,11 +224,11 @@
 		<!-- <a class="popup-with-form btn btn-danger" href="#annuler"><i class="mdi mdi-close"></i> Annuler l'intervention</a> -->
 		<?php if ($roleUser != 'Intervenant' && $roleUser != 'Gestionnaire' && $statut != 'annulee') { ?>
 			<?php if ($statut == 'validee') { ?><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#cloturer" class="btn btn btn-success mt-10 d-block text-center"><i class="mdi mdi-check"></i> Clôturer l'intervention</a><?php } ?>
-			<?php if ($statut != 'terminee') { ?><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#relancer" class="btn btn btn-warning mt-10 d-block text-center"><i class="mdi mdi-format-rotate-90"></i> Relancer l'intervenant</a><?php } ?>
-			<?php if ($statut != 'validee' && $statut != 'terminee') { ?><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#annuler" class="btn btn btn-danger mt-10 d-block text-center"> <i class="mdi mdi-close"></i> Annuler Intervention</a><?php } ?>
-		<?php } ?>
+			<?php if ($statut != 'terminee') { ?><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#relancer" class="btn btn btn-warning mt-10 d-block text-center"><i class="mdi mdi-format-rotate-90"></i> Relancer l'intervenant</a>
+		<?php }
+		} ?>
 		<!-- Bouton Intervenant -->
-		<?php if (($roleUser == 'Intervenant' || $roleUser == 'Responsable') && $statut != 'validee' && $statut != 'terminee' && $statut != 'annulee') { ?>
+		<?php if (($roleUser == 'Intervenant' || $roleUser == 'Responsable' || $roleUser == 'Administrateur') && $statut != 'validee' && $statut != 'terminee' && $statut != 'annulee') { ?>
 			<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#confirmerIntervention" class="btn btn btn-success mt-10 d-block text-center"><i class="mdi mdi-check"></i> Valider l'intervention</a>
 			<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#annuler" class="btn btn btn-danger mt-10 d-block text-center"> <i class="mdi mdi-close"></i> Annuler Intervention</a>
 		<?php } ?>

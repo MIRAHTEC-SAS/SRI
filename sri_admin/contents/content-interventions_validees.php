@@ -5,22 +5,22 @@
 
 // $getTypeIntervenant = mysqli_query($con, "SELECT type_intervenant FROM interventions");
 
-$getInterventionsPlanifiees = mysqli_query($con, "SELECT 
-interventions.code_intervention,
-interventions.code_incident,
-interventions.intervenant,
-interventions.numero_incident,
-interventions.date_intervention,
-interventions.date_saisie,
-interventions.statut,
-services.code_service,
-services.libelle,
-services.sigle,
-type_incidents.type_incident,
-interventions.type_intervenant
-FROM `interventions`
-INNER JOIN services ON services.code_service=interventions.service
-INNER JOIN type_incidents ON type_incidents.code_incident=interventions.code_incident WHERE interventions.statut='validee'");
+// $getInterventionsPlanifiees = mysqli_query($con, "SELECT 
+// interventions.code_intervention,
+// interventions.code_incident,
+// interventions.intervenant,
+// interventions.numero_incident,
+// interventions.date_intervention,
+// interventions.date_saisie,
+// interventions.statut,
+// services.code_service,
+// services.libelle,
+// services.sigle,
+// type_incidents.type_incident,
+// interventions.type_intervenant
+// FROM `interventions`
+// INNER JOIN services ON services.code_service=interventions.service
+// INNER JOIN type_incidents ON type_incidents.code_incident=interventions.code_incident WHERE interventions.statut='validee'");
 
 // $listeAgents=[];
 // $codeDirections=[];
@@ -47,7 +47,7 @@ INNER JOIN type_incidents ON type_incidents.code_incident=interventions.code_inc
 			</tr>
 		</thead>
 		<tbody>
-			<?php while ($row = mysqli_fetch_array($getInterventionsPlanifiees)) {
+			<?php while ($row = mysqli_fetch_array($getInterventionsValidees)) {
 				$intervenant = $row['intervenant'];
 				$service = $row['sigle'];
 				$categorie = $row['type_incident'];

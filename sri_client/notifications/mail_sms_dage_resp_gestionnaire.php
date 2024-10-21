@@ -1,5 +1,5 @@
 <?php
-include('../config/app.php');
+// include('../config/app.php');
 
 // Pour les SMS
 require __DIR__ . '/vendor_orange/autoload.php';

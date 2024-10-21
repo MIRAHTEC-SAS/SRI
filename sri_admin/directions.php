@@ -87,7 +87,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
 										<div class="modal-body" style="background-color:#F7F5F2">
-											<form action="controllers/referentielController.php" method="POST">
+											<form action="controllers/referentielController" method="POST">
 												<div class="form-group">
 
 													<label class="col-md-12 form-label">Ministere</label>
@@ -147,7 +147,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 											<h4 class="box-title">Edition</h4>
 										</div>
 										<div class="box-body" style="background-color:#FBFBFB">
-											<form action="controllers/referentielController.php" method="POST">
+											<form action="controllers/referentielController" method="POST">
 												<div class="row">
 													<div class="col-2">
 														<label class="col-md-12 form-label">Code Service</label>

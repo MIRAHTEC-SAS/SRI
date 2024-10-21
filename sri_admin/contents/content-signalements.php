@@ -1,6 +1,4 @@
-
-<?php 
-include ('config/app.php');
+<?php
 
 $getSignalements = mysqli_query($con, "SELECT 
 signalements.date_reception,
@@ -14,7 +12,6 @@ type_incidents.type_incident,
 type_incidents.couleur as couleur_type,
 code_priorite.priorite,
 code_priorite.couleur_priorite
-
 FROM `signalements` INNER JOIN services on services.code_service=signalements.code_service INNER JOIN type_incidents ON type_incidents.code_incident=signalements.code_incident INNER JOIN code_priorite ON code_priorite.code=signalements.code_priorite");
 
 // $listeAgents=[];
@@ -40,73 +37,73 @@ FROM `signalements` INNER JOIN services on services.code_service=signalements.co
 
 				<!-- <th>Responsable</th> -->
 				<!-- <th>Status</th> -->
-				<th style="width:10%;text-align:center">Action</th>					 
+				<th style="width:10%;text-align:center">Action</th>
 			</tr>
 		</thead>
 		<tbody>
-            <?php while ($row = mysqli_fetch_array($getSignalements)) { 
-                $numero_incident=$row['numero_incident']; 
-				$code_incident=$row['code_incident']; 
-				$type_incident=$row['type_incident']; 
-				$service=$row['sigle'];
-				$date_reception=date('d/m/Y', strtotime($row['date_reception']));
-				$description=$row['description'];
-				$priorite=$row['priorite'];
-				$auteur=$row['auteur'];
-				$couleur_type_incident=$row['couleur_type'];
-				$couleur_priorite=$row['couleur_priorite'];
-				$statut=$row['statut'];
-				
+			<?php while ($row = mysqli_fetch_array($getSignalements)) {
+				$numero_incident = $row['numero_incident'];
+				$code_incident = $row['code_incident'];
+				$type_incident = $row['type_incident'];
+				$service = $row['sigle'];
+				$date_reception = date('d/m/Y', strtotime($row['date_reception']));
+				$description = $row['description'];
+				$priorite = $row['priorite'];
+				$auteur = $row['auteur'];
+				$couleur_type_incident = $row['couleur_type'];
+				$couleur_priorite = $row['couleur_priorite'];
+				$statut = $row['statut'];
+
 			?>
 
-			<tr>
-				<td><?php echo '#'.$numero_incident; ?></td>
-				<td><?php echo $service; ?></td>
-				<td>
-                    <span class="badge badge-pill" style="background-color:<?php echo $couleur_type_incident;?>"><?php echo $type_incident; ?></span></br>
-                </td>
-                <td><?php echo substr($description,0,100).'<small>...</small>'; ?></td>
-				<td>
-                    <span class="badge badge-pill" style="background-color:<?php echo $couleur_priorite;?>"><?php echo $priorite; ?></span></br>
-                </td>
-				
-				<td><?php echo $date_reception; ?></td>
-				<td><?php echo $auteur; ?></td>
-				<!-- <td>
-                    <?php 
-                        //$getTypes = mysqli_query($con, "SELECT DISTINCT signalements_incidents.numero_incident, type_incidents.type_incident FROM `signalements_incidents` INNER JOIN type_incidents ON type_incidents.code_incident=signalements_incidents.code_incident where signalements_incidents.numero_incident='$numero_incident'");
-                       // while ($row = mysqli_fetch_array($getTypes)) { 
-                           // echo '<span class="badge badge-pill badge-success">P1</span></br>';
-                       // }
-                    ?>
+				<tr>
+					<td><?php echo '#' . $numero_incident; ?></td>
+					<td><?php echo $service; ?></td>
+					<td>
+						<span class="badge badge-pill" style="background-color:<?php echo $couleur_type_incident; ?>"><?php echo $type_incident; ?></span></br>
+					</td>
+					<td><?php echo substr($description, 0, 100) . '<small>...</small>'; ?></td>
+					<td>
+						<span class="badge badge-pill" style="background-color:<?php echo $couleur_priorite; ?>"><?php echo $priorite; ?></span></br>
+					</td>
+
+					<td><?php echo $date_reception; ?></td>
+					<td><?php echo $auteur; ?></td>
+					<!-- <td>
+                    <?php
+										//$getTypes = mysqli_query($con, "SELECT DISTINCT signalements_incidents.numero_incident, type_incidents.type_incident FROM `signalements_incidents` INNER JOIN type_incidents ON type_incidents.code_incident=signalements_incidents.code_incident where signalements_incidents.numero_incident='$numero_incident'");
+										// while ($row = mysqli_fetch_array($getTypes)) { 
+										// echo '<span class="badge badge-pill badge-success">P1</span></br>';
+										// }
+										?>
                 </td> -->
-				
-				<td>
-					<span class="badge badge-pill" style="background-color:<?php 
-					if ($statut=='en attente') echo "#C63D2F";
-					if ($statut=='en cours') echo "#FFC436";
-					if ($statut=='termine') echo "#1A5D1A";
-					if ($statut=='rejete') echo "#4E4FEB";
-					?>;font-weight:bold; font-size:13px; color:
-					<?php 
-					if ($statut=='en attente') echo "white";
-					if ($statut=='en cours') echo "black";
-					if ($statut=='termine') echo "white";
-					if ($statut=='rejete') echo "white";
+
+					<td>
+						<span class="badge badge-pill" style="background-color:<?php
+																																		if ($statut == 'en attente') echo "#C63D2F";
+																																		if ($statut == 'en cours') echo "#FFC436";
+																																		if ($statut == 'termine') echo "#1A5D1A";
+																																		if ($statut == 'rejete') echo "#4E4FEB";
+																																		?>;font-weight:bold; font-size:13px; color:
+					<?php
+					if ($statut == 'en attente') echo "white";
+					if ($statut == 'en cours') echo "black";
+					if ($statut == 'termine') echo "white";
+					if ($statut == 'rejete') echo "white";
 					?> 
 					"><?php echo $statut; ?></span></br>
-				</td>
+					</td>
 
-                <td style="text-align:center">
-                    <a href="details_signalements.php?numero_incident=<?php echo  $numero_incident; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
-				        <i class="fa fa-eye" style="font-size:16px;color:black"></i>
-					</a> 
-					<!-- <a href="javascript:void(0)" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
+					<td style="text-align:center">
+						<a href="details_signalements.php?numero_incident=<?php echo  $numero_incident; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+							<i class="fa fa-eye" style="font-size:16px;color:black"></i>
+						</a>
+						<!-- <a href="javascript:void(0)" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
 						<i class="ti-trash"></i>
 					</a> -->
-				</td>
-			</tr>
-			<?php } ?>	
-        </tbody>						
+					</td>
+				</tr>
+			<?php } ?>
+		</tbody>
 	</table>
 </div>
