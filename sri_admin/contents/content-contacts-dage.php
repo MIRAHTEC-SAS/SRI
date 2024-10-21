@@ -27,10 +27,10 @@ $getContactsUrgent = mysqli_query($con, "SELECT * FROM `contacts_dage_urgent` or
 						<span class="badge badge-pill" style="background-color:red">URGENT</span></br></br>
 					</td>
 					<td style="text-align:center">
-						<a href="contacts_dage.php?edit=<?php echo $id; ?>&type=urgent" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+						<a href="contacts_dage?edit=<?php echo $id; ?>&type=urgent" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
 							<i class="fa fa-edit" style="font-size:16px;color:orange"></i>
 						</a>
-						<a href="contacts_dage.php?delete=<?php echo $id; ?>&type=urgent" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
+						<a href="contacts_dage?delete=<?php echo $id; ?>&type=urgent" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
 							<i class="ti-trash" style="font-size:16px;color:red"></i>
 						</a>
 					</td>
@@ -46,10 +46,10 @@ $getContactsUrgent = mysqli_query($con, "SELECT * FROM `contacts_dage_urgent` or
 						<span class="badge badge-pill" style="background-color:green">NORMAL</span></br></br>
 					</td>
 					<td style="text-align:center">
-						<a href="contacts_dage.php?edit=<?php echo $id; ?>&type=normal" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+						<a href="contacts_dage?edit=<?php echo $id; ?>&type=normal" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
 							<i class="fa fa-edit" style="font-size:16px;color:orange"></i>
 						</a>
-						<a href="contacts_dage.php?delete=<?php echo $id; ?>&type=normal" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
+						<a href="contacts_dage?delete=<?php echo $id; ?>&type=normal" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
 							<i class="ti-trash" style="font-size:16px;color:red"></i>
 						</a>
 					</td>

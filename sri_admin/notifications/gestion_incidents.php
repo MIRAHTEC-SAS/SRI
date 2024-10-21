@@ -4,35 +4,27 @@ include('../config/app.php');
 /*********************************** Edition incident *************************************/
 
 if (isset($_POST['editerIncident'])) {
-
+    // var_dump($_POST);
+    // die();
     $numero_incident = $_POST['numero_incident'];
     $categorie = $_POST['categorie'];
-    $description = $_POST['description'];
+    $description = mysqli_real_escape_string($con, $_POST['description']);
+    $code_priorite = $_POST['code_priorite'];
 
 
     // Update Incident
-    $sql = mysqli_query($con, "UPDATE signalements set description='$description' where numero_incident='$numero_incident'");
-
-    // Update Incident
-    $sql2 = mysqli_query($con, "UPDATE signalements_incidents set code_incident='$categorie' where numero_incident='$numero_incident'");
-
-    if ($sql) {
-        $_SESSION['errorMsg'] = false;
-        $_SESSION['successMsg'] = true;
-        $_SESSION['message'] = "Incident edité avec succés !";
-        header("Location: ../details_signalements?numero_incident=$numero_incident");
-    } else {
+    $sql = mysqli_query($con, "UPDATE signalements set description='$description' ,code_incident='$categorie',code_priorite='$code_priorite' where numero_incident='$numero_incident'");
+    if (!$sql) {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
         $_SESSION['message'] = "Erreur lors de l'édition de l'incident! " . mysqli_error($con);
         header("Location: ../details_signalements?numero_incident=$numero_incident");
+    } else {
+        $_SESSION['errorMsg'] = false;
+        $_SESSION['successMsg'] = true;
+        $_SESSION['message'] = "Incident modifié avec succès !";
+        header("Location: ../details_signalements?numero_incident=$numero_incident");
     }
-
-    // echo 'yes';
-    // echo $numero_incident.'</br>';
-    // echo $categorie.'</br>';
-    // echo $description.'</br>';
-    // echo $testi.'</br>';
 }
 
 /*********************************** Affectation incident *************************************/
@@ -116,7 +108,7 @@ if (isset($_POST['affecterIncident'])) {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
         $_SESSION['message'] = "La date d'intervention ne peut pas etre anterieure a la date de l'incident !";
-        header("Location: ../details_signalements.php?numero_incident=$numero_incident&amp;&affect=1");
+        header("Location: ../details_signalements?numero_incident=$numero_incident&amp;&affect=1");
     } else {
         // echo $auteur;die;
         // Generation Code Intervention
@@ -174,7 +166,7 @@ if (isset($_POST['affecterIncident'])) {
                 $_SESSION['errorMsg'] = true;
                 $_SESSION['successMsg'] = false;
                 $_SESSION['message'] = "L'intervention n'a pas pu etre enregistrée !";
-                header("Location: ../details_signalements.php?numero_incident=$numero_incident&amp;&affect=1");
+                header("Location: ../details_signalements?numero_incident=$numero_incident&amp;&affect=1");
             } else {
                 // echo 'Persisté';
                 // Mettre a jour le statut du signalement
@@ -244,7 +236,7 @@ if (isset($_POST['affecterIncident'])) {
                 $_SESSION['errorMsg'] = false;
                 $_SESSION['successMsg'] = true;
                 $_SESSION['message'] = "Intervention planifiée avec succès !";
-                header("Location: ../interventions_planifiees.php");
+                header("Location: ../interventions_planifiees");
             }
             // echo 'done';die;
 
@@ -294,7 +286,7 @@ if (isset($_POST['affecterIncident'])) {
                 $_SESSION['errorMsg'] = true;
                 $_SESSION['successMsg'] = false;
                 $_SESSION['message'] = "L'intervention n'a pas pu etre enregistrée !";
-                header("Location: ../interventions_planifiees.php");
+                header("Location: ../interventions_planifiees");
             } else {
                 // echo 'Persisté';
                 // Mettre a jour le statut du signalement
@@ -312,7 +304,7 @@ if (isset($_POST['affecterIncident'])) {
                 $_SESSION['errorMsg'] = false;
                 $_SESSION['successMsg'] = true;
                 $_SESSION['message'] = "Intervention planifiée avec succès !";
-                header("Location: ../signalements_en_attente.php");
+                header("Location: ../signalements_encours");
             }
             // echo 'done';die;
 
@@ -343,7 +335,7 @@ if (isset($_POST['affecterIncident'])) {
                 $_SESSION['errorMsg'] = true;
                 $_SESSION['successMsg'] = false;
                 $_SESSION['message'] = "L'intervention n'a pas pu etre enregistrée !";
-                header("Location: ../details_signalements.php?numero_incident=$numero_incident&amp;&affect=1");
+                header("Location: ../details_signalements?numero_incident=$numero_incident&amp;&affect=1");
             } else {
                 // echo 'Persisté';
                 // Mettre a jour le statut du signalement
@@ -380,7 +372,7 @@ if (isset($_POST['affecterIncident'])) {
 if (isset($_POST['rejeterIncident'])) {
 
     $numero_incident = $_POST['numero_incident'];
-    $raisons = $_POST['raisons'];
+    $raisons = mysqli_real_escape_string($con, $_POST['raisons']);
     $auteur = $_POST['auteur'];
 
     // echo $numero_incident.'</br>';
@@ -391,14 +383,14 @@ if (isset($_POST['rejeterIncident'])) {
         VALUES ('$numero_incident', '$raisons', '$date_saisie', '$auteur')");
 
     // Maj Historique statut Intervention
-    $sql = mysqli_query($con, "INSERT INTO `historique_statuts_incident` (`numero_incident`, `statut`, `date_statut`, `auteur`) 
+    $sql1 = mysqli_query($con, "INSERT INTO `historique_statuts_incident` (`numero_incident`, `statut`, `date_statut`, `auteur`) 
         VALUES ('$numero_incident', 'rejete', '$date_saisie', '$auteur')");
 
     // Mettre a jour le statut du signalement
-    $sql = mysqli_query($con, "UPDATE signalements SET statut='rejete' WHERE numero_incident='$numero_incident'");
+    $sql2 = mysqli_query($con, "UPDATE signalements SET statut='rejete' WHERE numero_incident='$numero_incident'");
 
     $_SESSION['errorMsg'] = false;
     $_SESSION['successMsg'] = true;
     $_SESSION['message'] = "Demande d'intervention rejetée avec succès !";
-    header("Location: ../signalements.php");
+    header("Location: ../signalements_rejetes");
 }

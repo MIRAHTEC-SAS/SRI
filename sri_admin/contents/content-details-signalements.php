@@ -46,6 +46,62 @@
 								</span>
 							</td>
 						</tr>
+
+						<!-- Commentaire -->
+						<?php if ($statut == 'rejete') {
+
+							// get commentaires...
+							$getCommRes = mysqli_query($con, "SELECT 
+										signalements.date_reception, 
+										signalements.numero_incident, 
+										signalements.code_incident, 
+										signalements.auteur, 
+										signalements.statut, 
+										signalements.description, 
+										services.sigle, 
+										type_incidents.type_incident, 
+										type_incidents.couleur AS couleur_type, 
+										code_priorite.priorite, 
+										code_priorite.couleur_priorite, 
+										commentaires_rejets.commentaire,
+										commentaires_rejets.date_rejet,
+										commentaires_rejets.matricule_auteur 
+								FROM 
+										signalements 
+								INNER JOIN 
+										services ON services.code_service = signalements.code_service 
+								INNER JOIN 
+										type_incidents ON type_incidents.code_incident = signalements.code_incident 
+								INNER JOIN 
+										code_priorite ON code_priorite.code = signalements.code_priorite 
+								INNER JOIN 
+										commentaires_rejets ON commentaires_rejets.numero_incident = signalements.numero_incident 
+								WHERE 
+										signalements.statut = 'rejete' AND signalements.numero_incident='$numero_incident';
+								");
+							if ($getCommRes->num_rows > 0) {
+								while ($row = mysqli_fetch_array($getCommRes)) {
+									// var_dump($row);
+									$commentaire_res = $row['commentaire'];
+									$date_commentaire_res = date('d / m / Y', strtotime($row['date_rejet']));
+									$heure_commentaire_res = date('H:i', strtotime($row['date_rejet']));
+									$matricule_auteur_res = $row['matricule_auteur'];
+								}
+						?>
+								<tr>
+									<td style="width: 390px;">Raisons du rejet</td>
+									<td><strong><?php echo $commentaire_res; ?></strong></td>
+								</tr>
+								<tr>
+									<td style="width: 390px;">Commentaire rédigé le :</td>
+									<td><strong><?php echo $date_commentaire_res . ' à ' . $heure_commentaire_res; ?></strong></td>
+								</tr>
+								<tr>
+									<td style="width: 390px;">Commentaire rédigé par :</td>
+									<td><strong><?php echo $matricule_auteur_res ?></strong></td>
+								</tr>
+						<?php }
+						} ?>
 						<!-- Priorite -->
 						<tr>
 							<td style="width: 390px;">Priorité</td>
@@ -107,11 +163,12 @@
 
 					</tbody>
 				</table>
-				<?php if ($statut == 'en attente' && $roleUser != 'Gestionnaire') { ?>
+				<?php if ($statut == 'en attente' && $roleUser != 'Gestionnaire' && $roleUser != 'Intervenant') { ?>
 					<div class="gap-items text-center">
-						<button class="btn btn-success"><a href="details_signalements.php?numero_incident=<?php echo $numero_incident; ?>&amp;affect=1" style="color:white"><i class="mdi mdi-share"></i> Affecter</a></button>
-						<button class="btn btn-warning"><a href="details_signalements.php?numero_incident=<?php echo $numero_incident; ?>&amp;edit=1" style="color:white"><i class="mdi mdi-pencil"></i> Editer</a></button>
-						<?php if ($emailUser == 'alphalimalediop@minfinances.sn') { ?><button class="btn btn-danger"><a href="details_signalements.php?numero_incident=<?php echo $numero_incident; ?>&amp;rejet=1" style="color:white"><i class="mdi mdi-close"></i> Rejeter</a></button><?php } ?>
+						<button class="btn btn-success"><a href="details_signalements?numero_incident=<?php echo $numero_incident; ?>&amp;affect=1" style="color:white"><i class="mdi mdi-share"></i> Affecter</a></button>
+						<button class="btn btn-warning"><a href="details_signalements?numero_incident=<?php echo $numero_incident; ?>&amp;edit=1" style="color:white"><i class="mdi mdi-pencil"></i> Editer</a></button>
+						<button class="btn btn-danger"><a href="details_signalements?numero_incident=<?php echo $numero_incident;
+																																													?>&amp;rejet=1" style="color:white"><i class="mdi mdi-close"></i> Rejeter</a></button>
 					</div>
 				<?php } ?>
 			</div>
@@ -120,30 +177,38 @@
 			<div class="box box-body b-1 text-center no-shadow">
 				<div id="image-popups">
 					<a href="../sri_client/notifications/<?php //echo $image; 
-																								?>" data-effect="mfp-3d-unfold"><img src="../sri_client/notifications/<?php echo $image; ?>" class="img-fluid" alt="" /></a>
+																								?>" data-effect="mfp-3d-unfold"><img src="../sri_client/notifications/<?php //echo $image; 
+																																																											?>" class="img-fluid" alt="" /></a>
 				</div>
 			</div>
 			-->
 		<!-- </div>  -->
 		<!-- <div class="col-md-7 col-sm-6">
-			<h2 class="box-title mt-0"><?php echo $service; ?></h2>
+			<h2 class="box-title mt-0"><?php // echo $service; 
+																	?></h2>
 			<hr>
 			<b>Description de l'incident :</b></br>
-			<p><?php echo $description; ?></p>
+			<p><?php //echo $description; 
+					?></p>
 			<div class="row">
 				<div class="col-sm-12">
 					<h6 class="mt-20">Categorie</h6>
 					<p class="mb-0">
-						<span class="badge badge-pill badge-lg" style="background-color:<?php echo $couleur; ?>"><?php echo $categorie; ?></span>
+						<span class="badge badge-pill badge-lg" style="background-color:<?php //echo $couleur; 
+																																						?>"><?php //echo $categorie; 
+																																								?></span>
 					</p>
 				</div>
 			</div>
 			<hr>
 			<?php if ($statut == 'en attente' && $roleUser != 'Gestionnaire') { ?>
 			<div class="gap-items">
-				<button class="btn btn-success"><a href="details_signalements.php?numero_incident=<?php echo $numero_incident; ?>&amp;affect=1" style="color:white" ><i class="mdi mdi-share"></i> Affecter</a></button>
-				<button class="btn btn-warning"><a href="details_signalements.php?numero_incident=<?php echo $numero_incident; ?>&amp;edit=1" style="color:white" ><i class="mdi mdi-pencil"></i> Editer</a></button>
-				<?php if ($emailUser == 'alphalimalediop@minfinances.sn') { ?><button class="btn btn-danger"><a href="details_signalements.php?numero_incident=<?php echo $numero_incident; ?>&amp;rejet=1" style="color:white" ><i class="mdi mdi-close"></i> Rejeter</a></button><?php } ?>
+				<button class="btn btn-success"><a href="details_signalements?numero_incident=<?php //echo $numero_incident; 
+																																											?>&amp;affect=1" style="color:white" ><i class="mdi mdi-share"></i> Affecter</a></button>
+				<button class="btn btn-warning"><a href="details_signalements?numero_incident=<?php //echo $numero_incident; 
+																																											?>&amp;edit=1" style="color:white" ><i class="mdi mdi-pencil"></i> Editer</a></button>
+				<?php if ($emailUser == 'alphalimalediop@minfinances.sn') { ?><button class="btn btn-danger"><a href="details_signalements?numero_incident=<?php //echo $numero_incident; 
+																																																																										?>&amp;rejet=1" style="color:white" ><i class="mdi mdi-close"></i> Rejeter</a></button><?php } ?>
 			</div>
 			<?php } ?>
 

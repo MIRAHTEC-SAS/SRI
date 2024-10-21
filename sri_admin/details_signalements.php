@@ -94,29 +94,29 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 
 		// Incident en cours
 		$getIncidentsEnCours = mysqli_query($con, "SELECT 
-	signalements.date_reception,
-	signalements.numero_incident,
-	signalements.code_incident,
-	signalements.auteur,
-	signalements.statut,
-	signalements.description,
-	services.sigle,
-	type_incidents.type_incident,
-	type_incidents.couleur as couleur_type,
-	code_priorite.priorite,
-	code_priorite.couleur_priorite,
-	interventions.date_intervention,
-	interventions.date_saisie as date_affectation,
-	interventions.intervenant,
-	interventions.date_intervention,
-	interventions.type_intervenant
-	
-	FROM `signalements` 
-	INNER JOIN services on services.code_service=signalements.code_service
-	INNER JOIN type_incidents ON type_incidents.code_incident=signalements.code_incident 
-	INNER JOIN code_priorite ON code_priorite.code=signalements.code_priorite 
-	INNER JOIN interventions ON interventions.numero_incident=signalements.numero_incident
-	where signalements.numero_incident='$numero_incident'");
+			signalements.date_reception,
+			signalements.numero_incident,
+			signalements.code_incident,
+			signalements.auteur,
+			signalements.statut,
+			signalements.description,
+			services.sigle,
+			type_incidents.type_incident,
+			type_incidents.couleur as couleur_type,
+			code_priorite.priorite,
+			code_priorite.couleur_priorite,
+			interventions.date_intervention,
+			interventions.date_saisie as date_affectation,
+			interventions.intervenant,
+			interventions.date_intervention,
+			interventions.type_intervenant
+			
+			FROM `signalements` 
+			INNER JOIN services on services.code_service=signalements.code_service
+			INNER JOIN type_incidents ON type_incidents.code_incident=signalements.code_incident 
+			INNER JOIN code_priorite ON code_priorite.code=signalements.code_priorite 
+			INNER JOIN interventions ON interventions.numero_incident=signalements.numero_incident
+			where signalements.numero_incident='$numero_incident'");
 
 		while ($row = mysqli_fetch_array($getIncidentsEnCours)) {
 
@@ -169,7 +169,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 			code_priorite.code as code_priorite,
 			code_priorite.couleur_priorite
 	
-	FROM `signalements` INNER JOIN services on services.code_service=signalements.code_service INNER JOIN type_incidents ON type_incidents.code_incident=signalements.code_incident INNER JOIN code_priorite ON code_priorite.code=signalements.code_priorite where signalements.numero_incident='$numero_incident'");
+			FROM `signalements` INNER JOIN services on services.code_service=signalements.code_service INNER JOIN type_incidents ON type_incidents.code_incident=signalements.code_incident INNER JOIN code_priorite ON code_priorite.code=signalements.code_priorite where signalements.numero_incident='$numero_incident'");
 
 		while ($row = mysqli_fetch_array($getIncidents)) {
 			$service = $row['libelle'];
@@ -207,25 +207,25 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 		$showAffect = 1;
 
 		$getIncidents = mysqli_query($con, "SELECT 
-	signalements.date_reception,
-	signalements.numero_incident,
-	signalements.code_incident,
-	signalements.auteur,
-	signalements.statut,
-	signalements.telephone,
-	signalements.email,
-	signalements.photo,
-	signalements.description,
-	services.sigle,
-	services.code_service,
-	services.libelle,
-	type_incidents.type_incident,
-	type_incidents.couleur as couleur_type,
-	code_priorite.priorite,
-	code_priorite.code as code_priorite,
-	code_priorite.couleur_priorite
-	
-	FROM `signalements` INNER JOIN services on services.code_service=signalements.code_service INNER JOIN type_incidents ON type_incidents.code_incident=signalements.code_incident INNER JOIN code_priorite ON code_priorite.code=signalements.code_priorite where signalements.numero_incident='$numero_incident'");
+			signalements.date_reception,
+			signalements.numero_incident,
+			signalements.code_incident,
+			signalements.auteur,
+			signalements.statut,
+			signalements.telephone,
+			signalements.email,
+			signalements.photo,
+			signalements.description,
+			services.sigle,
+			services.code_service,
+			services.libelle,
+			type_incidents.type_incident,
+			type_incidents.couleur as couleur_type,
+			code_priorite.priorite,
+			code_priorite.code as code_priorite,
+			code_priorite.couleur_priorite
+			
+			FROM `signalements` INNER JOIN services on services.code_service=signalements.code_service INNER JOIN type_incidents ON type_incidents.code_incident=signalements.code_incident INNER JOIN code_priorite ON code_priorite.code=signalements.code_priorite where signalements.numero_incident='$numero_incident'");
 
 		while ($row = mysqli_fetch_array($getIncidents)) {
 			$service = $row['libelle'];
@@ -280,11 +280,11 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 			$service = $row['libelle'];
 			$descriptionEdit = $row['description'];
 			$code_service = $row['code_service'];
-			$auteur = $row['prenom'] . ' ' . $row['nom'];
+			$auteur = $row['auteur'];
 			$date_reception = date('d / m / Y', strtotime($row['date_reception']));
 			$heure_reception = date('H:i', strtotime($row['date_reception']));
 			$image = $row['photo'];
-			$contact = $row['contact'];
+			$contact = $row['telephone'];
 			// date("Y-m-d H:i:s");
 		}
 
@@ -337,7 +337,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 										<ol class="breadcrumb">
 											<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
 											<li class="breadcrumb-item" aria-current="page">Signalements</li>
-											<li class="breadcrumb-item active" aria-current="page">En attente</li>
+											<li class="breadcrumb-item active" aria-current="page"><?php echo ucfirst($statut) ?></li>
 										</ol>
 									</nav>
 								</div>
@@ -403,10 +403,10 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 
 			<!-- Vendor JS -->
 			<?php include('layouts/js.php'); ?>
-			<script src="../src/js/pages/chat-popup.js"></script>
+			<!-- <script src="../src/js/pages/chat-popup.js"></script>
 			<script src="../../../assets/icons/feather-icons/feather.min.js"></script>
 			<script src="../../../assets/vendor_components/Magnific-Popup-master/dist/jquery.magnific-popup.min.js"></script>
-			<script src="../../../assets/vendor_components/Magnific-Popup-master/dist/jquery.magnific-popup-init.js"></script>
+			<script src="../../../assets/vendor_components/Magnific-Popup-master/dist/jquery.magnific-popup-init.js"></script> -->
 
 	</body>
 

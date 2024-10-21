@@ -40,10 +40,10 @@ FROM `gestionnaires_services` INNER JOIN services on services.code_service=gesti
 						<?php echo $row['sigle']; ?>
 					</td>
 					<td style="text-align:center">
-						<a href="affecter_gestionnaires.php?edit=<?php echo $row['id']; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+						<a href="affecter_gestionnaires?edit=<?php echo $row['id']; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
 							<i class="fa fa-edit" style="font-size:16px;color:orange"></i>
 						</a>
-						<a href="affecter_gestionnaires.php?delete=<?php echo $row['id']; ?>" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
+						<a href="affecter_gestionnaires?delete=<?php echo $row['id']; ?>" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
 							<i class="ti-trash" style="font-size:16px;color:red"></i>
 						</a>
 					</td>

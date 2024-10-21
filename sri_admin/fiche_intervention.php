@@ -23,6 +23,11 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 				$matricule = $row['matricule_gestionnaire'];
 			}
 			break;
+		case "Intervenant":
+			$getMatriculeInt = mysqli_query($con, "SELECT matricule_intervenant FROM intervenants_interne WHERE email='$emailUser'");
+			while ($row = mysqli_fetch_array($getMatriculeInt)) {
+				$matricule = $row['matricule_intervenant'];
+			}
 	}
 	if (isset($_GET['code_intervention'])) {
 		$code_intervention = $_GET['code_intervention'];

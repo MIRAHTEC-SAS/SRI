@@ -35,13 +35,13 @@ $getUsers = mysqli_query($con, "SELECT * FROM `users` order by id desc");
 																						?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
 				        <i class="fa fa-edit" style="font-size:16px;color:orange"></i>
 					</a> -->
-						<a href="utilisateurs.php?upd=<?php echo $row['email']; ?>&statut=<?php echo $statut; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+						<a href="utilisateurs?upd=<?php echo $row['email']; ?>&statut=<?php echo $statut; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
 							<?php if ($statut == 1) { ?><i class="fa fa-toggle-on " style="font-size:22px;color:#1C9E74"></i> <?php } else { ?>
 								<i class="fa fa-toggle-off" style="font-size:22px;color:#65647C"></i>
 							<?php } ?>
 
 						</a>&nbsp;&nbsp;&nbsp;
-						<a href="utilisateurs.php?delete=<?php echo $row['email']; ?>" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
+						<a href="utilisateurs?delete=<?php echo $row['email']; ?>" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
 							<i class="ti-trash" style="font-size:22px;color:red"></i>
 						</a>
 

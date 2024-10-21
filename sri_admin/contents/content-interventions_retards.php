@@ -101,7 +101,7 @@
 					<td><?php echo $date_intervention; ?></td>
 
 					<td style="text-align:center">
-						<a href="fiche_intervention.php?code_intervention=<?php echo  $code_intervention; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+						<a href="fiche_intervention?code_intervention=<?php echo  $code_intervention; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
 							<i class="fa fa-eye" style="font-size:16px;color:black"></i>
 						</a>
 						<!-- <a href="javascript:void(0)" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">

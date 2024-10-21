@@ -224,7 +224,9 @@
 		<!-- <a class="popup-with-form btn btn-danger" href="#annuler"><i class="mdi mdi-close"></i> Annuler l'intervention</a> -->
 		<?php if ($roleUser != 'Intervenant' && $roleUser != 'Gestionnaire' && $statut != 'annulee') { ?>
 			<?php if ($statut == 'validee') { ?><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#cloturer" class="btn btn btn-success mt-10 d-block text-center"><i class="mdi mdi-check"></i> Clôturer l'intervention</a><?php } ?>
-			<?php if ($statut != 'terminee') { ?><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#relancer" class="btn btn btn-warning mt-10 d-block text-center"><i class="mdi mdi-format-rotate-90"></i> Relancer l'intervenant</a>
+			<?php if ($statut != 'terminee' && $statut != 'validee') { ?><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#relancer" class="btn btn btn-warning mt-10 d-block text-center"><i class="mdi mdi-format-rotate-90"></i> Relancer l'intervenant</a>
+			<?php } ?>
+			<?php if ($statut == 'validee' && $roleUser == 'Responsable') { ?><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#annuler" class="btn btn btn-danger mt-10 d-block text-center"><i class="mdi mdi-close"></i> Annuler Intervention</a>
 		<?php }
 		} ?>
 		<!-- Bouton Intervenant -->

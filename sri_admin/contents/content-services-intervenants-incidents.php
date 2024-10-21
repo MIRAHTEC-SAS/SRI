@@ -35,10 +35,10 @@ FROM `services_intervenant` INNER JOIN services_intervenant_incidents ON service
 					</td>
 					<td><?php echo $row['nom_service']; ?></td>
 					<td style="text-align:center">
-						<a href="services_intervenants_incidents.php?edit=<?php echo $row['id']; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+						<a href="services_intervenants_incidents?edit=<?php echo $row['id']; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
 							<i class="fa fa-edit" style="font-size:16px;color:orange"></i>
 						</a>
-						<a href="services_intervenants_incidents.php?delete=<?php echo $row['id']; ?>" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
+						<a href="services_intervenants_incidents?delete=<?php echo $row['id']; ?>" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
 							<i class="ti-trash" style="font-size:16px;color:red"></i>
 						</a>
 					</td>

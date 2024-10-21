@@ -45,10 +45,10 @@ $getPrestataires = mysqli_query($con, "SELECT * FROM `prestataires` order by id 
 						?>
 					</td>
 					<td style="text-align:center">
-						<a href="prestataires.php?edit=<?php echo $matricule_presta; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+						<a href="prestataires?edit=<?php echo $matricule_presta; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
 							<i class="fa fa-edit" style="font-size:16px;color:orange"></i>
 						</a>
-						<a href="prestataires.php?delete=<?php echo $matricule_presta; ?>" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
+						<a href="prestataires?delete=<?php echo $matricule_presta; ?>" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
 							<i class="ti-trash" style="font-size:16px;color:red"></i>
 						</a>
 					</td>

@@ -1239,7 +1239,8 @@ if (isset($_POST['supprimerRole'])) {
 if (isset($_POST['ajouterUser'])) {
 
     $code_role = $_POST['code_role'];
-    $pass_tmp = '5d0cf713a106628663bb8c552f31d4491fc9f38a0878626b5af4b0d91a914291';
+
+    $pass_tmp = hash('sha256', 'dtai@2023');
 
     $getRoleName = mysqli_query($con, "SELECT * FROM roles WHERE code_role='$code_role'");
     while ($row = mysqli_fetch_array($getRoleName)) {

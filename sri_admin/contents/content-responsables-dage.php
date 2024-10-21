@@ -43,10 +43,10 @@ $getResponsables = mysqli_query($con, "SELECT * FROM `responsables_dage` order b
 						?>
 					</td>
 					<td style="text-align:center">
-						<a href="responsables_dage.php?edit=<?php echo $matricule_responsable; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+						<a href="responsables_dage?edit=<?php echo $matricule_responsable; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
 							<i class="fa fa-edit" style="font-size:16px;color:orange"></i>
 						</a>
-						<a href="responsables_dage.php?delete=<?php echo $matricule_responsable; ?>" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
+						<a href="responsables_dage?delete=<?php echo $matricule_responsable; ?>" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
 							<i class="ti-trash" style="font-size:16px;color:red"></i>
 						</a>
 					</td>

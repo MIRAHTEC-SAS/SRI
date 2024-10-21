@@ -173,7 +173,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 										<ol class="breadcrumb">
 											<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
 											<li class="breadcrumb-item" aria-current="page">Signalements</li>
-											<li class="breadcrumb-item active" aria-current="page">En attente</li>
+											<li class="breadcrumb-item active" aria-current="page">Terminé</li>
 										</ol>
 									</nav>
 								</div>

@@ -43,10 +43,10 @@ $getServices = mysqli_query($con, "SELECT * FROM `services_intervenant` order by
 						?>
 					</td>
 					<td style="text-align:center">
-						<a href="services_intervenant.php?edit=<?php echo $matricule_service; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+						<a href="services_intervenant?edit=<?php echo $matricule_service; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
 							<i class="fa fa-edit" style="font-size:16px;color:orange"></i>
 						</a>
-						<a href="services_intervenant.php?delete=<?php echo $matricule_service; ?>" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
+						<a href="services_intervenant?delete=<?php echo $matricule_service; ?>" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
 							<i class="ti-trash" style="font-size:16px;color:red"></i>
 						</a>
 					</td>

@@ -8,7 +8,7 @@ if (isset($_POST['annulerIntervention'])) {
     $code_intervention = $_POST['code_intervention'];
     $auteur = $_POST['auteur'];
     $statutIncident = $_POST['statutIncident'];
-    $raisons = $_POST['raisons'];
+    $raisons = mysqli_real_escape_string($con, $_POST['raisons']);
 
     // echo $code_intervention.'</br>';
     // echo $raisons.'</br>';
@@ -55,7 +55,7 @@ if (isset($_POST['annulerIntervention'])) {
     $_SESSION['errorMsg'] = false;
     $_SESSION['successMsg'] = true;
     $_SESSION['message'] = "Intervention annulée avec succès !";
-    header("Location: ../interventions_planifiees");
+    header("Location: ../interventions_annulees");
 
     // echo 'yes';
     // echo $numero_incident.'</br>';
@@ -69,7 +69,7 @@ if (isset($_POST['relancerIntervenant'])) {
 
     $code_intervention = $_POST['code_intervention'];
     $auteur = $_POST['auteur'];
-    $msg = $_POST['msg'];
+    $msg = mysqli_real_escape_string($con, $_POST['msg']);
 
     // echo $code_intervention.'</br>';
     // echo $msg.'</br>';
@@ -228,7 +228,7 @@ if (isset($_POST['cloturerIntervention'])) {
 
     $code_intervention = $_POST['code_intervention'];
     $auteur = $_POST['auteur'];
-    $comment = $_POST['comment'];
+    $comment = mysqli_real_escape_string($con, $_POST['comment']);
 
     // echo $code_intervention.'</br>';
     // echo $comment.'</br>';
@@ -270,7 +270,7 @@ if (isset($_POST['cloturerIntervention'])) {
     $_SESSION['errorMsg'] = false;
     $_SESSION['successMsg'] = true;
     $_SESSION['message'] = "Intervention cloturée avec succès !";
-    header("Location: ../interventions_planifiees");
+    header("Location: ../interventions_terminees");
 }
 
 /*********************************** Valider Incident *************************************/
@@ -279,7 +279,7 @@ if (isset($_POST['validerIntervention'])) {
 
     $code_intervention = $_POST['code_intervention'];
     $auteur = $_POST['auteur'];
-    $comment = $_POST['comment'];
+    $comment = mysqli_real_escape_string($con, $_POST['comment']);
 
     // echo $code_intervention.'</br>';
     // echo $comment.'</br>';

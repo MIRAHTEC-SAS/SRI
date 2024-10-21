@@ -31,10 +31,10 @@ $getTypes = mysqli_query($con, "SELECT * FROM type_incidents order by id desc");
 						<p style="border-radius:50px; background-color:<?php echo $row['couleur']; ?>;text-align:center;width:20%">&nbsp;</p>
 					</td>
 					<td style="text-align:center">
-						<a href="types_incident.php?edit=<?php echo $row['code_incident']; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+						<a href="types_incident?edit=<?php echo $row['code_incident']; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
 							<i class="fa fa-edit" style="font-size:16px;color:orange"></i>
 						</a>
-						<a href="types_incident.php?delete=<?php echo $row['code_incident']; ?>" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
+						<a href="types_incident?delete=<?php echo $row['code_incident']; ?>" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
 							<i class="ti-trash" style="font-size:16px;color:red"></i>
 						</a>
 					</td>

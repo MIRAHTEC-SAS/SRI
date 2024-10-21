@@ -64,14 +64,13 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 			code_priorite.priorite,
 			code_priorite.couleur_priorite,
 			commentaires_rejets.commentaire,
-			users.prenom,
-			users.nom
+			commentaires_rejets.date_rejet,
+			commentaires_rejets.matricule_auteur
 			FROM `signalements` 
 			INNER JOIN services on services.code_service=signalements.code_service
 			INNER JOIN type_incidents ON type_incidents.code_incident=signalements.code_incident 
 			INNER JOIN code_priorite ON code_priorite.code=signalements.code_priorite 
 			INNER JOIN commentaires_rejets ON commentaires_rejets.numero_incident=signalements.numero_incident
-			INNER JOIN users ON users.email=commentaires_rejets.matricule_auteur
 			where signalements.statut='rejete'");
 			break;
 		case 'Responsable':
@@ -90,6 +89,7 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 				$responsable = $row['prenom'] . '' . $row['nom'];
 				$liste_codes_incident_resp[] = $row['code_incident'];
 			}
+			// var_dump($liste_codes_incident_resp);
 
 			$t_i_0 = '';
 			$t_i_1 = '';
@@ -99,28 +99,18 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 			for ($i = 0; $i < count($liste_codes_incident_resp); $i++) {
 				${'t_i_' . $i} = $liste_codes_incident_resp[$i];
 			}
-			$getSignalements = mysqli_query($con, "SELECT 
-			signalements.date_reception,
-			signalements.numero_incident,
-			signalements.code_incident,
-			signalements.auteur,
-			signalements.statut,
-			signalements.description,
-			services.sigle,
-			type_incidents.type_incident,
-			type_incidents.couleur as couleur_type,
-			code_priorite.priorite,
-			code_priorite.couleur_priorite,
-			commentaires_rejets.commentaire,
-			users.prenom,
-			users.nom
-			FROM `signalements` 
-			INNER JOIN services on services.code_service=signalements.code_service
-			INNER JOIN type_incidents ON type_incidents.code_incident=signalements.code_incident 
-			INNER JOIN code_priorite ON code_priorite.code=signalements.code_priorite 
-			INNER JOIN commentaires_rejets ON commentaires_rejets.numero_incident=signalements.numero_incident
-			INNER JOIN users ON users.email=commentaires_rejets.matricule_auteur
-			where signalements.statut='rejete' AND signalements.code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
+			// var_dump($t_i_0);
+			// var_dump($t_i_1);
+			// var_dump($t_i_2);
+			// var_dump($t_i_3);
+			// var_dump($t_i_4);
+			// die();
+			$getSignalements = mysqli_query($con, "SELECT signalements.date_reception, signalements.numero_incident, signalements.code_incident, signalements.auteur, signalements.statut, signalements.description, services.sigle, type_incidents.type_incident, type_incidents.couleur as couleur_type, code_priorite.priorite, code_priorite.couleur_priorite, commentaires_rejets.commentaire,
+			commentaires_rejets.date_rejet,
+			commentaires_rejets.matricule_auteur FROM `signalements` INNER JOIN services on services.code_service=signalements.code_service INNER JOIN type_incidents ON type_incidents.code_incident=signalements.code_incident INNER JOIN code_priorite ON code_priorite.code=signalements.code_priorite INNER JOIN commentaires_rejets ON commentaires_rejets.numero_incident=signalements.numero_incident where signalements.statut='rejete' AND signalements.code_incident IN ('$t_i_0','$t_i_1','$t_i_2','$t_i_3','$t_i_4')");
+			// var_dump($getSignalements);
+			// die();
+
 			break;
 		case 'Gestionnaire':
 			$getSignalements = mysqli_query($con, "SELECT 
@@ -136,6 +126,8 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 			code_priorite.priorite,
 			code_priorite.couleur_priorite,
 			commentaires_rejets.commentaire,
+			commentaires_rejets.date_rejet,
+			commentaires_rejets.matricule_auteur,
 			users.prenom,
 			users.nom
 			FROM `signalements` 

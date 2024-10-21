@@ -95,7 +95,7 @@ FROM `signalements` INNER JOIN services on services.code_service=signalements.co
 					</td>
 
 					<td style="text-align:center">
-						<a href="details_signalements.php?numero_incident=<?php echo  $numero_incident; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+						<a href="details_signalements?numero_incident=<?php echo  $numero_incident; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
 							<i class="fa fa-eye" style="font-size:16px;color:black"></i>
 						</a>
 						<!-- <a href="javascript:void(0)" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
