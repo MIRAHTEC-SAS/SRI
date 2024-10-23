@@ -106,15 +106,15 @@ if (isset($_POST['EnvoyerAllEtatsInitiaux'])) {
                 $this->SetFont('Arial', '', 10);
 
                 $getDirections = mysqli_query($con, "SELECT 
-            fc_initialisation_directions.codeDirection,
-            directions.libelle as libelleDirection,
-            directions_generales.libelle as libelleDirectionG
-            FROM fc_initialisation_directions
-            INNER JOIN directions 
-            ON directions.codeDirection=fc_initialisation_directions.codeDirection 
-            INNER JOIN directions_generales 
-            ON directions.codeDirectionGenerale=directions_generales.codeDirectionGenerale 
-            WHERE fc_initialisation_directions.codeFc='$codeFc' and fc_initialisation_directions.codeDirection='$codeDirection'");
+                    fc_initialisation_directions.codeDirection,
+                    directions.libelle as libelleDirection,
+                    directions_generales.libelle as libelleDirectionG
+                    FROM fc_initialisation_directions
+                    INNER JOIN directions 
+                    ON directions.codeDirection=fc_initialisation_directions.codeDirection 
+                    INNER JOIN directions_generales 
+                    ON directions.codeDirectionGenerale=directions_generales.codeDirectionGenerale 
+                    WHERE fc_initialisation_directions.codeFc='$codeFc' and fc_initialisation_directions.codeDirection='$codeDirection'");
 
 
                 while ($row = mysqli_fetch_array($getDirections)) {
@@ -125,16 +125,16 @@ if (isset($_POST['EnvoyerAllEtatsInitiaux'])) {
                 $reqAgents = mysqli_query(
                     $con,
                     "SELECT 
-            agents.matricule,
-            agents.prenom,
-            agents.nom,
-            agents.hierarchie,
-            fc_initialisation_directions.codeFc,
-            fc_initialisation_directions.codeDirection,
-            fc_initialisation_directions.nb_part,
-            corps.libelle as profession
-            FROM fc_initialisation_directions inner join agents on agents.matricule=fc_initialisation_directions.matricule INNER JOIN corps ON corps.codeCorps=agents.codeCorps
-            WHERE fc_initialisation_directions.codeFc='$codeFc' and fc_initialisation_directions.codeDirection='$direction' and fc_initialisation_directions.statut='Actif'"
+                    agents.matricule,
+                    agents.prenom,
+                    agents.nom,
+                    agents.hierarchie,
+                    fc_initialisation_directions.codeFc,
+                    fc_initialisation_directions.codeDirection,
+                    fc_initialisation_directions.nb_part,
+                    corps.libelle as profession
+                    FROM fc_initialisation_directions inner join agents on agents.matricule=fc_initialisation_directions.matricule INNER JOIN corps ON corps.codeCorps=agents.codeCorps
+                    WHERE fc_initialisation_directions.codeFc='$codeFc' and fc_initialisation_directions.codeDirection='$direction' and fc_initialisation_directions.statut='Actif'"
                 );
 
                 $x = 1;
