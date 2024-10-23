@@ -4,10 +4,6 @@
 		<div class="d-flex align-items-center logo-box justify-content-start d-md-block d-none">
 			<!-- Logo -->
 			<a href="dashboard" class="logo">
-				<!-- logo-->
-				<!-- <div class="logo-mini">
-				  <span class="light-logo"><img src="img/symbole.png" alt="logo"></span>
-			  </div> -->
 				<div class="logo-lg">
 					<span class="light-logo fs-36 fw-700">DAGE - <span class="text-primary">SRI</span></span>
 				</div>

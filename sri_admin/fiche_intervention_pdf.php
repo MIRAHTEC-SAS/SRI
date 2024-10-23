@@ -75,9 +75,21 @@ $page = 'Incident';
 		}
 
 		.box-header {
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
 			padding-bottom: 10px;
 			border-bottom: 1px solid #e5e5e5;
 			margin-bottom: 20px;
+		}
+
+		.box-title {
+			margin: 0;
+			/* Supprime la marge par défaut des h4 */
+			flex-grow: 1;
+			/* Permet à chaque h4 de croître pour occuper l'espace disponible */
+			text-align: center;
+			/* Centre le texte dans chaque h4 */
 		}
 
 		.box-body {
@@ -155,16 +167,10 @@ $page = 'Incident';
 						<div class="col-12">
 							<div class="box">
 								<div class="box-header with-border">
-									<h4 class="box-title">Fiche d'intervention <strong style="color:red"><?php echo $code_intervention; ?></strong></h4>
+									<h4 class="box-title" style="flex-grow: 1;">Fiche d'intervention <strong style="color:red"><?php echo $code_intervention; ?></strong></h4>
+									<h4 class="box-title" style="flex-grow: 1;">DAGE - <span style="color: #6a38ff;">SRI</span></h4>
 								</div>
-								<!-- <div class="box-body"> -->
 								<?php include('contents/content-fiche-intervention_pdf.php'); ?>
-								<!-- </div> -->
-								<!-- /.box-body -->
-								<!-- <div class="box-footer">
-						  Footer
-						</div> -->
-								<!-- /.box-footer-->
 							</div>
 						</div>
 					</div>

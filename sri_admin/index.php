@@ -3,46 +3,47 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="img/favicon.png">
 
-    <title>SRI-DAGE - Connexion </title>
-  
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="img/favicon.png">
+
+	<title>SRI-DAGE - Connexion </title>
+
 	<!-- Vendors Style-->
 	<link rel="stylesheet" href="src_sri/css/vendors_css.css">
-	  
-	<!-- Style-->  
+
+	<!-- Style-->
 	<link rel="stylesheet" href="src_sri/css/style.css">
-	<link rel="stylesheet" href="src_sri/css/skin_color.css">	
+	<link rel="stylesheet" href="src_sri/css/skin_color.css">
 
 </head>
-	
+
 <body class="hold-transition theme-primary bg-img" style="background-image: url(img/f.jpeg)">
-	
+
 	<div class="container h-p100">
-		<div class="row align-items-center justify-content-md-center h-p100">	
-			
+		<div class="row align-items-center justify-content-md-center h-p100">
+
 			<div class="col-12">
 				<div class="row justify-content-center g-0">
 					<div class="col-lg-5 col-md-5 col-12">
 						<div class="row text-center">
-						<img src="img/logo.png" width="50%">
+							<img src="img/logo.png" width="50%">
 
 						</div>
-</br>
+						</br>
 						<div class="bg-white rounded10 shadow-lg">
 							<div class="content-top-agile p-20 pb-0">
 								<h1 class="text-primary">DAGE - MFB</h1>
-								<h3 class="mb-0">Gestion des interventions</h3>	
-<!-- </br> -->
+								<h3 class="mb-0">Gestion des interventions</h3>
+
 							</div>
 							<div class="p-40">
-							<?php include('confirmation.php'); ?>						
+								<?php include('confirmation.php'); ?>
 
 								<form action="controllers/loginController.php" method="post">
 									<div class="form-group">
@@ -51,18 +52,18 @@ session_start();
 											<input class="form-control" type="email" name="email" required="" placeholder="test@minfinances.sn">
 										</div>
 									</div>
-								
+
 									<div class="form-group">
 										<div class="input-group mb-3">
 											<span class="input-group-text  bg-transparent"><i class="ti-lock"></i></span>
-                    						<input class="form-control" type="password" name="pwd" required="" placeholder="*********">
+											<input class="form-control" type="password" name="pwd" required="" placeholder="*********">
 											<span class="input-group-text  bg-transparent">
 												<i style="color:#7047ED" id="eye" class="ti-eye"></i>
 												<i style="color:green; display:none" id="eyeoff" class="fa fa-eye-slash"></i>
 											</span>
 										</div>
 									</div>
-									  <div class="row">
+									<div class="row">
 										<!-- <div class="col-6">
 										  <div class="checkbox">
 											<input type="checkbox" id="basic_checkbox_1" >
@@ -71,22 +72,22 @@ session_start();
 										</div> -->
 										<!-- /.col -->
 										<div class="col-6">
-										 <div class="fog-pwd">
-											<a href="reinit_password.php" class="hover-warning"><i class="ion ion-locked"></i> Mot de passe oublié ?</a><br>
-										  </div>
+											<div class="fog-pwd">
+												<a href="reinit_password.php" class="hover-warning"><i class="ion ion-locked"></i> Mot de passe oublié ?</a><br>
+											</div>
 										</div>
 										<!-- /.col -->
 										<div class="col-12 text-center">
-										  <button type="submit" class="btn btn-danger mt-10" name="login">Se connecter</button>
+											<button type="submit" class="btn btn-danger mt-10" name="login">Se connecter</button>
 										</div>
 										<!-- /.col -->
-									  </div>
-								</form>	
+									</div>
+								</form>
 								<!-- <div class="text-center">
 									<p class="mt-15 mb-0">Don't have an account? <a href="auth_register.html" class="text-warning ms-5">Sign Up</a></p>
 								</div>	 -->
-							</div>						
-						<!-- </div>
+							</div>
+							<!-- </div>
 						<div class="text-center">
 						  <p class="mt-20 text-white">- Sign With -</p>
 						  <p class="gap-items-2 mb-20">
@@ -95,37 +96,38 @@ session_start();
 							  <a class="btn btn-social-icon btn-round btn-instagram" href="#"><i class="fa fa-instagram"></i></a>
 							</p>	
 						</div> -->
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
 
-	<!-- Vendor JS -->
-	<script src="src_sri/js/vendors.min.js"></script>
-	<script src="src_sri/js/pages/chat-popup.js"></script>
-    <script src="../../../assets0/icons/feather-icons/feather.min.js"></script>	
-	<script>
-		const eye = document.getElementById("eye");
-		const eyeoff = document.getElementById("eyeoff");
-		const iPass = document.getElementById("inputPass");
-		const passwordField = document.querySelector("input[type=password]");
+		<!-- Vendor JS -->
+		<script src="src_sri/js/vendors.min.js"></script>
+		<script src="src_sri/js/pages/chat-popup.js"></script>
+		<script src="../../../assets0/icons/feather-icons/feather.min.js"></script>
+		<script>
+			const eye = document.getElementById("eye");
+			const eyeoff = document.getElementById("eyeoff");
+			const iPass = document.getElementById("inputPass");
+			const passwordField = document.querySelector("input[type=password]");
 
-		eye.addEventListener("click", () => {
-		eye.style.display = "none";
-		eyeoff.style.display = "block";
-		passwordField.type = "text";
-		iPass.type = "text";
-		});
+			eye.addEventListener("click", () => {
+				eye.style.display = "none";
+				eyeoff.style.display = "block";
+				passwordField.type = "text";
+				iPass.type = "text";
+			});
 
-		eyeoff.addEventListener("click", () => {
-		eyeoff.style.display = "none";
-		eye.style.display = "block";
-		passwordField.type = "password";
-		iPass.type = "password";
+			eyeoff.addEventListener("click", () => {
+				eyeoff.style.display = "none";
+				eye.style.display = "block";
+				passwordField.type = "password";
+				iPass.type = "password";
 
-		});
-	</script>
+			});
+		</script>
 </body>
+
 </html>
