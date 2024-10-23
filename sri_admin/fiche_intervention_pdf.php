@@ -141,6 +141,14 @@ $page = 'Incident';
 			color: #555;
 		}
 
+		img {
+			width: 250px;
+			height: 100px;
+			object-fit: cover;
+			margin-left: 250px;
+			margin-bottom: 10px;
+		}
+
 		table tr td {
 			padding: 10px;
 			vertical-align: top;
@@ -167,8 +175,9 @@ $page = 'Incident';
 						<div class="col-12">
 							<div class="box">
 								<div class="box-header with-border">
-									<h4 class="box-title" style="flex-grow: 1;">Fiche d'intervention <strong style="color:red"><?php echo $code_intervention; ?></strong></h4>
+									<img src="http://localhost/sri_gassama/sri_admin/img/logo.png" alt="logo">
 									<h4 class="box-title" style="flex-grow: 1;">DAGE - <span style="color: #6a38ff;">SRI</span></h4>
+									<h4 class="box-title" style="flex-grow: 1;">Fiche d'intervention <strong style="color:red"><?php echo $code_intervention; ?></strong></h4>
 								</div>
 								<?php include('contents/content-fiche-intervention_pdf.php'); ?>
 							</div>

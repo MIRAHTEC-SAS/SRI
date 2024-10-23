@@ -143,8 +143,8 @@ if (isset($_GET['code_intervention'])) {
 
 // instantiate and use the dompdf class
 $dompdf = new Dompdf();
-// $options = $dompdf->getOptions();
-// $options->set('isRemoteEnabled', true);
+$options = $dompdf->getOptions();
+$options->set('isRemoteEnabled', true);
 ob_start();
 require_once('fiche_intervention_pdf.php');
 $html = ob_get_contents();
