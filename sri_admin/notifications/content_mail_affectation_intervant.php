@@ -116,7 +116,7 @@ $htmlversion = '
 												</p>
 
 												<p style="text-align:center;font-size:12px;line-height:15px;margin-bottom:5px;margin-top:0;margin-right:0;margin-left:0;">
-													DAGE - MFB<br/><span style="color:#a3afc8;">Gestion des Bâtiments</span>
+													DAGE - MFB<br/><span style="color:#a3afc8;">Gestion des Batiments</span>
 												</p>
 											</div>
 										</td>
