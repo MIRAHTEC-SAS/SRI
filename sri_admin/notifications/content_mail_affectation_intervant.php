@@ -111,7 +111,7 @@ $htmlversion = '
 												
 												<p style="text-align:center;font-size:12px;line-height:15px;margin-bottom:5px;margin-top:0;margin-right:0;margin-left:0;">
 													<a href="http://localhost/sri_gassama/sri_admin/fiche_pdf?code_intervention=' . $code_intervention . '" class="btn" target="_blank">
-														<i class="mdi mdi-printer"></i> Imprimer l\'intervention
+														<i class="mdi mdi-printer"></i> Imprimer la fiche d\'intervention
 													</a>
 												</p>
 
