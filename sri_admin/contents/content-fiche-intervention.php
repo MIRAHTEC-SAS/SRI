@@ -234,6 +234,9 @@
 			<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#confirmerIntervention" class="btn btn btn-success mt-10 d-block text-center"><i class="mdi mdi-check"></i> Valider l'intervention</a>
 			<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#annuler" class="btn btn btn-danger mt-10 d-block text-center"> <i class="mdi mdi-close"></i> Annuler Intervention</a>
 		<?php } ?>
+		<a href="fiche_pdf?code_intervention=<?php echo $code_intervention; ?>" class="btn btn-info mt-10 d-block text-center" target="_blank">
+			<i class="mdi mdi-printer"></i> Imprimer l'intervention
+		</a>
 		<!-- <div class="text-end">
 			<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#annuler" class="btn btn-success mt-10 d-block text-center"><i class="fa fa-plus-circle"></i> Nouvelle Etage</a>
 		</div> -->

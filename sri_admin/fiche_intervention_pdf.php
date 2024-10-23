@@ -1,49 +1,151 @@
 <?php
-
-switch ($roleUser) {
-	case "Responsable":
-		$getMatriculeRes = mysqli_query($con, "SELECT matricule FROM responsables_dage WHERE email='$emailUser'");
-
-		while ($row = mysqli_fetch_array($getMatriculeRes)) {
-			$matricule = $row['matricule'];
-		}
-		break;
-	case "Gestionnaire":
-		$getMatriculeGes = mysqli_query($con, "SELECT matricule_gestionnaire FROM gestionnaires WHERE email='$emailUser'");
-
-		while ($row = mysqli_fetch_array($getMatriculeGes)) {
-			$matricule = $row['matricule_gestionnaire'];
-		}
-		break;
-	case "Intervenant":
-		$getMatriculeInt = mysqli_query($con, "SELECT matricule_intervenant FROM intervenants_interne WHERE email='$emailUser'");
-		while ($row = mysqli_fetch_array($getMatriculeInt)) {
-			$matricule = $row['matricule_intervenant'];
-		}
-}
-
-
-
 //Fin edition...
 $page = 'Incident';
 ?>
-<?php include('layouts/head.php'); ?>
+<!DOCTYPE html>
+<html lang="en">
 
-<body class="hold-transition light-skin sidebar-mini theme-primary fixed">
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="MIRAHTEC">
+	<link rel="icon" href="img/favicon.png">
+	<title>DAGE - <?php echo $page; ?></title>
+	<style>
+		@page {
+			margin: 0;
+			size: A4;
+		}
+
+		body {
+			font-family: Arial, sans-serif;
+			/* background-color: #f5f5f5; */
+			color: #333;
+			height: 100%;
+		}
+
+		.table {
+			width: 100%;
+			margin-bottom: 1rem;
+			background-color: #fff;
+			border-collapse: separate;
+			border-spacing: 0;
+			border-radius: 0.25rem;
+		}
+
+		.table th,
+		.table td {
+			padding: 0.75rem;
+			vertical-align: top;
+			border-top: 1px solid #dee2e6;
+		}
+
+		.table tbody tr:nth-of-type(odd) {
+			background-color: #f9f9f9;
+		}
+
+		.table td {
+			font-size: 14px;
+			color: #555;
+		}
+
+		h4.box-title {
+			font-size: 20px;
+			font-weight: bold;
+			color: #333;
+		}
+
+		h5.box-title {
+			font-size: 18px;
+			font-weight: bold;
+			color: #333;
+			margin-bottom: 15px;
+		}
+
+		.box {
+			background-color: #fff;
+			border: 1px solid #e5e5e5;
+			border-radius: 8px;
+			padding: 20px;
+			margin-bottom: 20px;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+		}
+
+		.box-header {
+			padding-bottom: 10px;
+			border-bottom: 1px solid #e5e5e5;
+			margin-bottom: 20px;
+		}
+
+		.box-body {
+			padding: 15px;
+			background-color: #fbfbfb;
+		}
+
+		.badge {
+			font-size: 16px;
+			padding: 5px 10px;
+			border-radius: 5px;
+			font-weight: bold;
+		}
+
+		.badge-primary-light {
+			background-color: #6a38ff;
+			color: white;
+		}
+
+		.badge-success-light {
+			background-color: #5ccc6d;
+			color: white;
+		}
+
+		.badge-danger-light {
+			background-color: #e34a4f;
+			color: white;
+		}
+
+		.badge-info-light {
+			background-color: #17a2b8;
+			color: white;
+		}
+
+		strong {
+			font-weight: bold;
+			color: #333;
+		}
+
+		table {
+			width: 100%;
+			margin: 10px 0;
+			border: 1px solid #ddd;
+			border-radius: 8px;
+		}
+
+		table tr td:first-child {
+			font-weight: bold;
+			color: #555;
+		}
+
+		table tr td {
+			padding: 10px;
+			vertical-align: top;
+			border-bottom: 1px solid #eaeaea;
+		}
+	</style>
+
+</head>
+
+
+<body class="hold-transition light-skin sidebar-mini theme-primary fixed ">
 
 	<div class="wrapper">
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<div class="container-full">
-				<div class="content-header">
-					<div class="d-flex align-items-center">
-						<div class="me-auto">
-							<h4 class="page-title">Interventions</h4>
-						</div>
-
-					</div>
-				</div>
 
 				<!-- Main content -->
 				<section class="content">
@@ -71,27 +173,16 @@ $page = 'Incident';
 
 			</div>
 		</div>
-		<!-- /.content-wrapper -->
-
-		<!-- FOOTER -->
-		<?php //include('layouts/footer.php'); 
-		?>
-		<!-- FIN FOOTER -->
-		<?php //include('layouts/rightbar.php'); 
-		?>
-
-		<?php //include('layouts/modal_user.php'); 
-		?>
-
-		<!-- Page Content overlay -->
+	</div>
 
 
-		<!-- Vendor JS -->
-		<?php include('layouts/js.php'); ?>
-		<script src="src/js/pages/chat-popup.js"></script>
-		<script src="assets/icons/feather-icons/feather.min.js"></script>
-		<script src="assets/vendor_components/Magnific-Popup-master/dist/jquery.magnific-popup.min.js"></script>
-		<script src="assets/vendor_components/Magnific-Popup-master/dist/jquery.magnific-popup-init.js"></script>
+	<!-- Vendor JS -->
+	<?php include('layouts/js.php'); ?>
+	<script src="src/js/pages/chat-popup.js"></script>
+	<script src="assets/icons/feather-icons/feather.min.js"></script>
+	<script src="assets/vendor_components/Magnific-Popup-master/dist/jquery.magnific-popup.min.js"></script>
+	<script src="assets/vendor_components/Magnific-Popup-master/dist/jquery.magnific-popup-init.js"></script>
+
 
 </body>
 

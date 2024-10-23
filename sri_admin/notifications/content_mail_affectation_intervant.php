@@ -1,5 +1,5 @@
 <?php
-$htmlversion='
+$htmlversion = '
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<html lang="fr">
 
@@ -43,7 +43,20 @@ $htmlversion='
 		  cursor: default;
 		}
 		.preheader {display: none;}
+		.btn {
+			display: inline-block;
+			padding: 10px 20px;
+			color: white;
+			background-color: #17a2b8;
+			border-radius: 5px;
+			text-decoration: none;
+			text-align: center;
+		}
+		.btn i {
+			margin-right: 5px; 
+		}
 	</style>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdi/2.2.43/css/materialdesignicons.min.css" />
 	<!--[if !mso]><!-->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<!--<![endif]-->
@@ -86,16 +99,22 @@ $htmlversion='
 									<tr class="one-col">
 										<td class="inner type" style="font-family:Arial,sans-serif;padding-top:30px;padding-bottom:30px;padding-right:30px;padding-left:30px;">
 											<div class="mktEditable" id="main-content">
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour '.$intervenant_interne.', </p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour ' . $intervenant_interne . ', </p>
 	
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Une demande d\'intervention provenant du service '.$service.' vous est assignée.</br></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">La demande porte la reference <strong>'.$numero_incident.'</strong></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Type d\'intervention : <strong style="color:red">'.$type_incident.'</strong></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Description : <strong>'.$description.'</strong></p>
-                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Localisation : <strong style="color:blue">'.$localisation.'</strong></p>
-                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Contact : <strong>'.$contact.'</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Une demande d\'intervention provenant du service ' . $service . ' vous est assignée.</br></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">La demande porte la reference <strong>' . $numero_incident . '</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Type d\'intervention : <strong style="color:red">' . $type_incident . '</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Description : <strong>' . $description . '</strong></p>
+                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Localisation : <strong style="color:blue">' . $localisation . '</strong></p>
+                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Contact : <strong>' . $contact . '</strong></p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">&nbsp;</p>
 												
+												<p style="text-align:center;font-size:12px;line-height:15px;margin-bottom:5px;margin-top:0;margin-right:0;margin-left:0;">
+													<a href="http://localhost/sri_gassama/sri_admin/fiche_pdf?code_intervention=' . $code_intervention . '" class="btn" target="_blank">
+														<i class="mdi mdi-printer"></i> Imprimer l\'intervention
+													</a>
+												</p>
+
 												<p style="text-align:center;font-size:12px;line-height:15px;margin-bottom:5px;margin-top:0;margin-right:0;margin-left:0;">
 													DAGE - MFB<br/><span style="color:#a3afc8;">Gestion des Bâtiments</span>
 												</p>
@@ -110,41 +129,22 @@ $htmlversion='
 								<table width="100%" cellpadding="0" cellspacing="0" border="0" class="section-footer">
 									<tr class="one-col">
 										<td class="inner" style="padding-top:44px;padding-bottom:26px;padding-right:15px;padding-left:15px;">
-											<table cellpadding="0" cellspacing="0" border="0" width="100%" class="contents" style="font-size:12px;line-height:16px;color:#a3afc8;text-align:center;">
-												<tr>
-													<td  class="type" style="padding-bottom:10px;font-family:Arial,sans-serif;">
-														<table align="center" cellpadding="0" cellspacing="0" border="0" class="social" style="font-size:8px;line-height:10px;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;">
-															<tr>
-	
-															</tr>
-														</table>
-													</td>
-												</tr>
-												<tr>
-													<td class="type" style="font-family:Arial,sans-serif;">
-														<div class="mktEditable" id="footer">
-															<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:4px;">Direction du Traitement Automatique de l\'information</p>
-															<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:4px;"><b><a href="{{system.forwardToFriendLink}}" style="text-decoration:none;color:#a3afc8;">Tel</a> &middot; <a href="{{system.unsubscribeLink}}" style="text-decoration:none;color:#a3afc8;">(+221) 33 824 33 33</a> &middot; <a href="{{system.viewAsWebpageLink}}" style="text-decoration:none;color:#a3afc8;">dtai@minfinances.sn</a></b></p>
-														</div>
-													</td>
-												</tr>
-											</table>
+											<div class="mktEditable" id="footer">
+												<p style="font-size:12px;line-height:15px;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;">DAGE - MFB - 2024</p>
+												<p style="font-size:12px;line-height:15px;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;">Données de contact : <span style="color:#a3afc8;">dage@edl.sn</span></p>
+											</div>
 										</td>
 									</tr>
 								</table>
 							</td>
-						</tr>	
+						</tr>
 					</table>
-					
-					<!--[if(mso)|(IE)]>
-					</td></tr></table>
-					<![endif]-->
-
+					<!--[if(mso)|(IE)]></td></tr></table><![endif]-->
 				</div>
 			</center>
 		</td>
 	</tr>
 </table>
 </body>
-</html>';
-?>
+</html>
+';

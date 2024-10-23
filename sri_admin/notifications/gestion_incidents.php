@@ -147,6 +147,7 @@ if (isset($_POST['affecterIncident'])) {
             $getInfosPresta = mysqli_query($con, "SELECT * FROM prestataires WHERE matricule_presta='$intervenant'");
 
             while ($row = mysqli_fetch_array($getInfosPresta)) {
+
                 $matricule_presta = $row['matricule_prestat'];
                 $prestataire = $row['denomination'];
                 $adresse = $row['adresse'];
