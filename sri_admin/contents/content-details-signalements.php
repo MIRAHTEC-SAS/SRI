@@ -11,13 +11,19 @@
 						</tr>
 						<tr>
 							<td style="width: 390px;">Gestionnaire</td>
-							<td><strong style="color: #4C18EA"><?php echo $gestionnaire_service . ' / ' . $telephone_gestionnaire; ?></strong></td>
+							<?php
+							if (isset($gestionnaire_service)) { ?>
+								<td><strong style="color: #4C18EA"><?php echo $gestionnaire_service . ' / ' . $telephone_gestionnaire; ?></strong></td>
+							<?php } ?>
 						</tr>
 						<!-- Localisation -->
 						<tr>
 							<td>Localisation</td>
 							<td>
-								<?php echo $batiment . '</br>' . $etage . '</br>' . $adresse . '</br>'; ?>
+								<?php
+								if (isset($batiment)) {
+									echo $batiment . '</br>' . $etage . '</br>' . $adresse . '</br>';
+								} ?>
 							</td>
 						</tr>
 						<!-- Description -->

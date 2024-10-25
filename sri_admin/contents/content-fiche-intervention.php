@@ -12,7 +12,10 @@
 				</tr>
 				<tr>
 					<td style="width: 390px;">Gestionnaire</td>
-					<td><strong style="color: #4C18EA"><?php echo $gestionnaire_service . ' / ' . $telephone_gestionnaire; ?></strong></td>
+					<?php
+					if (isset($gestionnaire_service)) { ?>
+						<td><strong style="color: #4C18EA"><?php echo $gestionnaire_service . ' / ' . $telephone_gestionnaire; ?></strong></td>
+					<?php } ?>
 				</tr>
 				<!-- Description -->
 				<tr>
@@ -185,8 +188,10 @@
 							<td>Localisation </td>
 							<td>
 								<?php
-								echo $batiment . ' - ' . $etage . ' - ' . $piece . '</br>' .
-									$adresse . ' - ' . $contact_immeuble;
+								if (isset($batiment)) {
+									echo $batiment . ' - ' . $etage . ' - ' . $piece . '</br>' .
+										$adresse . ' - ' . $contact_immeuble;
+								}
 								?>
 							</td>
 						</tr>
