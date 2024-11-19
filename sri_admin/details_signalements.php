@@ -360,11 +360,12 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 						<?php if ($showAffect == 1) { ?>
 							<?php include('affectation_incident.php'); ?>
 						<?php } ?>
+						<!-- Fin Affectation de l'incident -->
 						<!-- Rejeter l'incident -->
 						<?php if ($showRejet == 1) { ?>
 							<?php include('rejet_incident.php'); ?>
 						<?php } ?>
-						<!-- Fin de l'affectation -->
+						<!-- Fin de rejet-->
 
 
 						<div class="row">

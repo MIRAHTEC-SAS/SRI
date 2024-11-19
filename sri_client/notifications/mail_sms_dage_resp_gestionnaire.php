@@ -51,6 +51,10 @@ while ($row = mysqli_fetch_array($reqInfosAdminDage)) {
     $emailsAdmin[] = $row['email'];
     $prenomsNomsAdmin[] = $row['prenom'] . ' ' . $row['nom'];
 }
+$piece = $con->query("SELECT nom_piece FROM pieces WHERE code_piece=$code_piece")->fetch_assoc()['nom_piece'];
+$service = $con->query("SELECT sigle FROM services WHERE code_service=$code_service")->fetch_assoc()['sigle'];
+$etage = $con->query("SELECT nom_etage FROM etages WHERE code_etage=$code_etage")->fetch_assoc()['nom_etage'];
+
 // *********************** ADMIN DAGE
 try {
 
