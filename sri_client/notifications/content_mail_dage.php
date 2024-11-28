@@ -87,7 +87,7 @@ $htmlversion = '
 										<td class="inner type" style="font-family:Arial,sans-serif;padding-top:30px;padding-bottom:30px;padding-right:30px;padding-left:30px;">
 											<div class="mktEditable" id="main-content">
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour ' . $prenomNomAdmin . ', </p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Un incident de type : <strong style="color:red">' . $type_incident . '</strong> vient d\'être signalé par ' . $auteur . ' à la ' . $service . '/' . $etage . '/' . $piece . ' le ' . $date_saisie . '</p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Un incident de type : <strong style="color:red">' . $type_incident . '</strong> vient d\'être signalé par ' . $auteur . ' à la ' . $service . '/' . $etage . '/' . $piece . ' le ' . formatDateTime($date_saisie) . '</p>
                                             
                         <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center"><button style="background-color:#446A46"><a style="color:white; font-size:18px;font-style:none" href="https://sedif.sn/dtai/pgav/dev/">Traiter la demande</a></button></p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">&nbsp;</p>

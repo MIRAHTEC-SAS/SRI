@@ -255,29 +255,6 @@ header('Content-Type: text/html; charset=utf-8');
 		$description = str_replace("'", "''", $desc);
 		$telephoneDeclarant = '+221' . $telephone;
 
-
-		// Categories
-		//  $categories=[];
-		//  for ($i=0;$i<count($_POST['question_1']);$i++) {
-		// 	$categories[]=$_POST['question_1'][$i];
-		//  }
-
-		// recuperation des codes incidents
-		//  $codes_incident=[];
-		//  for ($i=0;$i<count($categories);$i++) {
-		// 	$type=$categories[$i];
-
-		// 	$recupCode = $con->query("SELECT * FROM type_incidents WHERE type_incident='$type'");
-
-		// 	 while ($row = mysqli_fetch_array($recupCode)) { 
-		//     	$codes_incident[]=$row['code_incident'];
-		// 	}
-
-		//  }
-
-		// Reference incident
-		//   $numero_incident='44DC432';
-
 		$getLastRef = mysqli_query($con, "SELECT max(numero_incident) as lastRef FROM signalements");
 		while ($row = mysqli_fetch_array($getLastRef)) {
 			$lastRef = $row['lastRef'];
@@ -330,26 +307,6 @@ header('Content-Type: text/html; charset=utf-8');
 				$priorite = 'Basse';
 				break;
 		}
-
-		// echo 'Code incident : '.$code_incident.'</br>';
-		// echo 'Code service : '.$code_service.'</br>';
-		// echo 'Code batiment : '.$code_batiment.'</br>';
-		// echo 'Code etage : '.$code_etage.'</br>';
-		// echo 'code Piece : '.$code_piece.'</br>';
-		// echo 'Numero Piece : '.$numero_piece.'</br>';
-		// echo 'numero incident: '.$numero_incident.'</br>';
-		// echo 'Description : '.$description.'</br>';
-		// echo 'Auteur : '.$auteur.'</br>';
-		// echo 'Telephone : '.$telephone.'</br>';
-		// echo 'Email : '.$email.'</br>';
-
-		// echo 'Type Incident : '.$priorite_type_incident.'</br>';
-		// echo 'Localisation : '.$priorite_type_localisation.'</br>';
-		// echo 'Priorite Incident : '.$priorite_incident.'</br>';
-
-		// die;
-
-		//Photo...
 
 		$rep = $numero_incident;
 

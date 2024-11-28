@@ -30,3 +30,108 @@ $from = 'sedif';
 $headers .= 'From: <' . $from . '>' . "\r\n";
 
 $roleUser = $_SESSION['role'];
+
+function formatDateTime($datetime)
+{
+    $timestamp = strtotime($datetime);
+    // Mapping des jours de la semaine
+    $jours = [
+        'Monday' => 'Lundi',
+        'Tuesday' => 'Mardi',
+        'Wednesday' => 'Mercredi',
+        'Thursday' => 'Jeudi',
+        'Friday' => 'Vendredi',
+        'Saturday' => 'Samedi',
+        'Sunday' => 'Dimanche'
+    ];
+
+    // Mapping des mois de l'année
+    $mois = [
+        '01' => 'Janvier',
+        '02' => 'Février',
+        '03' => 'Mars',
+        '04' => 'Avril',
+        '05' => 'Mai',
+        '06' => 'Juin',
+        '07' => 'Juillet',
+        '08' => 'Août',
+        '09' => 'Septembre',
+        '10' => 'Octobre',
+        '11' => 'Novembre',
+        '12' => 'Décembre'
+    ];
+
+    $day = date('l', $timestamp); // Jour en anglais
+    $dayNumber = date('d', $timestamp); // Numéro du jour
+    $month = date('m', $timestamp); // Mois en numéro
+    $year = date('Y', $timestamp); // Année
+    $hour = date('H', $timestamp); // Heure
+    // $minute = date('i', $timestamp); // Minute
+
+    // Conversion en français
+    $dayFrench = $jours[$day];
+    $monthFrench = $mois[$month];
+
+    // return " $dayFrench $dayNumber $monthFrench $year à $hour H $minute min";
+    return " $dayFrench $dayNumber $monthFrench $year à $hour H";
+}
+function sendNotification($recipients, $mail, $smsFile, $mailContentFile, $links, $subject, $variableMapping = [], $extraVars = [])
+{
+    // Définir les noms de variables par défaut
+    $defaultMapping = [
+        'telephone' => 'telephone',
+        'email' => 'email',
+        'prenomNom' => 'prenomNom'
+    ];
+    // Fusionner avec le mapping personnalisé
+    $variableMapping = array_merge($defaultMapping, $variableMapping);
+
+    // Inclure les variables supplémentaires
+    extract($extraVars);
+
+    foreach ($recipients as $recipient) {
+        // Utiliser les noms de variables dynamiques
+        ${$variableMapping['telephone']} = $recipient['telephone'];
+        ${$variableMapping['email']} = $recipient['email'];
+        ${$variableMapping['prenomNom']} = $recipient['prenomNom'];
+
+        // Envoi du SMS
+        if (file_exists($smsFile)) {
+            include($smsFile);
+        }
+
+        // Contenu du mail
+        if (file_exists($mailContentFile)) {
+            include($mailContentFile);
+        }
+
+        // Configuration et envoi du mail
+        try {
+            $textversion = "This is the text version";
+
+            $mail->isSMTP();
+            $mail->SMTPAuth = true;
+            $mail->Host = 'mail.sedif.sn';
+            $mail->Username = 'contact@sedif.sn';
+            $mail->Password = 'Sedif@2022';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port = 465;
+
+            $mail->setFrom('contact@sedif.sn', 'MFB/DAGE');
+            $mail->addAddress(${$variableMapping['email']}, 'Utilisateur');
+            if (isset($links)) {
+                foreach ($links as $link) {
+                    $mail->addAttachment($link);
+                }
+            }
+            $mail->isHTML(true);
+            $mail->Subject = $subject;
+            $mail->Body = $htmlversion;
+            $mail->AltBody = $textversion;
+
+            $mail->send();
+        } catch (Exception $e) {
+            echo "Erreur lors de l'envoi : {$mail->ErrorInfo}";
+        }
+    }
+}

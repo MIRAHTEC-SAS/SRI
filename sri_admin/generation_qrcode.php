@@ -175,42 +175,31 @@ if (isset($_SESSION['User']) && isset($_SESSION['UserPass']) && $_SESSION['role'
 									<div class="box-body" style="background-color:#FBFBFB">
 										<?php include('contents/content-qrcode.php'); ?>
 									</div>
-									<!-- /.box-body -->
-									<!-- <div class="box-footer">
-						  Footer
-						</div> -->
-									<!-- /.box-footer-->
 								</div>
 							</div>
-						</div>
-					</section>
-					<!-- /.content -->
+							<!-- /.content-wrapper -->
 
-				</div>
-			</div>
-			<!-- /.content-wrapper -->
+							<!-- FOOTER -->
+							<?php include('layouts/footer.php'); ?>
+							<!-- FIN FOOTER -->
 
-			<!-- FOOTER -->
-			<?php include('layouts/footer.php'); ?>
-			<!-- FIN FOOTER -->
+							<!-- Vue & Axios -->
+							<?php include('lib.php'); ?>
 
-			<!-- Vue & Axios -->
-			<?php include('lib.php'); ?>
+							<!--  VUE JS -->
+							<?php include('vuejs/scriptParametrage.php'); ?>
 
-			<!--  VUE JS -->
-			<?php include('vuejs/scriptParametrage.php'); ?>
+							<?php include('layouts/rightbar.php'); ?>
 
-			<?php include('layouts/rightbar.php'); ?>
+							<?php include('layouts/modal_user.php'); ?>
 
-			<?php include('layouts/modal_user.php'); ?>
-
-			<!-- Page Content overlay -->
+							<!-- Page Content overlay -->
 
 
-			<!-- Vendor JS -->
-			<?php include('layouts/js.php'); ?>
-			<script src="../../../assets/vendor_components/select2/dist/js/select2.full.js"></script>
-			<script src="../src/js/pages/advanced-form-element.js"></script>
+							<!-- Vendor JS -->
+							<?php include('layouts/js.php'); ?>
+							<script src="../../../assets/vendor_components/select2/dist/js/select2.full.js"></script>
+							<script src="../src/js/pages/advanced-form-element.js"></script>
 
 
 	</body>

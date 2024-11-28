@@ -1,12 +1,9 @@
 <?php
-// include ('config/app.php');
-
 $getQrcodeDispo = mysqli_query($con, "SELECT qrcodes_sri.id, services.libelle, services.sigle, batiments.nom_batiment, batiments.adresse, etages.nom_etage, qrcodes_sri.lien
 FROM `qrcodes_sri` 
 INNER JOIN services ON services.code_service=qrcodes_sri.code_service 
 INNER JOIN batiments ON batiments.code_batiment=qrcodes_sri.code_batiment
 INNER JOIN etages ON etages.code_etage=qrcodes_sri.code_etage");
-
 
 ?>
 <div class="table-responsive">
@@ -30,10 +27,6 @@ INNER JOIN etages ON etages.code_etage=qrcodes_sri.code_etage");
 					<td><?php echo $row['nom_etage']; ?></td>
 					<td><img src="<?php echo $row['lien']; ?>"></td>
 					<td style="text-align:center">
-						<!-- <a href="generation_qrcode?edit=<?php //echo $row['id']; 
-																									?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
-				        <i class="fa fa-edit" style="font-size:16px;color:orange"></i>
-					</a>  -->
 						<a href="generation_qrcode?delete=<?php echo $row['id']; ?>" class="text-danger" data-bs-original-title="Delete" data-bs-toggle="tooltip">
 							<i class="ti-trash" style="font-size:16px;color:red"></i>
 						</a>

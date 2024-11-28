@@ -28,3 +28,45 @@ $headers .= "Content-type:text/html; charset=UTF-8" . "\r\n";
 // More headers
 $from = 'sedif';
 $headers .= 'From: <' . $from . '>' . "\r\n";
+function formatDateTime($datetime)
+{
+    $timestamp = strtotime($datetime);
+    // Mapping des jours de la semaine
+    $jours = [
+        'Monday' => 'Lundi',
+        'Tuesday' => 'Mardi',
+        'Wednesday' => 'Mercredi',
+        'Thursday' => 'Jeudi',
+        'Friday' => 'Vendredi',
+        'Saturday' => 'Samedi',
+        'Sunday' => 'Dimanche'
+    ];
+    // Mapping des mois de l'année
+    $mois = [
+        '01' => 'Janvier',
+        '02' => 'Février',
+        '03' => 'Mars',
+        '04' => 'Avril',
+        '05' => 'Mai',
+        '06' => 'Juin',
+        '07' => 'Juillet',
+        '08' => 'Août',
+        '09' => 'Septembre',
+        '10' => 'Octobre',
+        '11' => 'Novembre',
+        '12' => 'Décembre'
+    ];
+    $day = date('l', $timestamp); // Jour en anglais
+    $dayNumber = date('d', $timestamp); // Numéro du jour
+    $month = date('m', $timestamp); // Mois en numéro
+    $year = date('Y', $timestamp); // Année
+    $hour = date('H', $timestamp); // Heure
+    // $minute = date('i', $timestamp); // Minute
+
+    // Conversion en français
+    $dayFrench = $jours[$day];
+    $monthFrench = $mois[$month];
+
+    // return " $dayFrench $dayNumber $monthFrench $year à $hour H $minute min";
+    return " $dayFrench $dayNumber $monthFrench $year à $hour H";
+}
