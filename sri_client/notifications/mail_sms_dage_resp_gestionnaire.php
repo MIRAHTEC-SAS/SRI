@@ -1,5 +1,5 @@
 <?php
-// include('../config/app.php');
+include('../mailerNotif.php');
 
 // Pour les SMS
 require __DIR__ . '/vendor_orange/autoload.php';
@@ -26,15 +26,6 @@ if (isset($response['access_token'])) {
 }
 $senderAddress = 'tel:+221771752617';
 $senderName = 'DTAI';
-
-// // Pour les mails....
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-// //Create an instance; passing `true` enables exceptions
-// //Load Composer's autoloader
-require 'vendor_mail/autoload.php';
-
 // Récupération des destinataires pour les deux groupes
 $recipientsAdmin = [];
 $reqInfosAdminDage = $con->query("SELECT * FROM contacts_dage");
@@ -53,7 +44,7 @@ $varAdmin = [
 $varResp = [
     'telephone' => 'telephoneResp',
     'email' => 'emailResp',
-    'prenomNom' => 'prenomNomResp'
+    'prenomNom' => 'prenomNomAdmin'
 ];
 $varGest = [
     'telephone' => 'telephoneGest',
@@ -83,7 +74,7 @@ while ($row = mysqli_fetch_array($reqInfosGest)) {
     $recipientsGest[] = [
         'telephone' => $row['telephone'],
         'email' => $row['email'],
-        'prenomNom' => $row['prenom'] . '' . $row['nom']
+        'prenomNom' => $row['prenom'] . ' ' . $row['nom']
     ];
 }
 // Informations supplémentaires
@@ -96,11 +87,12 @@ $extraVars = [
     'etage' => $etage,
     'auteur' => $auteur,
     'type_incident' => $type_incident,
-    'date_saisie' => $date_saisie
+    'date_saisie' => $date_saisie,
+    'description' => $description,
+    'localisation' => $localisation
 ];
 
-// Envoi des notifications
-$mail = new PHPMailer(true);
+
 $link = [$link]; // URL ou chemin de la pièce jointe
 sendNotification($recipientsAdmin, $mail, 'sms_admin_dage.php', 'content_mail_dage.php', $link, utf8_decode('Nouvelle déclaration d\'incident'), $varAdmin, $extraVars);
 sendNotification($recipientsResp, $mail, 'sms_responsable_dage.php', 'content_mail_dage.php', $link, utf8_decode('Nouvelle déclaration d\'incident'), $varResp, $extraVars);

@@ -1,5 +1,6 @@
 <?php
 // session_start();
+
 header('Content-Type: text/html; charset=UTF-8');
 
 $severName = '127.0.0.1';
@@ -74,64 +75,4 @@ function formatDateTime($datetime)
 
     // return " $dayFrench $dayNumber $monthFrench $year à $hour H $minute min";
     return " $dayFrench $dayNumber $monthFrench $year à $hour H";
-}
-function sendNotification($recipients, $mail, $smsFile, $mailContentFile, $links, $subject, $variableMapping = [], $extraVars = [])
-{
-    // Définir les noms de variables par défaut
-    $defaultMapping = [
-        'telephone' => 'telephone',
-        'email' => 'email',
-        'prenomNom' => 'prenomNom'
-    ];
-    // Fusionner avec le mapping personnalisé
-    $variableMapping = array_merge($defaultMapping, $variableMapping);
-
-    // Inclure les variables supplémentaires
-    extract($extraVars);
-
-    foreach ($recipients as $recipient) {
-        // Utiliser les noms de variables dynamiques
-        ${$variableMapping['telephone']} = $recipient['telephone'];
-        ${$variableMapping['email']} = $recipient['email'];
-        ${$variableMapping['prenomNom']} = $recipient['prenomNom'];
-
-        // Envoi du SMS
-        if (file_exists($smsFile)) {
-            include($smsFile);
-        }
-
-        // Contenu du mail
-        if (file_exists($mailContentFile)) {
-            include($mailContentFile);
-        }
-
-        // Configuration et envoi du mail
-        try {
-            $textversion = "This is the text version";
-
-            $mail->isSMTP();
-            $mail->SMTPAuth = true;
-            $mail->Host = 'mail.sedif.sn';
-            $mail->Username = 'contact@sedif.sn';
-            $mail->Password = 'Sedif@2022';
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port = 465;
-
-            $mail->setFrom('contact@sedif.sn', 'MFB/DAGE');
-            $mail->addAddress(${$variableMapping['email']}, 'Utilisateur');
-            if (isset($links)) {
-                foreach ($links as $link) {
-                    $mail->addAttachment($link);
-                }
-            }
-            $mail->isHTML(true);
-            $mail->Subject = $subject;
-            $mail->Body = $htmlversion;
-            $mail->AltBody = $textversion;
-
-            $mail->send();
-        } catch (Exception $e) {
-            echo "Erreur lors de l'envoi : {$mail->ErrorInfo}";
-        }
-    }
 }

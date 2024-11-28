@@ -4,7 +4,7 @@
 // $service='DTAI';
 
 //Message
-$messageDageResp = "Bonjour $prenomNomResp,\nL'incident ci-dessous est declaré au service $service.\nDescription: $description \nLocalisation: $localisation \n\nDAGE - MFB";
+$messageDageResp = "Bonjour $prenomNomAdmin,\nL'incident ci-dessous est declaré au service $service.\nDescription: $description \nLocalisation: $localisation \n\nDAGE - MFB";
 
 if (!empty($token)) {
 
