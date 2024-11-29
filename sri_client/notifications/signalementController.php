@@ -368,7 +368,6 @@ header('Content-Type: text/html; charset=utf-8');
 		while ($row = mysqli_fetch_array($reqPiece)) {
 			$piece = $row['nom_piece'];
 		}
-
 		// Localisation Piece
 		$reqService = $con->query("SELECT * FROM `services` WHERE code_service='$code_service'");
 		while ($row = mysqli_fetch_array($reqService)) {
@@ -454,14 +453,14 @@ header('Content-Type: text/html; charset=utf-8');
 
 		// Notifications des administrateurs DAGE... 
 		// echo $priorite;die;
-		switch ($priorite) {
-			case 'Haute':
-				include('mail_sms_dage_resp_gestionnaire_urgent.php');
-				break;
-			default:
-				include('mail_sms_dage_resp_gestionnaire.php');
-				break;
-		}
+		// switch ($priorite) {
+		// 	case 'Haute':
+		// 		include('mail_sms_dage_resp_gestionnaire_urgent.php');
+		// 		break;
+		// 	default:
+		include('mail_sms_dage_resp_gestionnaire.php');
+		// 		break;
+		// }
 
 		include('sms_declarant.php');
 

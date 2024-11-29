@@ -16,7 +16,6 @@ $osms = new Osms($config);
 
 // retrieve an access token
 $response = $osms->getTokenFromConsumerKey();
-
 if (isset($response['access_token'])) {
     $token = $response['access_token'];
 } else {
@@ -80,10 +79,12 @@ while ($row = mysqli_fetch_array($reqInfosGest)) {
 // Informations supplémentaires
 $piece = $con->query("SELECT nom_piece FROM pieces WHERE code_piece = $code_piece")->fetch_assoc()['nom_piece'];
 $service = $con->query("SELECT sigle FROM services WHERE code_service = $code_service")->fetch_assoc()['sigle'];
+$direction = $con->query("SELECT libelle FROM services WHERE code_service = $code_service")->fetch_assoc()['libelle'];
 $etage = $con->query("SELECT nom_etage FROM etages WHERE code_etage = $code_etage")->fetch_assoc()['nom_etage'];
 $extraVars = [
     'piece' => $piece,
     'service' => $service,
+    'direction' => $direction,
     'etage' => $etage,
     'auteur' => $auteur,
     'type_incident' => $type_incident,
@@ -91,9 +92,13 @@ $extraVars = [
     'description' => $description,
     'localisation' => $localisation
 ];
-
-
 $link = [$link]; // URL ou chemin de la pièce jointe
-sendNotification($recipientsAdmin, $mail, 'sms_admin_dage.php', 'content_mail_dage.php', $link, utf8_decode('Nouvelle déclaration d\'incident'), $varAdmin, $extraVars);
-sendNotification($recipientsResp, $mail, 'sms_responsable_dage.php', 'content_mail_dage.php', $link, utf8_decode('Nouvelle déclaration d\'incident'), $varResp, $extraVars);
-sendNotification($recipientsGest, $mail, 'sms_gestionnaire.php', 'content_mail_gestionnaire.php', $link, utf8_decode('Nouvelle déclaration d\'incident'), $varGest, $extraVars);
+if ($priorite != 'Haute') {
+    sendNotification($recipientsAdmin, $mail, 'sms_admin_dage.php', 'content_mail_dage.php', $link, utf8_decode('Nouvelle déclaration d\'incident'), $varAdmin, $extraVars);
+    sendNotification($recipientsResp, $mail, 'sms_responsable_dage.php', 'content_mail_dage.php', $link, utf8_decode('Nouvelle déclaration d\'incident'), $varResp, $extraVars);
+    sendNotification($recipientsGest, $mail, 'sms_gestionnaire.php', 'content_mail_gestionnaire.php', $link, utf8_decode('Nouvelle déclaration d\'incident'), $varGest, $extraVars);
+} else {
+    sendNotification($recipientsAdmin, $mail, 'sms_admin_dage.php', 'content_mail_prioritaire.php', $link, utf8_decode('Nouvelle déclaration d\'incident'), $varAdmin, $extraVars);
+    sendNotification($recipientsResp, $mail, 'sms_responsable_dage.php', 'content_mail_prioritaire.php', $link, utf8_decode('Nouvelle déclaration d\'incident'), $varResp, $extraVars);
+    sendNotification($recipientsGest, $mail, 'sms_gestionnaire.php', 'content_mail_prioritaire.php', $link, utf8_decode('Nouvelle déclaration d\'incident'), $varGest, $extraVars);
+}

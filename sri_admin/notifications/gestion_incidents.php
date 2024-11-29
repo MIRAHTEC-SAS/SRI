@@ -88,22 +88,6 @@ if (isset($_POST['affecterIncident'])) {
     $localisation = $batiment . ' - ' . $etage . ' ' . $piece;
 
 
-    // echo $numero_incident.'</br>';
-    // echo $code_service.'</br>';
-    // echo $code_incident.'</br>';
-    // echo $intervenant.'</br>';
-    // echo 'Date Incident : '.$date_declaration.'</br>';
-    // echo 'Intervention : '.$date_intervention.'</br>';
-    // echo 'Auteur : '.$auteur.'</br>';
-    // echo 'Service : '.$service.'</br>';
-    // echo 'Description : '.$description.'</br>';
-    // echo 'Localisation : '.$localisation.'</br>';
-    // echo 'Adresse : '.$adresse.'</br>';
-    // echo 'Contact : '.$contact.'</br>';
-
-    // die;
-
-
     if ($date_declaration > $date_intervention) {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
@@ -122,16 +106,6 @@ if (isset($_POST['affecterIncident'])) {
         } else {
             $code_intervention = 901;
         }
-
-        // echo $numero_incident.'</br>';
-        // echo $code_incident.'</br>';
-        // echo $code_service.'</br>';
-        // echo $intervenant.'</br>';
-        // echo $code_intervention.'</br>';
-        // echo $dateDuJour.'</br>';
-        // echo $date_saisie.'</br>';
-        // echo $date_intervention.'</br>';
-        // die;
 
         // Requete de verification prestataire
         $verifPresta = mysqli_query($con, "SELECT * FROM prestataires WHERE matricule_presta='$intervenant'");
@@ -213,25 +187,6 @@ if (isset($_POST['affecterIncident'])) {
                     $service = $row['libelle'];
                     $sigle = $row['sigle'];
                 }
-
-                //Check variables...
-                // echo $numero_incident.'</br>';
-                // echo $description.'</br>';
-                // echo $photo.'</br>';
-                // echo $service.'</br>';
-                // echo $sigle.'</br>';
-                // echo $etage.'</br>';
-                // echo $piece.'</br>';
-                // echo $adresse.'</br>';
-                // echo $localisation.'</br>';
-                // echo $categorie.'</br>';
-                // echo $contact.'</br>';
-                // echo $telephone.'</br>';
-                // echo $email.'</br>';
-
-                // die;
-
-
                 include('mail_sms_prestataire.php');
 
                 $_SESSION['errorMsg'] = false;
@@ -368,7 +323,7 @@ if (isset($_POST['affecterIncident'])) {
 
 
 }
-/*********************************** Affectation incident *************************************/
+/*********************************** Rejeter un incident *************************************/
 
 if (isset($_POST['rejeterIncident'])) {
 
@@ -389,6 +344,8 @@ if (isset($_POST['rejeterIncident'])) {
 
     // Mettre a jour le statut du signalement
     $sql2 = mysqli_query($con, "UPDATE signalements SET statut='rejete' WHERE numero_incident='$numero_incident'");
+    // Je dois envoyer une notification pour prevenir le gestionnaire du servie concerné ainsi que les repsonsables du domaine 
+    include("mail_rejet_responsable_gestionnaire.php");
 
     $_SESSION['errorMsg'] = false;
     $_SESSION['successMsg'] = true;

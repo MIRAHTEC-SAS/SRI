@@ -23,7 +23,6 @@ $senderName = 'DTAI';
 
 // Pour les mails....
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 //Create an instance; passing `true` enables exceptions
@@ -32,21 +31,6 @@ require 'vendor_mail/autoload.php';
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
-
-// $intervenant_interne=$row['prenom'].' '.$row['nom'];
-// $telephone_intervenant=$row['telephone'];
-// $email_intervenant=$row['email'];
-
-// $intervenant_interne='Pathe SENE';
-// $telephone_intervenant='+221771547103';
-// $email_intervenant='leborofaye@gmail.com';
-// $service='DTAI';
-// $description='desssscccccc';
-// $localisation='Loccccccc';
-// $adresse='Adresssssse';
-// $contact='Contactttt';
-// $numero_incident='12345';
-// $type_incident='Electricite';
 
 
 try {
@@ -74,10 +58,6 @@ try {
     $mail->setFrom('contact@sedif.sn', 'MFB/DAGE');
     $mail->addAddress($email_prestataire, $prestataire);     //Add a recipient
     // $pieceJointe='Signalements/no_image.png';
-
-    // //Attachments
-    // $mail->addAttachment($pieceJointe);         //Add attachments
-    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
 
     // Envoi Mail DAGE
     $mail->isHTML();                                  //Set email format to HTML
