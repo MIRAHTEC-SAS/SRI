@@ -1295,19 +1295,9 @@ if (isset($_POST['ajouterUser'])) {
             break;
     }
 
-    // echo $code_role.'</br>';
-    // echo $role.'</br>';
-    // echo $matricule.'</br>';
-    // echo $prenom.'</br>';
-    // echo $nom.'</br>';
-    // echo $email.'</br>';
-    // die;
-
     $verifIntegrite = mysqli_query($con, "SELECT * FROM users WHERE email='$email'");
 
     if (mysqli_num_rows($verifIntegrite) > 0) {
-        // $sql =  $con->query("UPDATE contacts SET telephone='$telephone', email='$email', adresse='$adresse' WHERE matricule='$matricule'");
-
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
         $_SESSION['message'] = "Un utilisateur existe deja avec cet email ! ";
@@ -1315,9 +1305,11 @@ if (isset($_POST['ajouterUser'])) {
     } else {
 
         $sql = mysqli_query($con, "INSERT INTO `users` (`prenom`, `nom`, `email`, `password`, `role`, `statut`, `date_c`) 
-    VALUES ('$prenom', '$nom', '$email', '$pass_tmp', '$role', '1', '$date_saisie')");
+                 VALUES ('$prenom', '$nom', '$email', '$pass_tmp', '$role', '1', '$date_saisie')");
 
         if ($sql) {
+            $user_id = $con->insert_id;
+            include "mail_user_admin.php";
             $_SESSION['errorMsg'] = false;
             $_SESSION['successMsg'] = true;
             $_SESSION['message'] = "Utilisateur ajouté avec succès !";

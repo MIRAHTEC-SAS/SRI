@@ -94,11 +94,11 @@ $extraVars = [
 ];
 $link = [$link]; // URL ou chemin de la pièce jointe
 if ($priorite != 'Haute') {
-    sendNotification($recipientsAdmin, $mail, 'sms_admin_dage.php', 'content_mail_dage.php', $link, utf8_decode('Nouvelle déclaration d\'incident'), $varAdmin, $extraVars);
-    sendNotification($recipientsResp, $mail, 'sms_responsable_dage.php', 'content_mail_dage.php', $link, utf8_decode('Nouvelle déclaration d\'incident'), $varResp, $extraVars);
-    sendNotification($recipientsGest, $mail, 'sms_gestionnaire.php', 'content_mail_gestionnaire.php', $link, utf8_decode('Nouvelle déclaration d\'incident'), $varGest, $extraVars);
+    sendNotification($recipientsAdmin, $mail, 'sms_admin_dage.php', 'content_mail_dage.php', $link, 'Nouvelle déclaration d\'incident', $varAdmin, $extraVars);
+    sendNotification($recipientsResp, $mail, 'sms_responsable_dage.php', 'content_mail_dage.php', $link, 'Nouvelle déclaration d\'incident', $varResp, $extraVars);
+    sendNotification($recipientsGest, $mail, 'sms_gestionnaire.php', 'content_mail_gestionnaire.php', $link, 'Nouvelle déclaration d\'incident', $varGest, $extraVars);
 } else {
-    sendNotification($recipientsAdmin, $mail, 'sms_admin_dage.php', 'content_mail_prioritaire.php', $link, utf8_decode('Nouvelle déclaration d\'incident'), $varAdmin, $extraVars);
-    sendNotification($recipientsResp, $mail, 'sms_responsable_dage.php', 'content_mail_prioritaire.php', $link, utf8_decode('Nouvelle déclaration d\'incident'), $varResp, $extraVars);
-    sendNotification($recipientsGest, $mail, 'sms_gestionnaire.php', 'content_mail_prioritaire.php', $link, utf8_decode('Nouvelle déclaration d\'incident'), $varGest, $extraVars);
+    sendNotification($recipientsAdmin, $mail, 'sms_admin_dage.php', 'content_mail_prioritaire.php', $link, 'Nouvelle déclaration d\'incident', $varAdmin, $extraVars);
+    sendNotification($recipientsResp, $mail, 'sms_responsable_dage.php', 'content_mail_prioritaire.php', $link, 'Nouvelle déclaration d\'incident', $varResp, $extraVars);
+    sendNotification($recipientsGest, $mail, 'sms_gestionnaire.php', 'content_mail_prioritaire.php', $link, 'Nouvelle déclaration d\'incident', $varGest, $extraVars);
 }

@@ -1,6 +1,4 @@
 <?php
-include('../config/app.php');
-
 // Pour les SMS
 require __DIR__ . '/vendor_orange/autoload.php';
 require 'vendor_orange/ismaeltoe/osms/src/Osms.php';
@@ -51,7 +49,7 @@ try {
     $mail->Password   = 'Sedif@2022';                           //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
+    $mail->CharSet = 'UTF-8';
     //Recipients
     // $utilisateur=$prenom.' '.$nom;
     $utilisateur = 'DAGE MFB';
@@ -61,12 +59,10 @@ try {
 
     // Envoi Mail DAGE
     $mail->isHTML();                                  //Set email format to HTML
-    $mail->Subject = utf8_decode('[SRI_DAGE] - Nouvelle demande d\'intervention !');
+    $mail->Subject = '[SRI_DAGE] - Nouvelle demande d\'intervention !';
     $mail->Body    = $htmlversion;
     $mail->AltBody = $textversion;
     $mail->send();
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
-
-// echo "done !";

@@ -66,8 +66,6 @@ if (isset($_POST['affecterIncident'])) {
         $adresse = $row['adresse'];
         $contact = $row['contact'];
     }
-    // var_dump($row);
-    // die();
     // Localisation Etage
     $reqEtage = $con->query("SELECT * FROM `etages` WHERE code_etage='$code_etage'");
     while ($row = mysqli_fetch_array($reqEtage)) {
@@ -122,7 +120,7 @@ if (isset($_POST['affecterIncident'])) {
 
             while ($row = mysqli_fetch_array($getInfosPresta)) {
 
-                $matricule_presta = $row['matricule_prestat'];
+                $matricule_presta = $row['matricule_presta'];
                 $prestataire = $row['denomination'];
                 $adresse = $row['adresse'];
                 $telephone_prestataire = $row['telephone'];
@@ -211,25 +209,6 @@ if (isset($_POST['affecterIncident'])) {
                 $telephone_intervenant = $row['telephone'];
                 $email_intervenant = $row['email'];
             }
-
-            // echo 'Numero Incident : '.$numero_incident.'</br>';
-            // echo 'Code Service : '.$code_service.'</br>';
-            // echo 'Code Incident : '.$code_incident.'</br>';
-            // echo 'Intervenant : '.$intervenant_interne.'</br>';
-            // echo 'Telephone Intervenant : '.$telephone_intervenant.'</br>';
-            // echo 'Email intervenant : '.$email_intervenant.'</br>';
-            // echo 'Date Incident : '.$date_declaration.'</br>';
-            // echo 'Intervention : '.$date_intervention.'</br>';
-            // echo 'Auteur : '.$auteur.'</br>';
-            // echo 'Service : '.$service.'</br>';
-            // echo 'Description : '.$description.'</br>';
-            // echo 'Localisation : '.$localisation.'</br>';
-            // echo 'Adresse : '.$adresse.'</br>';
-            // echo 'Contact : '.$contact.'</br>';
-
-            // die;
-
-
             //persister dans la table des interventions avec statut planifiée
             $reqPersistIntervention = mysqli_query($con, "INSERT INTO `interventions` (`code_intervention`, `numero_incident`, `service`, `code_incident`, `intervenant`, `type_intervenant`, `date_intervention`, `date_saisie`, `statut`) 
             VALUES ('$code_intervention', '$numero_incident', '$code_service', '$code_incident', '$intervenant', '$type_intervenant', '$date_intervention', '$date_saisie', 'planifiee')");
@@ -265,7 +244,7 @@ if (isset($_POST['affecterIncident'])) {
             // echo 'done';die;
 
         } elseif (mysqli_num_rows($verifService) > 0) {
-            echo 'Je suis un service !';
+            // echo 'Je suis un service !';
 
             $type_intervenant = 'service';
 
@@ -313,15 +292,10 @@ if (isset($_POST['affecterIncident'])) {
             // echo 'done';die;
 
         } else {
-            echo 'Je suis introuvable';
+            // echo 'Je suis introuvable';
             $type_intervenant = 'service';
         }
     }
-    // die;
-    //         echo $numero_incident.'</br>';
-    //         echo $intervenant.'</br>';
-
-
 }
 /*********************************** Rejeter un incident *************************************/
 
@@ -344,6 +318,16 @@ if (isset($_POST['rejeterIncident'])) {
 
     // Mettre a jour le statut du signalement
     $sql2 = mysqli_query($con, "UPDATE signalements SET statut='rejete' WHERE numero_incident='$numero_incident'");
+    // Recuperer la description du signalement mis a jour
+    $sql3 = mysqli_query($con, "SELECT * FROM signalements WHERE numero_incident='$numero_incident'");
+    while ($row = mysqli_fetch_assoc($sql3)) {
+        $description = $row['description'];
+        $code_service = $row['code_service'];
+        $code_incident = $row['code_incident'];
+        $code_piece = $row['piece'];
+        $code_etage = $row['code_etage'];
+        $link = $row['photo'];
+    }
     // Je dois envoyer une notification pour prevenir le gestionnaire du servie concerné ainsi que les repsonsables du domaine 
     include("mail_rejet_responsable_gestionnaire.php");
 

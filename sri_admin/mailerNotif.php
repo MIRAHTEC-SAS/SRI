@@ -21,6 +21,7 @@ function sendNotification($recipients, $mail, $smsFile = '', $mailContentFile, $
   // Inclure les variables supplémentaires
   extract($extraVars);
 
+
   foreach ($recipients as $recipient) {
     // Utiliser les noms de variables dynamiques
     ${$variableMapping['telephone']} = $recipient['telephone'];
@@ -43,6 +44,7 @@ function sendNotification($recipients, $mail, $smsFile = '', $mailContentFile, $
 
       $mail->isSMTP();
       $mail->SMTPAuth = true;
+      $mail->CharSet = 'UTF-8';
       $mail->Host = 'mail.sedif.sn';
       $mail->Username = 'contact@sedif.sn';
       $mail->Password = 'Sedif@2022';
@@ -53,12 +55,16 @@ function sendNotification($recipients, $mail, $smsFile = '', $mailContentFile, $
       $mail->addAddress(${$variableMapping['email']}, 'Utilisateur');
       if (isset($links)) {
         foreach ($links as $link) {
-          $mail->addAttachment($link);
+          if (file_exists($link)) {
+            $mail->addAttachment($link);
+          }
         }
       }
       $mail->isHTML(true);
       $mail->Subject = $subject;
       $mail->Body = file_exists($mailContentFile) ? $htmlversion : $mailContentFile;
+      // var_dump($mail);
+      // die();
       $mail->AltBody = $textversion;
 
       $mail->send();

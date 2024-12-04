@@ -1,5 +1,5 @@
 <?php
-$htmlversion='
+$htmlversion = '
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<html lang="fr">
 
@@ -87,15 +87,15 @@ $htmlversion='
 											<div class="mktEditable" id="main-content">
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour, </p>
 	
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Une demande d\'intervention provenant du service '.$service.' est en attente de traitement</br></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">La demande porte la reference <strong>'.$numero_incident.'</strong></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Type d\'intervention : <strong style="color:red">'.
-												$categories[0].
-												'</strong></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Description : <strong>'.$description.'</strong></p>
-                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Localisation : <strong style="color:blue">'.$localisation.'</strong></p>
-                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Adresse : <strong>'.$adresse.'</strong></p>
-                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Contact : <strong>'.$contact.'</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Une demande d\'intervention provenant du service ' . $service . ' est en attente de traitement</br></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">La demande porte la reference <strong>' . $numero_incident . '</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Type d\'intervention : <strong style="color:red">' .
+	$categories[0] .
+	'</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Description : <strong>' . $description . '</strong></p>
+                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Localisation : <strong style="color:blue">' . $localisation . '</strong></p>
+                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Adresse : <strong>' . $adresse . '</strong></p>
+                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Contact : <strong>' . $contact . '</strong></p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Vous trouverez en piece jointe une image illustrant l\'incident.</p>
                         <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center"><button style="background-color:#446A46"><a style="color:white; font-size:18px;font-style:none" href="https://sri.minfinances.sn/sri_admin/">Traiter la demande</a></button></p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">&nbsp;</p>
@@ -153,4 +153,3 @@ $htmlversion='
 </table>
 </body>
 </html>';
-?>

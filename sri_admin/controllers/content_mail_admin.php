@@ -75,7 +75,7 @@ $htmlversion = '
 									<tr class="one-col">
 										<td class="inner type" align="center" style="font-family:Arial,sans-serif;padding-right:30px;padding-left:30px;padding-top:26px;padding-bottom:24px;">
 											<div class="mktEditable" id="logo">
-												<p style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;"><a href="#" style="text-decoration:none;color:inherit;"><img src="https://sedif.sn/dtai/logo_sri.png" alt="DTAI" width="185" style="border-width:0;height:auto;-ms-interpolation-mode:bicubic;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;max-width:70%;" /></a></p>
+												<p style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;"><a href="#" style="text-decoration:none;color:inherit;"><img src="https://sedif.sn/dtai/pgav/dev/min2.png" alt="DTAI" width="185" style="border-width:0;height:auto;-ms-interpolation-mode:bicubic;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;max-width:70%;" /></a></p>
 											</div>
 										</td>
 									</tr>
@@ -85,15 +85,17 @@ $htmlversion = '
 									<tr class="one-col">
 										<td class="inner type" style="font-family:Arial,sans-serif;padding-top:30px;padding-bottom:30px;padding-right:30px;padding-left:30px;">
 											<div class="mktEditable" id="main-content">
-											<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour ' . $utilisateur . ', </p>	
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Votre mot de passe est reinitialisé avec succès.</br></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Pour vous connecter, cliquez sur le bouton ci-dessous en utilisant votre adresse email et le mot de passe temporaire ci-dessous</br></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center; color:red; text-weight:bold;font-size:18px">' . $tempoPass . '</br></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center"><button style="background-color:green; color:white; border-radius:50px"><a style="color:white; font-weight:bold  " href=' . $link_app . '>Me connecter</a></button></p>
-
-												
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour, ' . $prenomNomAdmin . ' </p>
+	
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Un compte d\'accès à l\'application SRI (système de remontée des incidents) de la DAGE  a été créé pour l\'utilisateur ' . $prenomNomUser . '  </br></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Email: <strong>' . $emailUser . '</strong></p>
+                        <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center"><button style="background-color:#446A46"><a style="color:white; font-size:18px;font-style:none" href="https://sri.minfinances.sn/sri_admin/">Se connecter</a></button></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">&nbsp;</p>
+												<p style="text-align:center;font-size:12px;margin-bottom:10px;margin-top:0;margin-right:0;margin-left:0;">
+													<img src="https://placehold.it/75x75" border="0" alt="" style="max-width:100%;border-width:0;height:auto;-ms-interpolation-mode:bicubic;" />
+												</p>
 												<p style="text-align:center;font-size:12px;line-height:15px;margin-bottom:5px;margin-top:0;margin-right:0;margin-left:0;">
-												<br/>DAGE - MFB<br/><span style="color:#a3afc8;">Gestion des Bâtiments</span>
+													DAGE - MFB<br/><span style="color:#a3afc8;">Cellule de maintenance</span>
 												</p>
 											</div>
 										</td>
@@ -120,7 +122,7 @@ $htmlversion = '
 													<td class="type" style="font-family:Arial,sans-serif;">
 														<div class="mktEditable" id="footer">
 															<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:4px;">Direction du Traitement Automatique de l\'information</p>
-															<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:4px;"><b><a href="{{system.forwardToFriendLink}}" style="text-decoration:none;color:#a3afc8;">Tel</a> &middot; <a href="{{system.unsubscribeLink}}" style="text-decoration:none;color:#a3afc8;">(+221) 33 824 33 33</a> &middot; <a href="{{system.viewAsWebpageLink}}" style="text-decoration:none;color:#a3afc8;">dtai@minfinances.sn</a></b></p>
+															<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:4px;"><b><a href="" style="text-decoration:none;color:#a3afc8;">Tel</a> &middot; <a href="" style="text-decoration:none;color:#a3afc8;">(+221) 33 824 33 33</a> &middot; <a href="" style="text-decoration:none;color:#a3afc8;">dtai@minfinances.sn</a></b></p>
 														</div>
 													</td>
 												</tr>

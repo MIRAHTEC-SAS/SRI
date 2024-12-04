@@ -10,11 +10,6 @@ if (isset($_POST['annulerIntervention'])) {
     $statutIncident = $_POST['statutIncident'];
     $raisons = mysqli_real_escape_string($con, $_POST['raisons']);
 
-    // echo $code_intervention.'</br>';
-    // echo $raisons.'</br>';
-    // echo $auteur.'</br>';
-    // echo $statutIncident;die;
-
     // Persister la raison
     $sql = mysqli_query($con, "INSERT INTO `commentaires_annulation_intervention` (`code_intervention`, `commentaire`, `date_annulation`, `matricule_auteur`) 
     VALUES ('$code_intervention', '$raisons', '$date_saisie', '$auteur');");
@@ -56,12 +51,6 @@ if (isset($_POST['annulerIntervention'])) {
     $_SESSION['successMsg'] = true;
     $_SESSION['message'] = "Intervention annulée avec succès !";
     header("Location: ../interventions_annulees");
-
-    // echo 'yes';
-    // echo $numero_incident.'</br>';
-    // echo $categorie.'</br>';
-    // echo $description.'</br>';
-    // echo $testi.'</br>';
 }
 /*********************************** Relance Intervenant *************************************/
 
@@ -230,13 +219,6 @@ if (isset($_POST['cloturerIntervention'])) {
     $auteur = $_POST['auteur'];
     $comment = mysqli_real_escape_string($con, $_POST['comment']);
 
-    // echo $code_intervention.'</br>';
-    // echo $comment.'</br>';
-    // echo $auteur.'</br>';
-    // echo $date_saisie.'</br>';
-
-    // die;
-
     // Persister le msg
     $sql = mysqli_query($con, "INSERT INTO `commentaires_cloture_intervention` (`code_intervention`, `commentaire`, `date_cloture`, `auteur`) 
     VALUES ('$code_intervention', '$comment', '$date_saisie', '$auteur')");
@@ -281,11 +263,7 @@ if (isset($_POST['validerIntervention'])) {
     $auteur = $_POST['auteur'];
     $comment = mysqli_real_escape_string($con, $_POST['comment']);
 
-    // echo $code_intervention.'</br>';
-    // echo $comment.'</br>';
-    // echo $auteur.'</br>';
-    // echo $date_saisie;
-    // die;
+
 
     // Persister le msg
     $sql = mysqli_query($con, "INSERT INTO `commentaires_validation_intervention` (`code_intervention`, `commentaire`, `date_validation`, `auteur`) 

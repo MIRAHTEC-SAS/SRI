@@ -266,7 +266,7 @@ try {
         $mailGest->Password   = 'Sedif@2022';                           //SMTP password
         $mailGest->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mailGest->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
+        $mail->CharSet = 'UTF-8';
         //Recipients
         // $utilisateur=$prenom.' '.$nom;
         $utilisateur = 'DAGE MFB';
@@ -280,7 +280,7 @@ try {
 
         // Envoi Mail DAGE
         $mailGest->isHTML();                                  //Set email format to HTML
-        $mailGest->Subject = utf8_decode('Nouvelle déclaration d\'incident');
+        $mailGest->Subject = 'Nouvelle déclaration d\'incident';
         $mailGest->Body    = $htmlversion;
         $mailGest->AltBody = $textversion;
         $mailGest->send();
