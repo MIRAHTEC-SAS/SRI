@@ -35,6 +35,53 @@ if (isset($_POST['annulerIntervention'])) {
     // Update
     $sql = mysqli_query($con, "UPDATE signalements set statut='$statutIncident' where numero_incident='$numero_incident'");
 
+    $signalement = mysqli_query($con, "SELECT * FROM signalements WHERE numero_incident='$numero_incident'");
+    while ($row = mysqli_fetch_array($signalement)) {
+        $date_declaration = date('Y-m-d', strtotime($row['date_reception']));
+        $description = $row['description'];
+        $code_batiment = $row['code_batiment'];
+        $code_etage = $row['code_etage'];
+        $code_piece = $row['piece'];
+        $link = $row['photo'];
+        $code_incident = $row['code_incident'];
+        $code_service = $row['code_service'];
+        $code_priorite = $row['code_priorite'];
+        $date_reception = $row['date_reception'];
+        $concerne = $row['auteur'];
+    }
+
+    // GET Type Incident...
+    $getTypeIncident = mysqli_query($con, "SELECT * FROM type_incidents WHERE code_incident='$code_incident'");
+    while ($row = mysqli_fetch_array($getTypeIncident)) {
+        $type_incident = $row['type_incident'];
+    }
+
+    $reqInfosService = $con->query("SELECT * FROM `services` WHERE code_service='$code_service'");
+
+    while ($row = mysqli_fetch_array($reqInfosService)) {
+        $service = $row['libelle'];
+        $sigle = $row['sigle'];
+        // $emailDage=$row['email']; 
+    }
+
+    // Localisation Batiment
+    $reqBatiment = $con->query("SELECT * FROM `batiments` WHERE code_batiment='$code_batiment'");
+    while ($row = mysqli_fetch_array($reqBatiment)) {
+        $batiment = $row['nom_batiment'];
+        $adresse = $row['adresse'];
+        $contact = $row['contact'];
+    }
+    // Localisation Etage
+    $reqEtage = $con->query("SELECT * FROM `etages` WHERE code_etage='$code_etage'");
+    while ($row = mysqli_fetch_array($reqEtage)) {
+        $etage = $row['nom_etage'];
+    }
+    // Localisation Piece
+    $reqPiece = $con->query("SELECT * FROM `pieces` WHERE code_piece='$code_piece'");
+    while ($row = mysqli_fetch_array($reqPiece)) {
+        $piece = $row['nom_piece'];
+    }
+
     // Maj Historique statut Intervention
     $sql = mysqli_query($con, "INSERT INTO `historique_statuts_intervention` (`code_intervention`, `statut`, `date_statut`, `auteur`) 
     VALUES ('$code_intervention', 'annulee', '$date_saisie', '$auteur')");
@@ -43,7 +90,8 @@ if (isset($_POST['annulerIntervention'])) {
     $sql = mysqli_query($con, "INSERT INTO `historique_statuts_incident` (`numero_incident`, `statut`, `date_statut`, `auteur`) 
     VALUES ('$numero_incident', '$statutIncident', '$date_saisie', '$auteur')");
 
-    // Notifié intervenant
+    // Notifié l'admin ,le responsable ainsi que le gestionnaire 
+    include('mail_annule_resp_admin_gest.php');
 
 
 

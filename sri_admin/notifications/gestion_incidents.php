@@ -44,6 +44,9 @@ if (isset($_POST['affecterIncident'])) {
         $code_batiment = $row['code_batiment'];
         $code_etage = $row['code_etage'];
         $code_piece = $row['piece'];
+        $link = $row['photo'];
+        $code_priorite = $row['code_priorite'];
+        $date_reception = $row['date_reception'];
     }
 
     // GET Type Incident...
@@ -56,6 +59,7 @@ if (isset($_POST['affecterIncident'])) {
 
     while ($row = mysqli_fetch_array($reqInfosService)) {
         $service = $row['libelle'];
+        $sigle = $row['sigle'];
         // $emailDage=$row['email']; 
     }
 
@@ -126,6 +130,7 @@ if (isset($_POST['affecterIncident'])) {
                 $telephone_prestataire = $row['telephone'];
                 $email_prestataire = $row['email'];
             }
+            $concerne = $prestataire;
 
             //persister dans la table des interventions avec statut planifiée
             $reqPersistIntervention = mysqli_query($con, "INSERT INTO `interventions` (`code_intervention`, `numero_incident`, `service`, `code_incident`, `intervenant`, `type_intervenant`, `date_intervention`, `date_saisie`, `statut`) 
@@ -148,11 +153,11 @@ if (isset($_POST['affecterIncident'])) {
                 // historique statut
                 // Maj Historique statut Incident
                 $sql = mysqli_query($con, "INSERT INTO `historique_statuts_incident` (`numero_incident`, `statut`, `date_statut`, `auteur`) 
-            VALUES ('$numero_incident', 'en cours', '$date_saisie', '$auteur')");
+                    VALUES ('$numero_incident', 'en cours', '$date_saisie', '$auteur')");
 
 
                 // Get categorie incident
-                $getCategorie = mysqli_query($con, "SELECT * FROM `type_incidents` WHERE code_incident='$code_incident'");
+                $getCategorie = mysqli_query($con, "SELECT *    FROM `type_incidents` WHERE code_incident='$code_incident'");
 
                 while ($row = mysqli_fetch_array($getCategorie)) {
                     $categorie = $row['type_incident'];
@@ -185,6 +190,7 @@ if (isset($_POST['affecterIncident'])) {
                     $service = $row['libelle'];
                     $sigle = $row['sigle'];
                 }
+                include('mail_affect_resp_gestionnaire.php');
                 include('mail_sms_prestataire.php');
 
                 $_SESSION['errorMsg'] = false;
@@ -209,6 +215,7 @@ if (isset($_POST['affecterIncident'])) {
                 $telephone_intervenant = $row['telephone'];
                 $email_intervenant = $row['email'];
             }
+            $concerne = $intervenant_interne;
             //persister dans la table des interventions avec statut planifiée
             $reqPersistIntervention = mysqli_query($con, "INSERT INTO `interventions` (`code_intervention`, `numero_incident`, `service`, `code_incident`, `intervenant`, `type_intervenant`, `date_intervention`, `date_saisie`, `statut`) 
             VALUES ('$code_intervention', '$numero_incident', '$code_service', '$code_incident', '$intervenant', '$type_intervenant', '$date_intervention', '$date_saisie', 'planifiee')");
@@ -223,8 +230,7 @@ if (isset($_POST['affecterIncident'])) {
                 $_SESSION['message'] = "L'intervention n'a pas pu etre enregistrée !";
                 header("Location: ../interventions_planifiees");
             } else {
-                // echo 'Persisté';
-                // Mettre a jour le statut du signalement
+
                 $sql = mysqli_query($con, "UPDATE signalements SET statut='en cours' WHERE numero_incident='$numero_incident'");
 
                 // historique statut
@@ -234,6 +240,7 @@ if (isset($_POST['affecterIncident'])) {
 
 
                 // Notifier l'intervenant
+                include('mail_affect_resp_gestionnaire.php');
                 include('mail_sms_intervenant.php');
 
                 $_SESSION['errorMsg'] = false;

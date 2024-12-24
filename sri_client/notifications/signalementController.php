@@ -294,7 +294,6 @@ header('Content-Type: text/html; charset=utf-8');
 			$priorite_incident = $priorite_type_incident;
 		}
 
-		// echo $priorite_incident;die;
 
 		switch ($priorite_incident) {
 			case 0:
@@ -328,21 +327,6 @@ header('Content-Type: text/html; charset=utf-8');
 		} else {
 			$link = 'Signalements/no_image.png';
 		}
-
-		//  echo $link.'</br>';
-
-		//  // Identification
-		//  $prenom=$_POST['firstname'];
-		//  $nom=$_POST['lastname'];
-		//  $contact=$_POST['contact'];
-
-
-		//  $type_intervention='Informatique';
-		//  $description='Les climatisations de l\'étage 2 ne fonctionnent plus';
-		//  $service='DTAI';
-		//  $code_service='43100000';
-
-		// recup Infos services 
 
 		$reqInfosService = $con->query("SELECT * FROM `services` WHERE code_service='$code_service'");
 
@@ -380,97 +364,11 @@ header('Content-Type: text/html; charset=utf-8');
 
 		$localisation = $batiment . ' - ' . $etage . ' - ' . $piece;
 
-		// echo 'Numero Piece : '.$numero_piece.'</br>';
-		// echo 'Code incident : '.$code_incident.'</br>';
-		// echo 'Code service : '.$code_service.' -- Service :'.$service.'</br>';
-		// echo 'Code batiment : '.$code_batiment.' -- Batiment :'.$batiment.'</br>';
-		// echo 'Code etage : '.$code_etage.' -- Etage :'.$etage.'</br>';
-		// echo 'code Piece : '.$code_piece.' -- Piece :'.$piece.'</br>';
-		// echo 'numero incident: '.$numero_incident.'</br>';
-		// echo 'Description : '.$description.'</br>';
-		// echo 'Auteur : '.$auteur.'</br>';
-		// echo 'Telephone : '.$telephone.'</br>';
-		// echo 'Email : '.$email.'</br>';
-
-		// echo 'Priorite Type Incident : '.$priorite_type_incident.'</br>';
-		// echo 'Priorite Localisation : '.$priorite_type_localisation.'</br>';
-		// echo 'Code Priorite Incident : '.$priorite_incident.'</br></br>';
-		// echo 'Priorite Incident : '.$priorite.'</br></br>';
-		// echo 'Localisation : '.$localisation.'</br>';
-
-
-		// die;
-		// Numero Piece :
-		// Code incident : 208
-		// Code service : 43000000 -- Service :CABINET MFB
-		// Code batiment : 102 -- Batiment :Immeuble CCAP
-		// Code etage : 242 -- Etage :6ème étage
-		// code Piece : 906 -- Piece :Bureau DC
-		// numero incident: 20290
-		// Description : rfehehfefe
-		// Auteur : Amet Fakk
-		// Telephone : 666666666
-		// Email :
-		// Priorite Type Incident : 3
-		// Priorite Localisation : 1
-		// Code Priorite Incident : 1	
-		// Priorite Incident : Moyenne
-		// Localisation : Immeuble CCAP - 6ème étage - Bureau DC
-
-		// PERSISTE...
 		// Table signalements
 		$sql = $con->query("INSERT INTO `signalements` (`numero_incident`, `date_reception`, `auteur`, `telephone`, `email`, 					`code_incident` , `code_priorite`, `code_service`, `code_batiment`, `code_etage`, `piece`, `description`, `photo`, `statut`) 
 				VALUES ('$numero_incident', '$date_saisie', '$auteur', '$telephone', '$email', '$code_incident', '$priorite_incident', '$code_service', '$code_batiment', '$code_etage', '$code_piece', '$description', '$link', 'en attente')");
-
-		// Infos Responsables DAGE
-		//  $telephonesResponsables=[];
-		//  $emailsResponsables=[];
-		//  $responsables=[];
-
-		// // Responsables de domaines  
-		// $reqInfosResponsablesDage = $con->query("SELECT * FROM responsables_incidents INNER JOIN responsables_dage on responsables_dage.matricule=responsables_incidents.matricule_responsable where responsables_incidents.code_incident='$code_incident'");
-		// while ($row = mysqli_fetch_array($reqInfosResponsablesDage)) { 
-		// 	$telephonesResponsables[]=$row['telephone'];
-		// 	$emailsResponsables[]=$row['email']; 
-		// 	$responsables[]=$row['prenom'].' '.$row['nom'];
-		// }
-		// 	//  }
-
-		//  $reqInfosGestionnaires = $con->query("SELECT * FROM `gestionnaires` INNER JOIN gestionnaires_services on gestionnaires_services.matricule_gestionnaire=gestionnaires.matricule_gestionnaire WHERE gestionnaires_services.code_service='$code_service'");
-
-		//  $telephonesGestionnaires=[];
-		//  $emailsGestionnaires=[];
-		//  $gestionnaires=[];
-
-		//  while ($row = mysqli_fetch_array($reqInfosGestionnaires)) { 
-		// 	 $telephonesGestionnaires[]=$row['telephone'];
-		// 	 $emailsGestionnaires[]=$row['email'];
-		// 	 $gestionnaires[]=$row['prenom'].' '.$row['nom'];
-		//  }
-
-		// Notifications
-		// include ('notification_signalement.php');
-
-		// Notifications des administrateurs DAGE... 
-		// echo $priorite;die;
-		// switch ($priorite) {
-		// 	case 'Haute':
-		// 		include('mail_sms_dage_resp_gestionnaire_urgent.php');
-		// 		break;
-		// 	default:
 		include('mail_sms_dage_resp_gestionnaire.php');
-		// 		break;
-		// }
-
 		include('sms_declarant.php');
-
-
-		// Notifications des responsables DAGE... 
-		// include('mail_sms_responsable_dage.php');
-
-		// Notifications des gestionnaires... 
-		// include('mail_sms_gestionnaire.php');
-
 	?>
 
 		<div id="success">

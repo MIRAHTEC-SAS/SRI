@@ -60,19 +60,6 @@ while ($row = mysqli_fetch_array($reqInfosAdminDageUrgent)) {
     $prenomsNomsAdmin[] = $row['prenom'] . ' ' . $row['nom'];
 }
 
-//    for ($i = 0; $i < count($telephonesAdmin);$i++) 
-//    {   
-//     $telephoneAdmin = $telephonesAdmin[$i];
-//     $emailAdmin = $emailsAdmin[$i];
-//     $prenomNomAdmin=$prenomsNomsAdmin[$i];
-
-//     echo $telephoneAdmin.'</br>';
-//     echo $emailAdmin.'</br>';
-//     echo $prenomNomAdmin.'</br>'.'</br>'.'</br>';
-//    }
-// die;
-// for ($i = 0; $i < count($telephonesAdmin);$i++) {   
-
 try {
 
     for ($i = 0; $i < count($telephonesAdmin); $i++) {
@@ -80,31 +67,11 @@ try {
         $emailAdmin = $emailsAdmin[$i];
         $prenomNomAdmin = $prenomsNomsAdmin[$i];
 
-        // echo $telephoneAdmin.'</br>';
-        // echo $emailAdmin.'</br>';
-        // echo $prenomNomAdmin.'</br>'.'</br>'.'</br>';
 
-        // Variables...
-        // $numero_incident='44DC432';
-        // $type_incident='Informatique';
-        // $description='Les climatisations de l\'étage 2 ne fonctionnent plus';
-        // $service='DTAI';
-
-        // Infos localisation
-        // $localisation='Immeuble Moussa';
-        // $adresse='5, Rue Lamine GUEYE BP2300 Dakar';
-        // $contact='338904478';
-
-        // Envoi du SMS
-        // include('sms_admin_dage.php');
-
-        // Contenu du mail 
         include('content_mail_dage.php');
 
         // GOO MAIL DAGE
         $textversion = "This is the text version";
-        //Server settings
-        // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                   //Enable verbose debug output
         $mail->isSMTP();
         $mail->Host       = 'mail.sedif.sn';                        //Set the SMTP server to send through
         //Send using SMTP
@@ -114,23 +81,14 @@ try {
         $mail->Password   = 'Sedif@2022';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;
-        // PROD  
-        // $mail->Host       = '10.1.0.15';                        //Set the SMTP server to send through
-        // $mail->Username   = 'sri@minfinances.sn';                     //SMTP username
-        // $mail->Password   = '$1&nVen23!';   
-        // $mail->Port       = 25;                    //SMTP password
-        //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-        //Recipients
-        // $utilisateur=$prenom.' '.$nom;
+        $mail->CharSet = 'UTF-8';
         $utilisateur = 'DAGE MFB';
         $mail->setFrom('contact@sedif.sn', 'MFB/DAGE');
         $mail->addAddress($emailAdmin, $utilisateur);     //Add a recipient
         $pieceJointe = 'Signalements/no_image.png';
 
         // //Attachments
-        $mail->addAttachment($pieceJointe);         //Add attachments
-        // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+        $mail->addAttachment($pieceJointe);         //Add 
 
         // Envoi Mail DAGE
         $mail->isHTML();                                  //Set email format to HTML
@@ -185,7 +143,7 @@ try {
         $mailResp->Password   = 'Sedif@2022';                           //SMTP password
         $mailResp->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mailResp->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
+        $mail->CharSet = 'UTF-8';
         //Recipients
         // $utilisateur=$prenom.' '.$nom;
         $utilisateur = 'DAGE MFB';
@@ -233,21 +191,6 @@ try {
         $telephoneGest = $telephonesGest[$i];
         $emailGest = $emailsGest[$i];
         $prenomNomGest = $prenomsNomsGest[$i];
-
-        // echo $telephoneAdmin.'</br>';
-        // echo $emailAdmin.'</br>';
-        // echo $prenomNomAdmin.'</br>'.'</br>'.'</br>';
-
-        // Variables...
-        // $numero_incident='44DC432';
-        // $type_incident='Informatique';
-        // $description='Les climatisations de l\'étage 2 ne fonctionnent plus';
-        // $service='DTAI';
-
-        // // Infos localisation
-        // $localisation='Immeuble Moussa';
-        // $adresse='5, Rue Lamine GUEYE BP2300 Dakar';
-        // $contact='338904478';
 
         // Envoi du SMS
         include('sms_gestionnaire.php');
