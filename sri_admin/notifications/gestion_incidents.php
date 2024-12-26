@@ -134,11 +134,11 @@ if (isset($_POST['affecterIncident'])) {
 
             //persister dans la table des interventions avec statut planifiée
             $reqPersistIntervention = mysqli_query($con, "INSERT INTO `interventions` (`code_intervention`, `numero_incident`, `service`, `code_incident`, `intervenant`, `type_intervenant`, `date_intervention`, `date_saisie`, `statut`) 
-        VALUES ('$code_intervention', '$numero_incident', '$code_service', '$code_incident', '$intervenant', '$type_intervenant', '$date_intervention', '$date_saisie', 'planifiee')");
+            VALUES ('$code_intervention', '$numero_incident', '$code_service', '$code_incident', '$intervenant', '$type_intervenant', '$date_intervention', '$date_saisie', 'planifiee')");
 
             // Maj Historique statut Intervention
             $sql = mysqli_query($con, "INSERT INTO `historique_statuts_intervention` (`code_intervention`, `statut`, `date_statut`, `auteur`) 
-        VALUES ('$code_intervention', 'planifiee', '$date_saisie', '$auteur')");
+            VALUES ('$code_intervention', 'planifiee', '$date_saisie', '$auteur')");
             if (!$reqPersistIntervention) {
                 // echo 'Pas persisté !';
                 $_SESSION['errorMsg'] = true;

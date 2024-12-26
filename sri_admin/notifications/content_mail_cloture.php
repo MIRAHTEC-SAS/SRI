@@ -87,11 +87,10 @@ $htmlversion = '
 										<td class="inner type" style="font-family:Arial,sans-serif;padding-top:30px;padding-bottom:30px;padding-right:30px;padding-left:30px;">
 											<div class="mktEditable" id="main-content">
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour ' . ${$variableMapping['prenomNom']} . ', </p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">La demande d\'intervention  "' . $description . '", de type ' . $type_incident . ',   effectuée  au' . $piece . '(' . $direction . ') par ' . $concerne . ' le ' . formatDateTime($date_declaration) . ',a été annulée par le responsable  ' . $auteur . ' pour "' . $raisons . '" </p>
-                                            
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">La demande d\'intervention  "' . $description . '", effectuée par la ' . $service . '/' . $etage . '/' . $piece . ' a été clôturée:
+												Incident résolu le  ' . formatDateTime($date_saisie)  . ' par ' . $concerne . '</p>
                         <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center"><button style="background-color:#446A46"><a style="color:white; font-size:18px;font-style:none" href="https://sedif.sn/dtai/pgav/dev/">Traiter la demande</a></button></p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">&nbsp;</p>
-												
 												<p style="text-align:center;font-size:12px;line-height:15px;margin-bottom:5px;margin-top:0;margin-right:0;margin-left:0;">
 													DAGE - MFB<br/>
 												</p>

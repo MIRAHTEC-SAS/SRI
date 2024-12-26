@@ -262,7 +262,6 @@ if (isset($_POST['relancerIntervenant'])) {
 /*********************************** Cloture Intervention *************************************/
 
 if (isset($_POST['cloturerIntervention'])) {
-
     $code_intervention = $_POST['code_intervention'];
     $auteur = $_POST['auteur'];
     $comment = mysqli_real_escape_string($con, $_POST['comment']);
@@ -271,7 +270,6 @@ if (isset($_POST['cloturerIntervention'])) {
     $sql = mysqli_query($con, "INSERT INTO `commentaires_cloture_intervention` (`code_intervention`, `commentaire`, `date_cloture`, `auteur`) 
     VALUES ('$code_intervention', '$comment', '$date_saisie', '$auteur')");
     if (!$sql) {
-
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
         $_SESSION['message'] = "Erreur lors de la cloture de l'incident " . mysqli_error($con);
@@ -280,22 +278,62 @@ if (isset($_POST['cloturerIntervention'])) {
     }
 
     // Requete de verification prestataire
-    $getNumeroIncident = mysqli_query($con, "SELECT numero_incident FROM interventions WHERE code_intervention='$code_intervention'");
+    $getNumeroIncident = mysqli_query($con, "SELECT * FROM interventions WHERE code_intervention='$code_intervention'");
 
     while ($row = mysqli_fetch_array($getNumeroIncident)) {
         $numero_incident = $row['numero_incident'];
+        $matricule = $row['intervenant'];
+        $type_intervenant = $row['type_intervenant'];
     }
+    // Recuperere le signalements correspondant
+    // GET Date declaration...
+    $getDateDeclaration = mysqli_query($con, "SELECT * FROM signalements WHERE numero_incident='$numero_incident'");
+    while ($row = mysqli_fetch_array($getDateDeclaration)) {
+        $date_declaration = date('Y-m-d', strtotime($row['date_reception']));
+        $description = $row['description'];
+        $code_batiment = $row['code_batiment'];
+        $code_etage = $row['code_etage'];
+        $code_piece = $row['piece'];
+        $code_service = $row['code_service'];
+        $code_incident = $row['code_incident'];
+        $link = $row['photo'];
+        $code_priorite = $row['code_priorite'];
+        $date_reception = $row['date_reception'];
+        $declarant = $row['auteur'];
+    }
+    $reqInfosService = $con->query("SELECT * FROM `services` WHERE code_service='$code_service'");
+    while ($row = mysqli_fetch_array($reqInfosService)) {
+        $service = $row['libelle'];
+        $sigle = $row['sigle'];
+        // $emailDage=$row['email']; 
+    }
+
+    // Localisation Batiment
+    $reqBatiment = $con->query("SELECT * FROM `batiments` WHERE code_batiment='$code_batiment'");
+    while ($row = mysqli_fetch_array($reqBatiment)) {
+        $batiment = $row['nom_batiment'];
+        $adresse = $row['adresse'];
+        $contact = $row['contact'];
+    }
+    // Localisation Etage
+    $reqEtage = $con->query("SELECT * FROM `etages` WHERE code_etage='$code_etage'");
+    while ($row = mysqli_fetch_array($reqEtage)) {
+        $etage = $row['nom_etage'];
+    }
+    // Localisation Piece
+    $reqPiece = $con->query("SELECT * FROM `pieces` WHERE code_piece='$code_piece'");
+    while ($row = mysqli_fetch_array($reqPiece)) {
+        $piece = $row['nom_piece'];
+    }
+
     // Update intervention
     $sql = mysqli_query($con, "UPDATE interventions SET statut='terminee' WHERE code_intervention='$code_intervention' ");
 
     // Update Incident
-    $sql = mysqli_query($con, "UPDATE signalements SET statut='termine' WHERE numero_incident='$numero_incident' ");
+    $sql1 = mysqli_query($con, "UPDATE signalements SET statut='termine' WHERE numero_incident='$numero_incident' ");
 
-    // Notifier gestionnaire
-
-
-
-    //  include('notification_relance');
+    // Notifié l'admin ,le responsable ainsi que le gestionnaire 
+    include('mail_cloture_resp_admin_gest.php');
 
     $_SESSION['errorMsg'] = false;
     $_SESSION['successMsg'] = true;
