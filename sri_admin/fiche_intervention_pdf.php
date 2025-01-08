@@ -162,7 +162,6 @@ $page = 'Incident';
 <body class="hold-transition light-skin sidebar-mini theme-primary fixed ">
 
 	<div class="wrapper">
-
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<div class="container-full">
@@ -175,7 +174,7 @@ $page = 'Incident';
 						<div class="col-12">
 							<div class="box">
 								<div class="box-header with-border">
-									<img src="http://localhost/sri_gassama/sri_admin/img/logo.png" alt="logo">
+									<img src="http://localhost/sri/sri_admin/img/logo.png" alt="logo">
 									<h4 class="box-title" style="flex-grow: 1;">DAGE - <span style="color: #6a38ff;">SRI</span></h4>
 									<h4 class="box-title" style="flex-grow: 1;">Fiche d'intervention <strong style="color:red"><?php echo $code_intervention; ?></strong></h4>
 								</div>

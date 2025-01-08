@@ -75,7 +75,7 @@ $htmlversion = '
 									<tr class="one-col">
 										<td class="inner type" align="center" style="font-family:Arial,sans-serif;padding-right:30px;padding-left:30px;padding-top:26px;padding-bottom:24px;">
 											<div class="mktEditable" id="logo">
-												<p style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;"><a href="#" style="text-decoration:none;color:inherit;"><img src="https://sedif.sn/dtai/pgav/dev/min2.png" alt="DTAI" width="185" style="border-width:0;height:auto;-ms-interpolation-mode:bicubic;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;max-width:70%;" /></a></p>
+												<p style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;"><a href="#" style="text-decoration:none;color:inherit;"><img src="http://localhost/sri/sri_admin/img/logo.png" alt="DTAI" width="185" style="border-width:0;height:auto;-ms-interpolation-mode:bicubic;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;max-width:70%;" /></a></p>
 											</div>
 										</td>
 									</tr>
@@ -91,7 +91,11 @@ $htmlversion = '
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Login: <strong>' . $emailUser . '</strong></p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;"> Mot de passe : <strong">dtai@2023</strong></p>
 												
-                        <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center"><button style="background-color:#446A46"><a style="color:white; font-size:18px;font-style:none" href="https://sri.minfinances.sn/sri_admin/">Se connecter</a></button></p>
+                        <div style="text-align:center;">
+   												 <a style="color:white; font-size:18px; text-decoration:none; background-color:#446A46; padding:10px; display:inline-block;" href="http://localhost/sri/sri_admin/">
+        											Se connecter
+    												</a>
+												</div>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">&nbsp;</p>
 												<p style="text-align:center;font-size:12px;margin-bottom:10px;margin-top:0;margin-right:0;margin-left:0;">
 													<img src="https://placehold.it/75x75" border="0" alt="" style="max-width:100%;border-width:0;height:auto;-ms-interpolation-mode:bicubic;" />

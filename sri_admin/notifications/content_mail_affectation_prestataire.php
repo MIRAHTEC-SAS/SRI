@@ -90,7 +90,7 @@ $htmlversion = '
 									<tr class="one-col">
 										<td class="inner type" align="center" style="font-family:Arial,sans-serif;padding-right:30px;padding-left:30px;padding-top:26px;padding-bottom:24px;">
 											<div class="mktEditable" id="logo">
-												<p style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;"><a href="#" style="text-decoration:none;color:inherit;"><img src="https://sedif.sn/dtai/pgav/logo.png" alt="DTAI" width="185" style="border-width:0;height:auto;-ms-interpolation-mode:bicubic;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;max-width:70%;" /></a></p>
+												<p style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;"><a href="#" style="text-decoration:none;color:inherit;"><img src="http://localhost/sri/sri_admin/img/logo.png" alt="DTAI" width="185" style="border-width:0;height:auto;-ms-interpolation-mode:bicubic;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;max-width:70%;" /></a></p>
 											</div>
 											<h1>SRI - DAGE</h1>
 										</td>
@@ -112,7 +112,7 @@ $htmlversion = '
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">&nbsp;</p>
 												
 												<p style="text-align:center;font-size:12px;line-height:15px;margin-bottom:5px;margin-top:0;margin-right:0;margin-left:0;">
-													<a href="http://localhost/sri_gassama/sri_admin/fiche_pdf?code_intervention=' . $code_intervention . '" class="btn" target="_blank">
+													<a href="http://localhost/sri/sri_admin/fiche_pdf?code_intervention=' . $code_intervention . '" class="btn" target="_blank">
 														<i class="mdi mdi-printer"></i> Imprimer la fiche d\'intervention
 													</a>
 												</p>

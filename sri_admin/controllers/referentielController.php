@@ -48,7 +48,7 @@ if (isset($_POST['ajouterBatiment'])) {
 
             $_SESSION['errorMsg'] = true;
             $_SESSION['successMsg'] = false;
-            $_SESSION['message'] = "Echec de la creation !";
+            $_SESSION['message'] = "Echec de la creation !" . mysqli_error($con);
             header('Location: ../batiments');
         }
     }
@@ -77,7 +77,7 @@ if (isset($_POST['modifierBatiment'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la modification !";
+        $_SESSION['message'] = "Echec de la modification !" . mysqli_error($con);
         header('Location: ../batiments');
     }
 }
@@ -96,7 +96,7 @@ if (isset($_POST['supprimerBatiment'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la suppression !";
+        $_SESSION['message'] = "Echec de la suppression !" . mysqli_error($con);
         header('Location: ../batiments');
     }
 }
@@ -146,7 +146,7 @@ if (isset($_POST['ajouterEtage'])) {
 
             $_SESSION['errorMsg'] = true;
             $_SESSION['successMsg'] = false;
-            $_SESSION['message'] = "Echec de la creation !";
+            $_SESSION['message'] = "Echec de la creation !" . mysqli_error($con);
             header('Location: ../etages');
         }
     }
@@ -173,7 +173,7 @@ if (isset($_POST['modifierEtage'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la modification !";
+        $_SESSION['message'] = "Echec de la modification !" . mysqli_error($con);
         header('Location: ../etages');
     }
 }
@@ -192,7 +192,7 @@ if (isset($_POST['supprimerEtage'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la suppression !";
+        $_SESSION['message'] = "Echec de la suppression !" . mysqli_error($con);
         header('Location: ../etages');
     }
 }
@@ -274,7 +274,7 @@ if (isset($_POST['modifierPiece'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la modification !";
+        $_SESSION['message'] = "Echec de la modification !" . mysqli_error($con);
         header('Location: ../pieces');
     }
 }
@@ -293,7 +293,7 @@ if (isset($_POST['supprimerPiece'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la suppression !";
+        $_SESSION['message'] = "Echec de la suppression !" . mysqli_error($con);
         header('Location: ../pieces');
     }
 }
@@ -337,7 +337,7 @@ if (isset($_POST['ajouterMinistere'])) {
 
             $_SESSION['errorMsg'] = true;
             $_SESSION['successMsg'] = false;
-            $_SESSION['message'] = "Echec de la creation !";
+            $_SESSION['message'] = "Echec de la creation !" . mysqli_error($con);
             header('Location: ../ministeres');
         }
     }
@@ -366,7 +366,7 @@ if (isset($_POST['modifierMinistere'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la modification !";
+        $_SESSION['message'] = "Echec de la modification !" . mysqli_error($con);
         header('Location: ../ministeres');
     }
 }
@@ -385,7 +385,7 @@ if (isset($_POST['supprimerMinistere'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la suppression !";
+        $_SESSION['message'] = "Echec de la suppression !" . mysqli_error($con);
         header('Location: ../ministeres');
     }
 }
@@ -431,7 +431,7 @@ if (isset($_POST['ajouterService'])) {
 
             $_SESSION['errorMsg'] = true;
             $_SESSION['successMsg'] = false;
-            $_SESSION['message'] = "Echec de la creation !";
+            $_SESSION['message'] = "Echec de la creation !" . mysqli_error($con);
             header('Location: ../directions');
         }
     }
@@ -462,7 +462,7 @@ if (isset($_POST['modifierService'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la modification !";
+        $_SESSION['message'] = "Echec de la modification !" . mysqli_error($con);
         header('Location: ../directions');
     }
 }
@@ -481,7 +481,7 @@ if (isset($_POST['supprimerService'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la suppression !";
+        $_SESSION['message'] = "Echec de la suppression !" . mysqli_error($con);
         header('Location: ../directions');
     }
 }
@@ -537,7 +537,7 @@ if (isset($_POST['ajouterGestionnaire'])) {
 
             $_SESSION['errorMsg'] = true;
             $_SESSION['successMsg'] = false;
-            $_SESSION['message'] = "Echec de la creation !";
+            $_SESSION['message'] = "Echec de la creation !" . mysqli_error($con);
             header('Location: ../gestionnaires');
         }
     }
@@ -569,7 +569,7 @@ if (isset($_POST['modifierGestionnaire'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la modification !";
+        $_SESSION['message'] = "Echec de la modification !" . mysqli_error($con);
         header('Location: ../gestionnaires');
     }
 }
@@ -589,7 +589,7 @@ if (isset($_POST['supprimerGestionnaire'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la suppression !";
+        $_SESSION['message'] = "Echec de la suppression !" . mysqli_error($con);
         header('Location: ../gestionnaires');
     }
 }
@@ -644,7 +644,7 @@ if (isset($_POST['ajouterResponsable'])) {
 
             $_SESSION['errorMsg'] = true;
             $_SESSION['successMsg'] = false;
-            $_SESSION['message'] = "Echec de la creation !";
+            $_SESSION['message'] = "Echec de la creation !" . mysqli_error($con);
             header('Location: ../responsables_dage');
         }
     }
@@ -676,7 +676,7 @@ if (isset($_POST['modifierResponsable'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la modification !";
+        $_SESSION['message'] = "Echec de la modification !" . mysqli_error($con);
         header('Location: ../responsables_dage');
     }
 }
@@ -696,7 +696,7 @@ if (isset($_POST['supprimerResponsable'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la suppression !";
+        $_SESSION['message'] = "Echec de la suppression !" . mysqli_error($con);
         header('Location: ../responsables_dage');
     }
 }
@@ -752,7 +752,7 @@ if (isset($_POST['ajouterIntervenant'])) {
 
             $_SESSION['errorMsg'] = true;
             $_SESSION['successMsg'] = false;
-            $_SESSION['message'] = "Echec de la creation !";
+            $_SESSION['message'] = "Echec de la creation !" . mysqli_error($con);
             header('Location: ../intervenants_dage');
         }
     }
@@ -784,7 +784,7 @@ if (isset($_POST['modifierIntervenant'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la modification !";
+        $_SESSION['message'] = "Echec de la modification !" . mysqli_error($con);
         header('Location: ../intervenants_dage');
     }
 }
@@ -803,7 +803,7 @@ if (isset($_POST['supprimerIntervenant'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la suppression !";
+        $_SESSION['message'] = "Echec de la suppression !" . mysqli_error($con);
         header('Location: ../intervenants_dage');
     }
 }
@@ -861,7 +861,7 @@ if (isset($_POST['ajouterTypeIncident'])) {
 
             $_SESSION['errorMsg'] = true;
             $_SESSION['successMsg'] = false;
-            $_SESSION['message'] = "Echec de la creation !";
+            $_SESSION['message'] = "Echec de la creation !" . mysqli_error($con);
             header('Location: ../types_incident');
         }
     }
@@ -888,7 +888,7 @@ if (isset($_POST['modifierTypeIncident'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la modification !";
+        $_SESSION['message'] = "Echec de la modification !" . mysqli_error($con);
         header('Location: ../types_incident');
     }
 }
@@ -907,7 +907,7 @@ if (isset($_POST['supprimerTypeIncident'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la suppression !";
+        $_SESSION['message'] = "Echec de la suppression !" . mysqli_error($con);
         header('Location: ../types_incident');
     }
 }
@@ -965,7 +965,7 @@ if (isset($_POST['ajouterPrestataire'])) {
 
             $_SESSION['errorMsg'] = true;
             $_SESSION['successMsg'] = false;
-            $_SESSION['message'] = "Echec de la creation !";
+            $_SESSION['message'] = "Echec de la creation !" . mysqli_error($con);
             header('Location: ../prestataires');
         }
     }
@@ -997,7 +997,7 @@ if (isset($_POST['modifierPrestataire'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la modification !";
+        $_SESSION['message'] = "Echec de la modification !" . mysqli_error($con);
         header('Location: ../prestataires');
     }
 }
@@ -1016,7 +1016,7 @@ if (isset($_POST['supprimerPrestataire'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la suppression !";
+        $_SESSION['message'] = "Echec de la suppression !" . mysqli_error($con);
         header('Location: ../prestataires');
     }
 }
@@ -1076,7 +1076,7 @@ if (isset($_POST['ajouterServiceIntervenant'])) {
 
             $_SESSION['errorMsg'] = true;
             $_SESSION['successMsg'] = false;
-            $_SESSION['message'] = "Echec de la creation !";
+            $_SESSION['message'] = "Echec de la creation !" . mysqli_error($con);
             header('Location: ../services_intervenant');
         }
     }
@@ -1116,7 +1116,7 @@ if (isset($_POST['modifierServiceIntervenant'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la modification !";
+        $_SESSION['message'] = "Echec de la modification !" . mysqli_error($con);
         header('Location: ../services_intervenant');
     }
 }
@@ -1138,7 +1138,7 @@ if (isset($_POST['supprimerServiceIntervenant'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la suppression !";
+        $_SESSION['message'] = "Echec de la suppression !" . mysqli_error($con);
         header('Location: ../services_intervenant');
     }
 }
@@ -1186,7 +1186,7 @@ if (isset($_POST['ajouterRole'])) {
 
             $_SESSION['errorMsg'] = true;
             $_SESSION['successMsg'] = false;
-            $_SESSION['message'] = "Echec de la creation !";
+            $_SESSION['message'] = "Echec de la creation !" . mysqli_error($con);
             header('Location: ../roles');
         }
     }
@@ -1210,7 +1210,7 @@ if (isset($_POST['modifierRole'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la modification !";
+        $_SESSION['message'] = "Echec de la modification !" . mysqli_error($con);
         header('Location: ../roles');
     }
 }
@@ -1229,7 +1229,7 @@ if (isset($_POST['supprimerRole'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la suppression !";
+        $_SESSION['message'] = "Echec de la suppression !" . mysqli_error($con);
         header('Location: ../roles');
     }
 }
@@ -1289,7 +1289,7 @@ if (isset($_POST['ajouterUser'])) {
         default:
             $_SESSION['errorMsg'] = true;
             $_SESSION['successMsg'] = false;
-            $_SESSION['message'] = "Ce rôle n'est pas encore prise en compte ! ";
+            $_SESSION['message'] = "Ce rôle n'est pas encore prise en compte ! " . mysqli_error($con);
             header("Location: ../utilisateurs");
             die;
             break;
@@ -1318,7 +1318,7 @@ if (isset($_POST['ajouterUser'])) {
 
             $_SESSION['errorMsg'] = true;
             $_SESSION['successMsg'] = false;
-            $_SESSION['message'] = "Echec de la creation !";
+            $_SESSION['message'] = "Echec de la creation !" . mysqli_error($con);
             header('Location: ../utilisateurs');
         }
     }
@@ -1339,7 +1339,7 @@ if (isset($_POST['supprimerUser'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la suppression !";
+        $_SESSION['message'] = "Echec de la suppression !" . mysqli_error($con);
         header('Location: ../utilisateurs');
     }
 }
@@ -1359,7 +1359,7 @@ if (isset($_POST['desactiverUser'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la desactivation !";
+        $_SESSION['message'] = "Echec de la desactivation !" . mysqli_error($con);
         header('Location: ../utilisateurs');
     }
 }
@@ -1379,7 +1379,7 @@ if (isset($_POST['activerUser'])) {
     } else {
         $_SESSION['errorMsg'] = true;
         $_SESSION['successMsg'] = false;
-        $_SESSION['message'] = "Echec de la l'activation !";
+        $_SESSION['message'] = "Echec de la l'activation !" . mysqli_error($con);
         header('Location: ../utilisateurs');
     }
 }

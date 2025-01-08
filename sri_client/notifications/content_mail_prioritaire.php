@@ -75,7 +75,7 @@ $htmlversion = '
 									<tr class="one-col">
 										<td class="inner type" align="center" style="font-family:Arial,sans-serif;padding-right:30px;padding-left:30px;padding-top:26px;padding-bottom:24px;">
 											<div class="mktEditable" id="logo">
-												<p style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;"><a href="#" style="text-decoration:none;color:inherit;"><img src="https://sedif.sn/dtai/pgav/logo.png" alt="DTAI" width="185" style="border-width:0;height:auto;-ms-interpolation-mode:bicubic;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;max-width:70%;" /></a></p>
+												<p style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;"><a href="#" style="text-decoration:none;color:inherit;"><img src="http://localhost/sri/sri_admin/img/logo.png" alt="DTAI" width="185" style="border-width:0;height:auto;-ms-interpolation-mode:bicubic;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;max-width:70%;" /></a></p>
 											</div>
 											<h1>SRI - DAGE</h1>
 										</td>
@@ -89,7 +89,7 @@ $htmlversion = '
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour ' . ${$variableMapping['prenomNom']} . ', </p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Un incident de type : <strong style="color:red">' . $type_incident . '</strong> vient d\'être signalé dans le ' . $piece . '(' . $direction . ')  par ' . $auteur . ' le ' . formatDateTime($date_saisie) . '</p>
                                             
-                        <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center"><button style="background-color:#446A46"><a style="color:white; font-size:18px;font-style:none" href="https://sedif.sn/dtai/pgav/dev/">Traiter la demande</a></button></p>
+                       <a style="color:white; font-size:18px; text-decoration:none; background-color:#446A46; padding:10px; display:inline-block; text-align:center;" href="http://localhost/sri/sri_admin/dashboard">Traiter la demande</a>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">&nbsp;</p>
 												
 												<p style="text-align:center;font-size:12px;line-height:15px;margin-bottom:5px;margin-top:0;margin-right:0;margin-left:0;">

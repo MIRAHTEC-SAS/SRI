@@ -3,26 +3,10 @@
 session_start();
 require_once('../config/app.php');
 $login = $_POST['email'];
-// $pass = $_POST['pass'];
-
 $pass = stripslashes($_POST['pwd']);
 
 $pass = mysqli_real_escape_string($con, $pass);
-
 $pwdH = hash('sha256', $pass);
-
-//  // récupérer le mot de passe et supprimer les antislashes ajoutés par le formulaire
-//  $mdp1 = stripslashes($_POST['mdp1']);
-//  $mdp1 = mysqli_real_escape_string($con, $mdp1);
-
-//  $mdp2 = stripslashes($_POST['mdp2']);
-//  $mdp2 = mysqli_real_escape_string($con, $mdp2);
-
-
-
-// $pwdH = hash('sha256', $mdp1);
-
-
 
 $query1 = "SELECT * from users where statut = 1 AND email ='$login' AND password = '$pwdH'";
 $result1 = mysqli_query($con, $query1);

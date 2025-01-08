@@ -12,10 +12,10 @@ require '../vendor/autoload.php';
 $mail = new PHPMailer(true);
 
 try {
-    $candidat = 'Amet Sene';
-	$nomConcours='Concours direct Magistrature';
+	$candidat = 'Amet Sene';
+	$nomConcours = 'Concours direct Magistrature';
 
-    $htmlversion='
+	$htmlversion = '
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="fr">
 
@@ -101,9 +101,9 @@ try {
 									<tr class="one-col">
 										<td class="inner type" style="font-family:Arial,sans-serif;padding-top:30px;padding-bottom:30px;padding-right:30px;padding-left:30px;">
 											<div class="mktEditable" id="main-content">
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour '.$candidat.', </p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour ' . $candidat . ', </p>
 												
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Vous êtes invité(e) à vous présenter au '.$nomConcours.' le «DATE_SESSION» muni(e) d\'une piece d\'identite. Faute de quoi la possibilité de passer le concours vous sera refusée. Aucun
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Vous êtes invité(e) à vous présenter au ' . $nomConcours . ' le «DATE_SESSION» muni(e) d\'une piece d\'identite. Faute de quoi la possibilité de passer le concours vous sera refusée. Aucun
 												remboursement des droits d’inscription ne sera alors effectué.</p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Au centre ci-apres : </br> </p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center">...Universite Cheikh Anta Diop...:</p>
@@ -173,45 +173,43 @@ try {
 </body>
 </html>';
 
-    // $htmlversion=include('mail/mail.php');
+	// $htmlversion=include('mail/mail.php');
 
-    $textversion="This is the text version";
-    //Server settings
-    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'mail.concours-cfj.sn';                     //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'contact@concours-cfj.sn';                     //SMTP username
-    $mail->Password   = 'Cfj@2022';                               //SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+	$textversion = "This is the text version";
+	//Server settings
+	// $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+	$mail->isSMTP();                                            //Send using SMTP
+	$mail->Host       = 'mail.concours-cfj.sn';                     //Set the SMTP server to send through
+	$mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+	$mail->Username   = 'contact@concours-cfj.sn';                     //SMTP username
+	$mail->Password   = 'Cfj@2022';                               //SMTP password
+	$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+	$mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-    //Recipients
-    $mail->setFrom('contact@concours-cfj.sn', 'CENTRE DE FORMATION JUDICIAIRE');
-    $mail->addAddress('leborofaye@gmail.com', 'Amet Sene');     //Add a recipient
-    // $mail->addAddress('ametsene21@gmail.com');               //Name is optional
-    // $mail->addReplyTo('support@sedif.sn', 'Information');
-    // $mail->addCC('ametsene0304@gmail.com');
-    // $mail->addBCC('bcc@example.com');
+	//Recipients
+	$mail->setFrom('contact@concours-cfj.sn', 'CENTRE DE FORMATION JUDICIAIRE');
+	$mail->addAddress('leborofaye@gmail.com', 'Amet Sene');     //Add a recipient
+	// $mail->addAddress('ametsene21@gmail.com');               //Name is optional
+	// $mail->addReplyTo('support@sedif.sn', 'Information');
+	// $mail->addCC('ametsene0304@gmail.com');
+	// $mail->addBCC('bcc@example.com');
 
-    // //Attachments
-    $mail->addAttachment('../Fiche_emargement.pdf');         //Add attachments
-    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+	// //Attachments
+	$mail->addAttachment('../Fiche_emargement.pdf');         //Add attachments
+	// $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
 
-    //Content
-    $mail->isHTML();                                  //Set email format to HTML
-    $mail->Subject = 'Convocation '.$nomConcours;
-    $mail->Body    = $htmlversion;
-    $mail->AltBody = $textversion;
+	//Content
+	$mail->isHTML();                                  //Set email format to HTML
+	$mail->Subject = 'Convocation ' . $nomConcours;
+	$mail->Body    = $htmlversion;
+	$mail->AltBody = $textversion;
 
-    $mail->send();
+	$mail->send();
 
-	$_SESSION['errorMsg']=false;
-	$_SESSION['successMsg']=true;
-	$_SESSION['message'] ="Les candidats sont notifiés avec succès par Email et par SMS ! ";
+	$_SESSION['errorMsg'] = false;
+	$_SESSION['successMsg'] = true;
+	$_SESSION['message'] = "Les candidats sont notifiés avec succès par Email et par SMS ! ";
 	header("Location: ../notifications.php");
-      
-
 } catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+	echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }

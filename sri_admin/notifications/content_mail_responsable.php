@@ -1,5 +1,5 @@
 <?php
-$contentMailResponsable='
+$contentMailResponsable = '
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<html lang="fr">
 
@@ -75,7 +75,7 @@ $contentMailResponsable='
 									<tr class="one-col">
 										<td class="inner type" align="center" style="font-family:Arial,sans-serif;padding-right:30px;padding-left:30px;padding-top:26px;padding-bottom:24px;">
 											<div class="mktEditable" id="logo">
-												<p style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;"><a href="#" style="text-decoration:none;color:inherit;"><img src="https://sedif.sn/dtai/pgav/dev/min2.png" alt="DTAI" width="185" style="border-width:0;height:auto;-ms-interpolation-mode:bicubic;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;max-width:70%;" /></a></p>
+												<p style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;"><a href="#" style="text-decoration:none;color:inherit;"><img src="http://localhost/sri/sri_admin/dashboardmin2.png" alt="DTAI" width="185" style="border-width:0;height:auto;-ms-interpolation-mode:bicubic;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;max-width:70%;" /></a></p>
 											</div>
 										</td>
 									</tr>
@@ -85,15 +85,15 @@ $contentMailResponsable='
 									<tr class="one-col">
 										<td class="inner type" style="font-family:Arial,sans-serif;padding-top:30px;padding-bottom:30px;padding-right:30px;padding-left:30px;">
 											<div class="mktEditable" id="main-content">
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour '.$responsable.', </p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour ' . $responsable . ', </p>
 	
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Une demande d\'intervention provenant du service '.$service.' est en attente de traitement</br></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">La demande porte la reference <strong>'.$numero_incident.'</strong></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Type d\'intervention : <strong style="color:red">'.$categories[0].'</strong></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Description : <strong style="color:red">'.$description.'</strong></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Localisation : <strong style="color:blue">'.$localisation.'</strong></p>
-                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Adresse : <strong>'.$adresse.'</strong></p>
-                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Contact : <strong>'.$contact.'</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Une demande d\'intervention provenant du service ' . $service . ' est en attente de traitement</br></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">La demande porte la reference <strong>' . $numero_incident . '</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Type d\'intervention : <strong style="color:red">' . $categories[0] . '</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Description : <strong style="color:red">' . $description . '</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Localisation : <strong style="color:blue">' . $localisation . '</strong></p>
+                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Adresse : <strong>' . $adresse . '</strong></p>
+                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Contact : <strong>' . $contact . '</strong></p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Vous trouverez en piece jointe une image illustrant l\'incident.</p>
                         <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center"><button style="background-color:#146132"><a style="color:white"href="https://sri.minfinances.sn/sri_admin/">Traiter la demande</a></button></p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">&nbsp;</p>
@@ -151,4 +151,3 @@ $contentMailResponsable='
 </table>
 </body>
 </html>';
-?>

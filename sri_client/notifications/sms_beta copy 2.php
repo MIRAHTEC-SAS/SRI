@@ -1,10 +1,11 @@
 
 <?php
-  header('Content-Type: text/html; charset=UTF-8');
+header('Content-Type: text/html; charset=UTF-8');
 
 include('../config/app.php');
 
 require __DIR__ . '/vendor/autoload.php';
+
 use Twilio\Rest\Client;
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -20,12 +21,12 @@ $auth_token = '9d69d8010cbc54fb5805968e6cbe9a25';
 $client = new Client($account_sid, $auth_token);
 
 
- if (isset($_POST['notifierCandidats'])) {
+if (isset($_POST['notifierCandidats'])) {
 
-    $codeConcours=$_POST['codeConcours'];
+  $codeConcours = $_POST['codeConcours'];
 
-                    // recuperation du numero
-                        $recuInfos = $con->query("SELECT 
+  // recuperation du numero
+  $recuInfos = $con->query("SELECT 
                         candidats.matricule,
                         candidats.prenom,
                         candidats.nom,
@@ -43,49 +44,50 @@ $client = new Client($account_sid, $auth_token);
                         concours_planifie_salles.ordre_table,
                         salles.nom as nomSalle
                         FROM concours_planifie_salles INNER JOIN concours_init ON concours_planifie_salles.codeConcours=concours_init.codeConcours  INNER JOIN candidats ON candidats.matricule=concours_planifie_salles.matricule INNER JOIN centres ON centres.codeCentre=concours_planifie_salles.codeCentre INNER JOIN salles ON salles.codeSalle=concours_planifie_salles.codeSalle INNER JOIN concours ON concours.codeConcours=concours_planifie_salles.codeConcours where concours_planifie_salles.codeConcours='$codeConcours'");
- 
-                        while ($row = mysqli_fetch_array($recuInfos)) { 
 
-                        $prenom=$row['prenom'];
-                        $nom=$row['nom'];
-                        $matricule=$row['matricule'];
-                        $telephone=$row['telephone'];
-                        $email=$row['email'];
-                        $nomConcours=$row['nomConcours'];
-                        $nomCentre=$row['nomCentre'];
-                        $adresse=$row['adresse'];
-                        $region=$row['region'];
-                        $nomSalle=$row['nomSalle'];
-                        $dateConcours=date("d/m/Y", strtotime($row['dateConcours']));
-                        $debut=$row['debut'];
-                        $fin=$row['fin'];
-                        $numero_table=$row['ordre_table'];
-                       
+  while ($row = mysqli_fetch_array($recuInfos)) {
 
-                        $message ="Bonjour $prenom $nom,\nVous êtes convoqué(e) au $nomConcours, le $dateConcours de $debut à $fin au centre $nomCentre .\nLes epreuves se dérouleront dans la salle $nomSalle et votre table porte le numéro $numero_table. \nVous recevez la convocation sur votre adresse courriel $email.\n\nCordialement \nCentre Formation Judiciaire";
-                      
-            
-                            // Persistance SMS
-                            $sql = $con->query("INSERT INTO historique_sms (matricule,numero,message,date_saisie) VALUES ('$matricule','$telephone','$message','$date_saisie')");
-                            // Envoi du SMS
-                                $client->messages->create($telephone,
-                                    array(
-                                    // "from" => "CFJ",
-                                    "messagingServiceSid" => 'MGf3c9896cbe7d180452fade5013466a98',
-                                    'body' => $message
-                                    )
-                                );
+    $prenom = $row['prenom'];
+    $nom = $row['nom'];
+    $matricule = $row['matricule'];
+    $telephone = $row['telephone'];
+    $email = $row['email'];
+    $nomConcours = $row['nomConcours'];
+    $nomCentre = $row['nomCentre'];
+    $adresse = $row['adresse'];
+    $region = $row['region'];
+    $nomSalle = $row['nomSalle'];
+    $dateConcours = date("d/m/Y", strtotime($row['dateConcours']));
+    $debut = $row['debut'];
+    $fin = $row['fin'];
+    $numero_table = $row['ordre_table'];
 
-                        // MAIL...
 
-                        //Create an instance; passing `true` enables exceptions
-$mail = new PHPMailer(true);
+    $message = "Bonjour $prenom $nom,\nVous êtes convoqué(e) au $nomConcours, le $dateConcours de $debut à $fin au centre $nomCentre .\nLes epreuves se dérouleront dans la salle $nomSalle et votre table porte le numéro $numero_table. \nVous recevez la convocation sur votre adresse courriel $email.\n\nCordialement \nCentre Formation Judiciaire";
 
-try {
-    $candidat = $prenom.' '.$nom;
-	// $nomConcours='Concours direct Magistrature';
 
-    $htmlversion='
+    // Persistance SMS
+    $sql = $con->query("INSERT INTO historique_sms (matricule,numero,message,date_saisie) VALUES ('$matricule','$telephone','$message','$date_saisie')");
+    // Envoi du SMS
+    $client->messages->create(
+      $telephone,
+      array(
+        // "from" => "CFJ",
+        "messagingServiceSid" => 'MGf3c9896cbe7d180452fade5013466a98',
+        'body' => $message
+      )
+    );
+
+    // MAIL...
+
+    //Create an instance; passing `true` enables exceptions
+    $mail = new PHPMailer(true);
+
+    try {
+      $candidat = $prenom . ' ' . $nom;
+      // $nomConcours='Concours direct Magistrature';
+
+      $htmlversion = '
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="fr">
 
@@ -171,14 +173,14 @@ try {
 									<tr class="one-col">
 										<td class="inner type" style="font-family:Arial,sans-serif;padding-top:30px;padding-bottom:30px;padding-right:30px;padding-left:30px;">
 											<div class="mktEditable" id="main-content">
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour '.$candidat.', </p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour ' . $candidat . ', </p>
 	
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Vous êtes invité(e) à vous présenter au <strong>'.$nomConcours.'</strong> le <strong>'.$dateConcours.'</strong> muni(e) d\'une piece d\'identite. Faute de quoi la possibilité de passer le concours vous sera refusée.</br> Aucun
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Vous êtes invité(e) à vous présenter au <strong>' . $nomConcours . '</strong> le <strong>' . $dateConcours . '</strong> muni(e) d\'une piece d\'identite. Faute de quoi la possibilité de passer le concours vous sera refusée.</br> Aucun
 												remboursement des droits d’inscription ne sera alors effectué.</p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Le concours se deroulera au centre ci-apres : </br> </p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center"><strong>'.$nomCentre.'</strong></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center;"><strong>Salle : '.$nomSalle.'</strong></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center;"><strong>Table numero : '.$numero_table.'</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center"><strong>' . $nomCentre . '</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center;"><strong>Salle : ' . $nomSalle . '</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center;"><strong>Table numero : ' . $numero_table . '</strong></p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">&nbsp;</p>
 												<p style="text-align:center;font-size:12px;margin-bottom:10px;margin-top:0;margin-right:0;margin-left:0;">
 													<img src="https://placehold.it/75x75" border="0" alt="" style="max-width:100%;border-width:0;height:auto;-ms-interpolation-mode:bicubic;" />
@@ -235,59 +237,57 @@ try {
 </body>
 </html>';
 
-    // $htmlversion=include('mail/mail.php');
+      // $htmlversion=include('mail/mail.php');
 
-    $textversion="This is the text version";
-    //Server settings
-    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'mail.concours-cfj.sn';                     //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'contact@concours-cfj.sn';                     //SMTP username
-    $mail->Password   = 'Cfj@2022';                               //SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+      $textversion = "This is the text version";
+      //Server settings
+      // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+      $mail->isSMTP();                                            //Send using SMTP
+      $mail->Host       = 'mail.concours-cfj.sn';                     //Set the SMTP server to send through
+      $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+      $mail->Username   = 'contact@concours-cfj.sn';                     //SMTP username
+      $mail->Password   = 'Cfj@2022';                               //SMTP password
+      $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+      $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-    //Recipients
-    $mail->setFrom('contact@concours-cfj.sn', 'CENTRE DE FORMATION JUDICIAIRE');
-    $mail->addAddress($email, $candidat);     //Add a recipient
-    // $mail->addAddress('ametsene21@gmail.com');               //Name is optional
-    // $mail->addReplyTo('support@sedif.sn', 'Information');
-    // $mail->addCC('ametsene0304@gmail.com');
-    // $mail->addBCC('bcc@example.com');
-    // /Applications/MAMP/htdocs/cfj/admin/Documents/Listes/2204/Convocation_22001.pdf
-    $convocationFIle='../Documents/listes/'.$codeConcours.'/Convocation_'.$matricule.'.pdf';
-    // //Attachments
-    $mail->addAttachment($convocationFIle);         //Add attachments
-    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+      //Recipients
+      $mail->setFrom('contact@concours-cfj.sn', 'CENTRE DE FORMATION JUDICIAIRE');
+      $mail->addAddress($email, $candidat);     //Add a recipient
+      // $mail->addAddress('ametsene21@gmail.com');               //Name is optional
+      // $mail->addReplyTo('support@sedif.sn', 'Information');
+      // $mail->addCC('ametsene0304@gmail.com');
+      // $mail->addBCC('bcc@example.com');
+      // /Applications/MAMP/htdocs/cfj/admin/Documents/Listes/2204/Convocation_22001.pdf
+      $convocationFIle = '../Documents/listes/' . $codeConcours . '/Convocation_' . $matricule . '.pdf';
+      // //Attachments
+      $mail->addAttachment($convocationFIle);         //Add attachments
+      // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
 
-    //Content
-    $mail->isHTML();                                  //Set email format to HTML
-    $mail->Subject = 'Convocation '.$nomConcours;
-    $mail->Body    = $htmlversion;
-    $mail->AltBody = $textversion;
+      //Content
+      $mail->isHTML();                                  //Set email format to HTML
+      $mail->Subject = 'Convocation ' . $nomConcours;
+      $mail->Body    = $htmlversion;
+      $mail->AltBody = $textversion;
 
-    $mail->send();
+      $mail->send();
+    } catch (Exception $e) {
+      echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+
+    // include ('/sendmail.php');
+  }
+  //  include ('mail.php');
 
 
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+  $_SESSION['errorMsg'] = false;
+  $_SESSION['successMsg'] = true;
+  $_SESSION['message'] = "Les candidats sont notifiés avec succès par Email et par SMS ! ";
+  header("Location: ../notifications.php");
+
+  // echo ' SENT !!!';
+
+
 }
-
-                        // include ('/sendmail.php');
-                        }
-                            //  include ('mail.php');
-
-                
-	$_SESSION['errorMsg']=false;
-	$_SESSION['successMsg']=true;
-	$_SESSION['message'] ="Les candidats sont notifiés avec succès par Email et par SMS ! ";
-	header("Location: ../notifications.php");
-      
-                    // echo ' SENT !!!';
-                     
-
- }
 
 
 
@@ -371,4 +371,3 @@ try {
     // }
 
 // }
-

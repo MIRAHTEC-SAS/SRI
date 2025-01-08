@@ -1,5 +1,5 @@
 <?php
-$htmlversion='
+$htmlversion = '
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<html lang="fr">
 
@@ -75,7 +75,7 @@ $htmlversion='
 									<tr class="one-col">
 										<td class="inner type" align="center" style="font-family:Arial,sans-serif;padding-right:30px;padding-left:30px;padding-top:26px;padding-bottom:24px;">
 											<div class="mktEditable" id="logo">
-												<p style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;"><a href="#" style="text-decoration:none;color:inherit;"><img src="https://sedif.sn/dtai/pgav/logo.png" alt="DTAI" width="185" style="border-width:0;height:auto;-ms-interpolation-mode:bicubic;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;max-width:70%;" /></a></p>
+												<p style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;"><a href="#" style="text-decoration:none;color:inherit;"><img src="http://localhost/sri/sri_admin/img/logo.png" alt="DTAI" width="185" style="border-width:0;height:auto;-ms-interpolation-mode:bicubic;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;max-width:70%;" /></a></p>
 											</div>
 											<h1>SRI - DAGE</h1>
 										</td>
@@ -86,17 +86,21 @@ $htmlversion='
 									<tr class="one-col">
 										<td class="inner type" style="font-family:Arial,sans-serif;padding-top:30px;padding-bottom:30px;padding-right:30px;padding-left:30px;">
 											<div class="mktEditable" id="main-content">
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour '.$prenomNomResp.', </p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour ' . $prenomNomResp . ', </p>
 	
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Une demande d\'intervention provenant du service '.$service.' est en attente de traitement</br></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">La demande porte la reference <strong>'.$numero_incident.'</strong></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Type d\'intervention : <strong style="color:red">'.$type_incident.'</strong></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Description : <strong>'.$description.'</strong></p>
-                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Localisation : <strong style="color:blue">'.$localisation.'</strong></p>
-                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Adresse : <strong>'.$adresse.'</strong></p>
-                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Contact : <strong>'.$contact.'</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Une demande d\'intervention provenant du service ' . $service . ' est en attente de traitement</br></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">La demande porte la reference <strong>' . $numero_incident . '</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Type d\'intervention : <strong style="color:red">' . $type_incident . '</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Description : <strong>' . $description . '</strong></p>
+                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Localisation : <strong style="color:blue">' . $localisation . '</strong></p>
+                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Adresse : <strong>' . $adresse . '</strong></p>
+                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Contact : <strong>' . $contact . '</strong></p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Vous trouverez en piece jointe une image illustrant l\'incident.</p>
-                        <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center"><button style="background-color:#446A46"><a style="color:white; font-size:18px;font-style:none" href="https://sedif.sn/dtai/pgav/dev/">Traiter la demande</a></button></p>
+                       <div style="text-align:center;">
+<a style="color:white; font-size:18px; text-decoration:none; background-color:#446A46; padding:10px; display:inline-block; text-align:center;" href="http://localhost/sri/sri_admin/dashboard">
+    Traiter la demande
+</a>
+</div>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">&nbsp;</p>
 												
 												<p style="text-align:center;font-size:12px;line-height:15px;margin-bottom:5px;margin-top:0;margin-right:0;margin-left:0;">
@@ -150,4 +154,3 @@ $htmlversion='
 </table>
 </body>
 </html>';
-?>

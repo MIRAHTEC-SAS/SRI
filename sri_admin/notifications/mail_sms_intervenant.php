@@ -48,7 +48,7 @@ try {
     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     $mail->CharSet = "UTF-8";
     $utilisateur = 'DAGE MFB';
-    $mail->setFrom('contact@sedif.sn', 'MFB/DAGE');
+    $mail->setFrom('sri@minfinances.sn', 'MFB/DAGE');
     $mail->addAddress($email_intervenant, $intervenant_interne);     //Add a recipient
 
     $mail->isHTML();                                  //Set email format to HTML

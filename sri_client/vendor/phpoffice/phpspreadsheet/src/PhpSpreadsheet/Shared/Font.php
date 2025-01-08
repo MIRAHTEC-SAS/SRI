@@ -409,34 +409,34 @@ class Font
         switch ($name) {
             case 'Arial':
                 $fontFile = (
-                $bold ? ($italic ? self::ARIAL_BOLD_ITALIC : self::ARIAL_BOLD)
+                    $bold ? ($italic ? self::ARIAL_BOLD_ITALIC : self::ARIAL_BOLD)
                     : ($italic ? self::ARIAL_ITALIC : self::ARIAL)
                 );
 
                 break;
             case 'Calibri':
                 $fontFile = (
-                $bold ? ($italic ? self::CALIBRI_BOLD_ITALIC : self::CALIBRI_BOLD)
+                    $bold ? ($italic ? self::CALIBRI_BOLD_ITALIC : self::CALIBRI_BOLD)
                     : ($italic ? self::CALIBRI_ITALIC : self::CALIBRI)
                 );
 
                 break;
             case 'Courier New':
                 $fontFile = (
-                $bold ? ($italic ? self::COURIER_NEW_BOLD_ITALIC : self::COURIER_NEW_BOLD)
+                    $bold ? ($italic ? self::COURIER_NEW_BOLD_ITALIC : self::COURIER_NEW_BOLD)
                     : ($italic ? self::COURIER_NEW_ITALIC : self::COURIER_NEW)
                 );
 
                 break;
             case 'Comic Sans MS':
                 $fontFile = (
-                $bold ? self::COMIC_SANS_MS_BOLD : self::COMIC_SANS_MS
+                    $bold ? self::COMIC_SANS_MS_BOLD : self::COMIC_SANS_MS
                 );
 
                 break;
             case 'Georgia':
                 $fontFile = (
-                $bold ? ($italic ? self::GEORGIA_BOLD_ITALIC : self::GEORGIA_BOLD)
+                    $bold ? ($italic ? self::GEORGIA_BOLD_ITALIC : self::GEORGIA_BOLD)
                     : ($italic ? self::GEORGIA_ITALIC : self::GEORGIA)
                 );
 
@@ -447,7 +447,7 @@ class Font
                 break;
             case 'Liberation Sans':
                 $fontFile = (
-                $bold ? ($italic ? self::LIBERATION_SANS_BOLD_ITALIC : self::LIBERATION_SANS_BOLD)
+                    $bold ? ($italic ? self::LIBERATION_SANS_BOLD_ITALIC : self::LIBERATION_SANS_BOLD)
                     : ($italic ? self::LIBERATION_SANS_ITALIC : self::LIBERATION_SANS)
                 );
 
@@ -466,7 +466,7 @@ class Font
                 break;
             case 'Palatino Linotype':
                 $fontFile = (
-                $bold ? ($italic ? self::PALATINO_LINOTYPE_BOLD_ITALIC : self::PALATINO_LINOTYPE_BOLD)
+                    $bold ? ($italic ? self::PALATINO_LINOTYPE_BOLD_ITALIC : self::PALATINO_LINOTYPE_BOLD)
                     : ($italic ? self::PALATINO_LINOTYPE_ITALIC : self::PALATINO_LINOTYPE)
                 );
 
@@ -477,27 +477,27 @@ class Font
                 break;
             case 'Tahoma':
                 $fontFile = (
-                $bold ? self::TAHOMA_BOLD : self::TAHOMA
+                    $bold ? self::TAHOMA_BOLD : self::TAHOMA
                 );
 
                 break;
             case 'Times New Roman':
                 $fontFile = (
-                $bold ? ($italic ? self::TIMES_NEW_ROMAN_BOLD_ITALIC : self::TIMES_NEW_ROMAN_BOLD)
+                    $bold ? ($italic ? self::TIMES_NEW_ROMAN_BOLD_ITALIC : self::TIMES_NEW_ROMAN_BOLD)
                     : ($italic ? self::TIMES_NEW_ROMAN_ITALIC : self::TIMES_NEW_ROMAN)
                 );
 
                 break;
             case 'Trebuchet MS':
                 $fontFile = (
-                $bold ? ($italic ? self::TREBUCHET_MS_BOLD_ITALIC : self::TREBUCHET_MS_BOLD)
+                    $bold ? ($italic ? self::TREBUCHET_MS_BOLD_ITALIC : self::TREBUCHET_MS_BOLD)
                     : ($italic ? self::TREBUCHET_MS_ITALIC : self::TREBUCHET_MS)
                 );
 
                 break;
             case 'Verdana':
                 $fontFile = (
-                $bold ? ($italic ? self::VERDANA_BOLD_ITALIC : self::VERDANA_BOLD)
+                    $bold ? ($italic ? self::VERDANA_BOLD_ITALIC : self::VERDANA_BOLD)
                     : ($italic ? self::VERDANA_ITALIC : self::VERDANA)
                 );
 
@@ -528,7 +528,7 @@ class Font
     public static function getCharsetFromFontName($name)
     {
         switch ($name) {
-            // Add more cases. Check FONT records in real Excel files.
+                // Add more cases. Check FONT records in real Excel files.
             case 'EucrosiaUPC':
                 return self::CHARSET_ANSI_THAI;
             case 'Wingdings':
@@ -600,7 +600,7 @@ class Font
                         break;
                     case 8:
                         // inspection of Arial 8 workbook says 11.25pt ~15px
-                        $rowHeight = 11.25;
+                        $rowHeight = 11.465;
 
                         break;
                     case 7:
@@ -611,7 +611,7 @@ class Font
                     case 6:
                     case 5:
                         // inspection of Arial 5,6 workbook says 8.25pt ~11px
-                        $rowHeight = 8.25;
+                        $rowHeight = 8.465;
 
                         break;
                     case 4:
@@ -627,7 +627,7 @@ class Font
                     case 2:
                     case 1:
                         // inspection of Arial 1,2 workbook says 5.25pt ~7px
-                        $rowHeight = 5.25;
+                        $rowHeight = 5.465;
 
                         break;
                     default:
@@ -657,7 +657,7 @@ class Font
                         break;
                     case 8:
                         // inspection of Calibri 8 workbook says 11.25pt ~15px
-                        $rowHeight = 11.25;
+                        $rowHeight = 11.465;
 
                         break;
                     case 7:
@@ -668,7 +668,7 @@ class Font
                     case 6:
                     case 5:
                         // inspection of Calibri 5,6 workbook says 8.25pt ~11px
-                        $rowHeight = 8.25;
+                        $rowHeight = 8.465;
 
                         break;
                     case 4:
@@ -684,7 +684,7 @@ class Font
                     case 2:
                     case 1:
                         // inspection of Calibri 1,2 workbook says 5.25pt ~7px
-                        $rowHeight = 5.25;
+                        $rowHeight = 5.465;
 
                         break;
                     default:
@@ -704,7 +704,7 @@ class Font
                         break;
                     case 9:
                         // inspection of Verdana 9 workbook says 11.25pt ~15px
-                        $rowHeight = 11.25;
+                        $rowHeight = 11.465;
 
                         break;
                     case 8:
@@ -720,7 +720,7 @@ class Font
                     case 6:
                     case 5:
                         // inspection of Verdana 5,6 workbook says 8.25pt ~11px
-                        $rowHeight = 8.25;
+                        $rowHeight = 8.465;
 
                         break;
                     case 4:
@@ -736,7 +736,7 @@ class Font
                     case 2:
                     case 1:
                         // inspection of Verdana 1,2 workbook says 5.25pt ~7px
-                        $rowHeight = 5.25;
+                        $rowHeight = 5.465;
 
                         break;
                     default:

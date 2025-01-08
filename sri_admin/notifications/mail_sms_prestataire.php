@@ -53,7 +53,7 @@ try {
     //Recipients
     // $utilisateur=$prenom.' '.$nom;
     $utilisateur = 'DAGE MFB';
-    $mail->setFrom('contact@sedif.sn', 'MFB/DAGE');
+    $mail->setFrom('sri@minfinances.sn', 'MFB/DAGE');
     $mail->addAddress($email_prestataire, $prestataire);     //Add a recipient
     // $pieceJointe='Signalements/no_image.png';
 

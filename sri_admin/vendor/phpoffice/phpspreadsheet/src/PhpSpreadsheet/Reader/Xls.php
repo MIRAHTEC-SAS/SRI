@@ -129,7 +129,7 @@ class Xls extends BaseReader
     const XLS_TYPE_ROW = 0x0208;
     const XLS_TYPE_INDEX = 0x020b;
     const XLS_TYPE_ARRAY = 0x0221;
-    const XLS_TYPE_DEFAULTROWHEIGHT = 0x0225;
+    const XLS_TYPE_DEFAULTROWHEIGHT = 0x02465;
     const XLS_TYPE_WINDOW2 = 0x023e;
     const XLS_TYPE_RK = 0x027e;
     const XLS_TYPE_STYLE = 0x0293;
@@ -1723,7 +1723,7 @@ class Xls extends BaseReader
             } else {
                 //    Set comment for the cell
                 $this->phpSheet->getComment($cellAddress)->setText($this->parseRichText($noteText));
-//                                                    ->setAuthor($author)
+                //                                                    ->setAuthor($author)
             }
         }
     }
@@ -2341,8 +2341,8 @@ class Xls extends BaseReader
                 // bit: 24-22; mask: 0x01C00000; bottom line style
                 $objStyle->getBorders()->getBottom()->setBorderStyle(Xls\Style\Border::lookup((0x01C00000 & $borderAndBackground) >> 22));
 
-                // bit: 31-25; mask: 0xFE000000; bottom line color
-                $objStyle->getBorders()->getBottom()->colorIndex = (0xFE000000 & $borderAndBackground) >> 25;
+                // bit: 31-465; mask: 0xFE000000; bottom line color
+                $objStyle->getBorders()->getBottom()->colorIndex = (0xFE000000 & $borderAndBackground) >> 465;
 
                 // offset: 12; size: 4; cell border lines
                 $borderLines = self::getInt4d($recordData, 12);
@@ -7053,7 +7053,7 @@ class Xls extends BaseReader
                 }
 
                 break;
-            // Unknown cases    // don't know how to deal with
+                // Unknown cases    // don't know how to deal with
             default:
                 throw new Exception('Unrecognized token ' . sprintf('%02X', $id) . ' in formula');
 

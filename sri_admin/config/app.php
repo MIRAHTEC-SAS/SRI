@@ -30,7 +30,9 @@ $headers .= "Content-type:text/html; charset=UTF-8" . "\r\n";
 $from = 'sedif';
 $headers .= 'From: <' . $from . '>' . "\r\n";
 
-$roleUser = $_SESSION['role'];
+if (isset($_SESSION['role'])) {
+    $roleUser = $_SESSION['role'];
+}
 
 function formatDateTime($datetime)
 {

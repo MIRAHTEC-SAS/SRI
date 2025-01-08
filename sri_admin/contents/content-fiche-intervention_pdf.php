@@ -218,5 +218,11 @@
 			</div>
 		</div>
 	</div>
+	<!-- je veux mettre la date du jour dans Imprimé le  -->
+	<div class="col-lg-12 col-md-12 col-sm-12">
+		<div class="row">
+			<h5 class="box-title mt-0"> Imprimé le <?php echo date('d / m / Y'); ?> à <?php echo date("H:i"); ?></h5>
+		</div>
+	</div>
 </div>
 </div>

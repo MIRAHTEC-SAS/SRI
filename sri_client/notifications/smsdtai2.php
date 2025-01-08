@@ -1,10 +1,11 @@
 
 <?php
-  header('Content-Type: text/html; charset=UTF-8');
+header('Content-Type: text/html; charset=UTF-8');
 
 include('../config/app.php');
 
 require __DIR__ . '/vendor/autoload.php';
+
 use Twilio\Rest\Client;
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -22,50 +23,51 @@ $client = new Client($account_sid, $auth_token);
 
 //  if (isset($_POST['notifierCandidats'])) {
 
-    // $codeFc='FC-MFB-2022-1';
-    // $codeDirection='43100000';
+// $codeFc='FC-MFB-2022-1';
+// $codeDirection='43100000';
 
-    $getDesc = mysqli_query($con, "SELECT * From fonds_commun where codeFc='$codeFc'");   
-    while ($row = mysqli_fetch_array($getDesc)) { 
-      $descriptionFc=$row['description'];
-      $trimestre=$row['trimestre'];
-    } 
-    // $descriptionFc='Fond commun du ministere de finance et du budget du premier semestre 2022';
+$getDesc = mysqli_query($con, "SELECT * From fonds_commun where codeFc='$codeFc'");
+while ($row = mysqli_fetch_array($getDesc)) {
+	$descriptionFc = $row['description'];
+	$trimestre = $row['trimestre'];
+}
+// $descriptionFc='Fond commun du ministere de finance et du budget du premier semestre 2022';
 
-    $getInfos = mysqli_query($con, "SELECT users.prenom, users.nom, users.email, acteurs_directions.telephone, acteurs_directions.codeDirection FROM `acteurs_directions` INNER JOIN users on users.email=acteurs_directions.acteur where acteurs_directions.codeDirection=' $codeDirection'");
+$getInfos = mysqli_query($con, "SELECT users.prenom, users.nom, users.email, acteurs_directions.telephone, acteurs_directions.codeDirection FROM `acteurs_directions` INNER JOIN users on users.email=acteurs_directions.acteur where acteurs_directions.codeDirection=' $codeDirection'");
 
-          while ($row = mysqli_fetch_array($getInfos)) { 
+while ($row = mysqli_fetch_array($getInfos)) {
 
-                        $prenom=$row['prenom'];
-                        $nom=$row['nom'];
-                        $telephone=$row['telephone'];
-                        $email=$row['email'];
+	$prenom = $row['prenom'];
+	$nom = $row['nom'];
+	$telephone = $row['telephone'];
+	$email = $row['email'];
 
-                        // $message ="Bonjour $prenom $nom,\nVous êtes convoqué(e) au $nomConcours, le $dateConcours de $debut à $fin au centre $nomCentre .\nLes epreuves se dérouleront dans la salle $nomSalle et votre table porte le numéro $numero_table. \nVous recevez la convocation sur votre adresse courriel $email.\n\nCordialement \nCentre Formation Judiciaire";
-                        $message ="Bonjour $prenom $nom,\nNous vous informons que le $descriptionFc est ouvert ce jour.\nVos code d'acces et les etats initiaux vous seront envoyés par mail. \nDirection du Traitement Automatique de l'information";
+	// $message ="Bonjour $prenom $nom,\nVous êtes convoqué(e) au $nomConcours, le $dateConcours de $debut à $fin au centre $nomCentre .\nLes epreuves se dérouleront dans la salle $nomSalle et votre table porte le numéro $numero_table. \nVous recevez la convocation sur votre adresse courriel $email.\n\nCordialement \nCentre Formation Judiciaire";
+	$message = "Bonjour $prenom $nom,\nNous vous informons que le $descriptionFc est ouvert ce jour.\nVos code d'acces et les etats initiaux vous seront envoyés par mail. \nDirection du Traitement Automatique de l'information";
 
-            
-                            // Persistance SMS
-                            $sql = $con->query("INSERT INTO historique_sms (matricule,numero,message,date_saisie) VALUES ('$matricule','$telephone','$message','$date_saisie')");
-                            // Envoi du SMS
-                                $client->messages->create($telephone,
-                                    array(
-                                    // "from" => "CFJ",
-                                    "messagingServiceSid" => 'MGf3c9896cbe7d180452fade5013466a98',
-                                    'body' => $message
-                                    )
-                                );
 
-                        // MAIL...
+	// Persistance SMS
+	$sql = $con->query("INSERT INTO historique_sms (matricule,numero,message,date_saisie) VALUES ('$matricule','$telephone','$message','$date_saisie')");
+	// Envoi du SMS
+	$client->messages->create(
+		$telephone,
+		array(
+			// "from" => "CFJ",
+			"messagingServiceSid" => 'MGf3c9896cbe7d180452fade5013466a98',
+			'body' => $message
+		)
+	);
 
-                        //Create an instance; passing `true` enables exceptions
-$mail = new PHPMailer(true);
+	// MAIL...
 
-try {
-    $directeur = $prenom.' '.$nom;
-	// $nomConcours='Concours direct Magistrature';
+	//Create an instance; passing `true` enables exceptions
+	$mail = new PHPMailer(true);
 
-    $htmlversion='
+	try {
+		$directeur = $prenom . ' ' . $nom;
+		// $nomConcours='Concours direct Magistrature';
+
+		$htmlversion = '
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="fr">
 
@@ -141,7 +143,7 @@ try {
 									<tr class="one-col">
 										<td class="inner type" align="center" style="font-family:Arial,sans-serif;padding-right:30px;padding-left:30px;padding-top:26px;padding-bottom:24px;">
 											<div class="mktEditable" id="logo">
-												<p style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;"><a href="#" style="text-decoration:none;color:inherit;"><img src="https://sedif.sn/dtai/pgav/dev/symbole.png" alt="DTAI" width="185" style="border-width:0;height:auto;-ms-interpolation-mode:bicubic;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;max-width:70%;" /></a></p>
+												<p style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;"><a href="#" style="text-decoration:none;color:inherit;"><img src="http://localhost/sri/sri_admin/dashboardsymbole.png" alt="DTAI" width="185" style="border-width:0;height:auto;-ms-interpolation-mode:bicubic;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;max-width:70%;" /></a></p>
 											</div>
 										</td>
 									</tr>
@@ -151,11 +153,11 @@ try {
 									<tr class="one-col">
 										<td class="inner type" style="font-family:Arial,sans-serif;padding-top:30px;padding-bottom:30px;padding-right:30px;padding-left:30px;">
 											<div class="mktEditable" id="main-content">
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour '.$directeur.', </p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour ' . $directeur . ', </p>
 	
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Nous vous informons que le <strong>'.$descriptionFc.'</strong> est ouvert pour saisie.</br></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Nous vous informons que le <strong>' . $descriptionFc . '</strong> est ouvert pour saisie.</br></p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;"></p>Vous avez desormais la possibilite d\'effectuer la saisie et la validation en ligne via la nouvelle plateforme de gestion des fonds commmun en cliquez sur le lien ci-dessous.</p>
-                        <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center"><button style="background-color:#146132"><a style="color:white"href="https://sedif.sn/dtai/pgav/dev/">Acceder a la plateforme</a></button></p>
+                        <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center"><button style="background-color:#146132"><a style="color:white"href="http://localhost/sri/sri_admin/dashboard">Acceder a la plateforme</a></button></p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Vous trouverez en piece jointe les etats initiaux en version PDF, que vous pouvez egalement remplir et nous retourner.</br> </p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">&nbsp;</p>
 												<p style="text-align:center;font-size:12px;margin-bottom:10px;margin-top:0;margin-right:0;margin-left:0;">
@@ -213,51 +215,49 @@ try {
 </body>
 </html>';
 
-    // $htmlversion=include('mail/mail.php');
+		// $htmlversion=include('mail/mail.php');
 
-    $textversion="This is the text version";
-    //Server settings
-    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'mail.sedif.sn';                     //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'contact@sedif.sn';                     //SMTP username
-    $mail->Password   = 'Sedif@2022';                               //SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+		$textversion = "This is the text version";
+		//Server settings
+		// $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+		$mail->isSMTP();                                            //Send using SMTP
+		$mail->Host       = 'mail.sedif.sn';                     //Set the SMTP server to send through
+		$mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+		$mail->Username   = 'contact@sedif.sn';                     //SMTP username
+		$mail->Password   = 'Sedif@2022';                               //SMTP password
+		$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+		$mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-    //Recipients
-    $mail->setFrom('contact@sedif.sn', 'DTAI');
-    $mail->addAddress($email, $directeur);     //Add a recipient
-    // $mail->addAddress('ametsene21@gmail.com');               //Name is optional
-    // $mail->addReplyTo('support@sedif.sn', 'Information');
-    // $mail->addCC('ametsene0304@gmail.com');
-    // $mail->addBCC('bcc@example.com');
-    // /Applications/MAMP/htdocs/cfj/admin/Documents/Listes/2204/Convocation_22001.pdf
-    // $convocationFIle='../Documents/listes/'.$codeConcours.'/Convocation_'.$matricule.'.pdf';
-    $convocationFIle='Convocation_22008.pdf';
+		//Recipients
+		$mail->setFrom('sri@minfinances.sn', 'DTAI');
+		$mail->addAddress($email, $directeur);     //Add a recipient
+		// $mail->addAddress('ametsene21@gmail.com');               //Name is optional
+		// $mail->addReplyTo('support@sedif.sn', 'Information');
+		// $mail->addCC('ametsene0304@gmail.com');
+		// $mail->addBCC('bcc@example.com');
+		// /Applications/MAMP/htdocs/cfj/admin/Documents/Listes/2204/Convocation_22001.pdf
+		// $convocationFIle='../Documents/listes/'.$codeConcours.'/Convocation_'.$matricule.'.pdf';
+		$convocationFIle = 'Convocation_22008.pdf';
 
-    $convocationFIle='../Etats/FC/'.$codeFc.'/Etats_initiaux_'.$codeFc.'_'.$codeDirection.'.pdf';
+		$convocationFIle = '../Etats/FC/' . $codeFc . '/Etats_initiaux_' . $codeFc . '_' . $codeDirection . '.pdf';
 
-    // //Attachments
-    $mail->addAttachment($convocationFIle);         //Add attachments
-    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+		// //Attachments
+		$mail->addAttachment($convocationFIle);         //Add attachments
+		// $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
 
-    //Content
-    $mail->isHTML();                                  //Set email format to HTML
-    $mail->Subject = 'Ouverture '.$descriptionFc;
-    $mail->Body    = $htmlversion;
-    $mail->AltBody = $textversion;
+		//Content
+		$mail->isHTML();                                  //Set email format to HTML
+		$mail->Subject = 'Ouverture ' . $descriptionFc;
+		$mail->Body    = $htmlversion;
+		$mail->AltBody = $textversion;
 
-    $mail->send();
+		$mail->send();
+	} catch (Exception $e) {
+		echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+	}
 
-
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+	// include ('/sendmail.php');
 }
-
-                        // include ('/sendmail.php');
-                        }
                             //  include ('mail.php');
 
                 
@@ -272,4 +272,3 @@ try {
                      
 
 //  }
-

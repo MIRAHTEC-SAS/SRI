@@ -377,7 +377,7 @@ class Slk extends BaseReader
             } elseif (array_key_exists($char, $this->styleSettingsBorder)) {
                 $styleData['borders'][$this->styleSettingsBorder[$char]]['borderStyle'] = Border::BORDER_THIN;
             } elseif ($char == 'S') {
-                $styleData['fill']['fillType'] = \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_PATTERN_GRAY125;
+                $styleData['fill']['fillType'] = \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_PATTERN_GRAY1465;
             } elseif ($char == 'M') {
                 if (preg_match('/M([1-9]\\d*)/', $styleSettings, $matches)) {
                     $fontStyle = $matches[1];

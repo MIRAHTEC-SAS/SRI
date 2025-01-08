@@ -1,5 +1,5 @@
 <?php
-$contentMailGestionnaire='
+$contentMailGestionnaire = '
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<html lang="fr">
 
@@ -75,7 +75,7 @@ $contentMailGestionnaire='
 									<tr class="one-col">
 										<td class="inner type" align="center" style="font-family:Arial,sans-serif;padding-right:30px;padding-left:30px;padding-top:26px;padding-bottom:24px;">
 											<div class="mktEditable" id="logo">
-												<p style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;"><a href="#" style="text-decoration:none;color:inherit;"><img src="https://sedif.sn/dtai/pgav/dev/min2.png" alt="DTAI" width="185" style="border-width:0;height:auto;-ms-interpolation-mode:bicubic;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;max-width:70%;" /></a></p>
+												<p style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;"><a href="#" style="text-decoration:none;color:inherit;"><img src="http://localhost/sri/sri_admin/dashboardmin2.png" alt="DTAI" width="185" style="border-width:0;height:auto;-ms-interpolation-mode:bicubic;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;max-width:70%;" /></a></p>
 											</div>
 										</td>
 									</tr>
@@ -85,17 +85,17 @@ $contentMailGestionnaire='
 									<tr class="one-col">
 										<td class="inner type" style="font-family:Arial,sans-serif;padding-top:30px;padding-bottom:30px;padding-right:30px;padding-left:30px;">
 											<div class="mktEditable" id="main-content">
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour '.$gestionnaire.', </p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour ' . $gestionnaire . ', </p>
 	
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Une demande d\'intervention provenant de votre service et portant la reference <strong>'.$numero_incident.'</strong> est envoyée à la DAGE</br></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Une demande d\'intervention provenant de votre service et portant la reference <strong>' . $numero_incident . '</strong> est envoyée à la DAGE</br></p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Vous trouverez ci-dessous les details de la demande.</p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Type d\'intervention : <strong style="color:red">'.$categories[0].'</strong></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Description : <strong style="color:red">'.$description.'</strong></p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Localisation : <strong style="color:blue">'.$localisation.'</strong></p>
-                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Adresse : <strong>'.$adresse.'</strong></p>
-                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Contact : <strong>'.$contact.'</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Type d\'intervention : <strong style="color:red">' . $categories[0] . '</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Description : <strong style="color:red">' . $description . '</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Localisation : <strong style="color:blue">' . $localisation . '</strong></p>
+                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Adresse : <strong>' . $adresse . '</strong></p>
+                                                <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Contact : <strong>' . $contact . '</strong></p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Vous trouverez en piece jointe une image illustrant l\'incident à l\'origine de la demande d\'intervention.</p>
-                        <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center"><button style="background-color:#146132"><a style="color:white"href="https://sedif.sn/dtai/pgav/dev/">Suivre la demande</a></button></p>
+                        <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center"><button style="background-color:#146132"><a style="color:white"href="http://localhost/sri/sri_admin/dashboard">Suivre la demande</a></button></p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">&nbsp;</p>
 												<p style="text-align:center;font-size:12px;margin-bottom:10px;margin-top:0;margin-right:0;margin-left:0;">
 													<img src="https://placehold.it/75x75" border="0" alt="" style="max-width:100%;border-width:0;height:auto;-ms-interpolation-mode:bicubic;" />
@@ -151,4 +151,3 @@ $contentMailGestionnaire='
 </table>
 </body>
 </html>';
-?>

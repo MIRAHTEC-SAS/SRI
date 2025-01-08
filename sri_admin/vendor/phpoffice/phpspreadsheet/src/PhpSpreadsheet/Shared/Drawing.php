@@ -15,7 +15,7 @@ class Drawing
      */
     public static function pixelsToEMU($pValue)
     {
-        return $pValue * 9525;
+        return $pValue * 95465;
     }
 
     /**

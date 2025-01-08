@@ -224,9 +224,6 @@
 		</div>
 	</div>
 	<div class="row text-center">
-		<!-- <a class="popup-with-form btn btn-success" target="#cloture"><i class="mdi mdi-check"></i> Clôturer l'incident</a> -->
-		<!-- <a class="popup-with-form btn btn-warning" href="#relance"><i class="mdi mdi-format-rotate-90"></i> Relancer l'intervenant</a> -->
-		<!-- <a class="popup-with-form btn btn-danger" href="#annuler"><i class="mdi mdi-close"></i> Annuler l'intervention</a> -->
 		<?php if ($roleUser != 'Intervenant' && $roleUser != 'Gestionnaire' && $statut != 'annulee') { ?>
 			<?php if ($statut == 'validee') { ?><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#cloturer" class="btn btn btn-success mt-10 d-block text-center"><i class="mdi mdi-check"></i> Clôturer l'intervention</a><?php } ?>
 			<?php if ($statut != 'terminee' && $statut != 'validee') { ?><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#relancer" class="btn btn btn-warning mt-10 d-block text-center"><i class="mdi mdi-format-rotate-90"></i> Relancer l'intervenant</a>
@@ -239,7 +236,7 @@
 			<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#confirmerIntervention" class="btn btn btn-success mt-10 d-block text-center"><i class="mdi mdi-check"></i> Valider l'intervention</a>
 			<a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#annuler" class="btn btn btn-danger mt-10 d-block text-center"> <i class="mdi mdi-close"></i> Annuler Intervention</a>
 		<?php } ?>
-		<a href="fiche_pdf?code_intervention=<?php echo $code_intervention; ?>" class="btn btn-info mt-10 d-block text-center" target="_blank">
+		<a href="fiche_pdf?code_intervention=<?php echo $code_intervention; ?>" class="btn btn-info mt-10 d-block text-center" download="fiche_intervention_<?php echo $code_intervention; ?>.pdf">
 			<i class="mdi mdi-printer"></i> Imprimer l'intervention
 		</a>
 		<!-- <div class="text-end">

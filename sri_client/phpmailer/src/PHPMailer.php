@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PHPMailer - PHP email creation and transport class.
  * PHP Version 5.5.
@@ -272,7 +273,7 @@ class PHPMailer
      * Either a single hostname or multiple semicolon-delimited hostnames.
      * You can also specify a different port
      * for each host by using this format: [hostname:port]
-     * (e.g. "smtp1.example.com:25;smtp2.example.com").
+     * (e.g. "smtp1.example.com:465;smtp2.example.com").
      * You can also specify encryption type, for example:
      * (e.g. "tls://smtp1.example.com:587;ssl://smtp2.example.com:465").
      * Hosts will be tried in order.
@@ -286,7 +287,7 @@ class PHPMailer
      *
      * @var int
      */
-    public $Port = 25;
+    public $Port = 465;
 
     /**
      * The SMTP HELO/EHLO name used for the SMTP connection.
@@ -916,7 +917,7 @@ class PHPMailer
                 $str = preg_replace('/\r\n|\r/m', "\n", $str);
                 echo gmdate('Y-m-d H:i:s'),
                 "\t",
-                    //Trim trailing space
+                //Trim trailing space
                 trim(
                     //Indent for readability, except for trailing break
                     str_replace(
@@ -1243,7 +1244,7 @@ class PHPMailer
         $pos = strrpos($address, '@');
         if ((false === $pos)
             || ((!$this->has8bitChars(substr($address, ++$pos)) || !static::idnSupported())
-            && !static::validateAddress($address))
+                && !static::validateAddress($address))
         ) {
             $error_message = sprintf(
                 '%s (From): %s',
@@ -1337,14 +1338,14 @@ class PHPMailer
                  */
                 return (bool) preg_match(
                     '/^(?!(?>(?1)"?(?>\\\[ -~]|[^"])"?(?1)){255,})(?!(?>(?1)"?(?>\\\[ -~]|[^"])"?(?1)){65,}@)' .
-                    '((?>(?>(?>((?>(?>(?>\x0D\x0A)?[\t ])+|(?>[\t ]*\x0D\x0A)?[\t ]+)?)(\((?>(?2)' .
-                    '(?>[\x01-\x08\x0B\x0C\x0E-\'*-\[\]-\x7F]|\\\[\x00-\x7F]|(?3)))*(?2)\)))+(?2))|(?2))?)' .
-                    '([!#-\'*+\/-9=?^-~-]+|"(?>(?2)(?>[\x01-\x08\x0B\x0C\x0E-!#-\[\]-\x7F]|\\\[\x00-\x7F]))*' .
-                    '(?2)")(?>(?1)\.(?1)(?4))*(?1)@(?!(?1)[a-z0-9-]{64,})(?1)(?>([a-z0-9](?>[a-z0-9-]*[a-z0-9])?)' .
-                    '(?>(?1)\.(?!(?1)[a-z0-9-]{64,})(?1)(?5)){0,126}|\[(?:(?>IPv6:(?>([a-f0-9]{1,4})(?>:(?6)){7}' .
-                    '|(?!(?:.*[a-f0-9][:\]]){8,})((?6)(?>:(?6)){0,6})?::(?7)?))|(?>(?>IPv6:(?>(?6)(?>:(?6)){5}:' .
-                    '|(?!(?:.*[a-f0-9]:){6,})(?8)?::(?>((?6)(?>:(?6)){0,4}):)?))?(25[0-5]|2[0-4][0-9]|1[0-9]{2}' .
-                    '|[1-9]?[0-9])(?>\.(?9)){3}))\])(?1)$/isD',
+                        '((?>(?>(?>((?>(?>(?>\x0D\x0A)?[\t ])+|(?>[\t ]*\x0D\x0A)?[\t ]+)?)(\((?>(?2)' .
+                        '(?>[\x01-\x08\x0B\x0C\x0E-\'*-\[\]-\x7F]|\\\[\x00-\x7F]|(?3)))*(?2)\)))+(?2))|(?2))?)' .
+                        '([!#-\'*+\/-9=?^-~-]+|"(?>(?2)(?>[\x01-\x08\x0B\x0C\x0E-!#-\[\]-\x7F]|\\\[\x00-\x7F]))*' .
+                        '(?2)")(?>(?1)\.(?1)(?4))*(?1)@(?!(?1)[a-z0-9-]{64,})(?1)(?>([a-z0-9](?>[a-z0-9-]*[a-z0-9])?)' .
+                        '(?>(?1)\.(?!(?1)[a-z0-9-]{64,})(?1)(?5)){0,126}|\[(?:(?>IPv6:(?>([a-f0-9]{1,4})(?>:(?6)){7}' .
+                        '|(?!(?:.*[a-f0-9][:\]]){8,})((?6)(?>:(?6)){0,6})?::(?7)?))|(?>(?>IPv6:(?>(?6)(?>:(?6)){5}:' .
+                        '|(?!(?:.*[a-f0-9]:){6,})(?8)?::(?>((?6)(?>:(?6)){0,4}):)?))?(25[0-5]|2[0-4][0-9]|1[0-9]{2}' .
+                        '|[1-9]?[0-9])(?>\.(?9)){3}))\])(?1)$/isD',
                     $address
                 );
             case 'html5':
@@ -1355,7 +1356,7 @@ class PHPMailer
                  */
                 return (bool) preg_match(
                     '/^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}' .
-                    '[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/sD',
+                        '[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/sD',
                     $address
                 );
             case 'php':
@@ -1393,7 +1394,8 @@ class PHPMailer
     {
         // Verify we have required functions, CharSet, and at-sign.
         $pos = strrpos($address, '@');
-        if (!empty($this->CharSet) &&
+        if (
+            !empty($this->CharSet) &&
             false !== $pos &&
             static::idnSupported()
         ) {
@@ -1455,7 +1457,8 @@ class PHPMailer
      */
     public function preSend()
     {
-        if ('smtp' === $this->Mailer
+        if (
+            'smtp' === $this->Mailer
             || ('mail' === $this->Mailer && stripos(PHP_OS, 'WIN') === 0)
         ) {
             //SMTP mandates RFC-compliant line endings
@@ -1466,7 +1469,8 @@ class PHPMailer
             static::setLE(PHP_EOL);
         }
         //Check for buggy PHP versions that add a header with an incorrect line break
-        if ('mail' === $this->Mailer
+        if (
+            'mail' === $this->Mailer
             && ((PHP_VERSION_ID >= 70000 && PHP_VERSION_ID < 70017)
                 || (PHP_VERSION_ID >= 70100 && PHP_VERSION_ID < 70103))
             && ini_get('mail.add_x_header') === '1'
@@ -1474,8 +1478,8 @@ class PHPMailer
         ) {
             trigger_error(
                 'Your version of PHP is affected by a bug that may result in corrupted messages.' .
-                ' To fix it, switch to sending using SMTP, disable the mail.add_x_header option in' .
-                ' your php.ini, switch to MacOS or Linux, or upgrade your PHP to version 7.0.17+ or 7.1.3+.',
+                    ' To fix it, switch to sending using SMTP, disable the mail.add_x_header option in' .
+                    ' your php.ini, switch to MacOS or Linux, or upgrade your PHP to version 7.0.17+ or 7.1.3+.',
                 E_USER_WARNING
             );
         }
@@ -1553,7 +1557,8 @@ class PHPMailer
             }
 
             // Sign with DKIM if enabled
-            if (!empty($this->DKIM_domain)
+            if (
+                !empty($this->DKIM_domain)
                 && !empty($this->DKIM_selector)
                 && (!empty($this->DKIM_private_string)
                     || (!empty($this->DKIM_private)
@@ -1714,7 +1719,8 @@ class PHPMailer
     protected static function isShellSafe($string)
     {
         // Future-proof
-        if (escapeshellcmd($string) !== $string
+        if (
+            escapeshellcmd($string) !== $string
             || !in_array(escapeshellarg($string), ["'$string'", "\"$string\""])
         ) {
             return false;
@@ -1881,7 +1887,7 @@ class PHPMailer
                     $isSent = true;
                 }
 
-                $callbacks[] = ['issent'=>$isSent, 'to'=>$to[0]];
+                $callbacks[] = ['issent' => $isSent, 'to' => $to[0]];
             }
         }
 
@@ -2514,7 +2520,7 @@ class PHPMailer
         }
 
         if ('mail' !== $this->Mailer) {
-//            $result .= static::$LE;
+            //            $result .= static::$LE;
         }
 
         return $result;
@@ -3191,7 +3197,7 @@ class PHPMailer
             case static::ENCODING_8BIT:
                 $encoded = static::normalizeBreaks($str);
                 // Make sure it ends with a line break
-                if (substr($encoded, -(strlen(static::$LE))) !== static::$LE) {
+                if (substr($encoded, - (strlen(static::$LE))) !== static::$LE) {
                     $encoded .= static::$LE;
                 }
                 break;
@@ -3238,10 +3244,10 @@ class PHPMailer
                 }
                 $matchcount = preg_match_all('/[^\040\041\043-\133\135-\176]/', $str, $matches);
                 break;
-            /* @noinspection PhpMissingBreakStatementInspection */
+                /* @noinspection PhpMissingBreakStatementInspection */
             case 'comment':
                 $matchcount = preg_match_all('/[()"]/', $str, $matches);
-            //fallthrough
+                //fallthrough
             case 'text':
             default:
                 $matchcount += preg_match_all('/[\000-\010\013\014\016-\037\177-\377]/', $str, $matches);
@@ -3411,14 +3417,14 @@ class PHPMailer
                 // RFC 2047 section 5.3
                 $pattern = '^A-Za-z0-9!*+\/ -';
                 break;
-            /*
+                /*
              * RFC 2047 section 5.2.
              * Build $pattern without including delimiters and []
              */
-            /* @noinspection PhpMissingBreakStatementInspection */
+                /* @noinspection PhpMissingBreakStatementInspection */
             case 'comment':
                 $pattern = '\(\)"';
-            /* Intentional fall through */
+                /* Intentional fall through */
             case 'text':
             default:
                 // RFC 2047 section 5.1
@@ -3879,7 +3885,8 @@ class PHPMailer
     public static function isValidHost($host)
     {
         //Simple syntax limits
-        if (empty($host)
+        if (
+            empty($host)
             || !is_string($host)
             || strlen($host) > 256
             || !preg_match('/^([a-zA-Z\d.-]*|\[[a-fA-F\d:]+])$/', $host)
@@ -4045,7 +4052,7 @@ class PHPMailer
                     );
                     continue;
                 }
-                if (// Only process relative URLs if a basedir is provided (i.e. no absolute local paths)
+                if ( // Only process relative URLs if a basedir is provided (i.e. no absolute local paths)
                     !empty($basedir)
                     // Ignore URLs containing parent dir traversal (..)
                     && (strpos($url, '..') === false)
@@ -4073,8 +4080,7 @@ class PHPMailer
                         $filename,
                         static::ENCODING_BASE64,
                         static::_mime_types((string) static::mb_pathinfo($filename, PATHINFO_EXTENSION))
-                    )
-                    ) {
+                    )) {
                         $message = preg_replace(
                             '/' . $images[1][$imgindex] . '=["\']' . preg_quote($url, '/') . '["\']/Ui',
                             $images[1][$imgindex] . '="cid:' . $cid . '"',

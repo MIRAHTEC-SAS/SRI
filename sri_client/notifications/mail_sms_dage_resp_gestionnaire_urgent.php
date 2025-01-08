@@ -28,7 +28,7 @@ $senderName = 'DTAI';
 
 // Pour les mails....
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
+
 use PHPMailer\PHPMailer\Exception;
 
 //Create an instance; passing `true` enables exceptions
@@ -83,7 +83,7 @@ try {
         $mail->Port       = 465;
         $mail->CharSet = 'UTF-8';
         $utilisateur = 'DAGE MFB';
-        $mail->setFrom('contact@sedif.sn', 'MFB/DAGE');
+        $mail->setFrom('sri@minfinances.sn', 'MFB/DAGE');
         $mail->addAddress($emailAdmin, $utilisateur);     //Add a recipient
         $pieceJointe = 'Signalements/no_image.png';
 
@@ -147,7 +147,7 @@ try {
         //Recipients
         // $utilisateur=$prenom.' '.$nom;
         $utilisateur = 'DAGE MFB';
-        $mailResp->setFrom('contact@sedif.sn', 'MFB/DAGE');
+        $mailResp->setFrom('sri@minfinances.sn', 'MFB/DAGE');
         $mailResp->addAddress($emailResp, $utilisateur);     //Add a recipient
         $pieceJointe = 'Signalements/no_image.png';
 
@@ -213,7 +213,7 @@ try {
         //Recipients
         // $utilisateur=$prenom.' '.$nom;
         $utilisateur = 'DAGE MFB';
-        $mailGest->setFrom('contact@sedif.sn', 'MFB/DAGE');
+        $mailGest->setFrom('sri@minfinances.sn', 'MFB/DAGE');
         $mailGest->addAddress($emailGest, $utilisateur);     //Add a recipient
         $pieceJointe = 'Signalements/no_image.png';
 

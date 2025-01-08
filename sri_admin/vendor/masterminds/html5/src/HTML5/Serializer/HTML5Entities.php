@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * This contains HTML5 entities to use with serializing.
@@ -532,7 +533,7 @@ class HTML5Entities
         '⅓' => '&frac13;',
         '⅔' => '&frac23;',
         '⅕' => '&frac15;',
-        '⅖' => '&frac25;',
+        '⅖' => '&frac465;',
         '⅗' => '&frac35;',
         '⅘' => '&frac45;',
         '⅙' => '&frac16;',

@@ -1,87 +1,85 @@
 
 <?php
 
-	header('Content-Type: text/html; charset=UTF-8');
-	include('../config/app.php');
+header('Content-Type: text/html; charset=UTF-8');
+include('../config/app.php');
 
-  use Twilio\Rest\Client;
+use Twilio\Rest\Client;
 
-  use PHPMailer\PHPMailer\PHPMailer;
-  use PHPMailer\PHPMailer\SMTP;
-  use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-    //Load Composer's autoloader
-	require '../vendor2/autoload.php';
-
-
-  // Your Account SID and Auth Token from twilio.com/console
-  $account_sid = 'AC7bff5efabe2de67bcbfd6f1a3692e526';
-  $auth_token = '9d69d8010cbc54fb5805968e6cbe9a25';
-  $client = new Client($account_sid, $auth_token);
-
-	require __DIR__ . '/vendor/autoload.php';
-
-  if (isset($_POST['addUser'])) {
-
-    $prenom = $_POST['prenom'];
-    $nom = $_POST['nom'];
-    $email= $_POST['email'];
-    $telephone = $_POST['telephone'];
-    $codeDirection = $_POST['codeDirection'];
-    $codeMinistere = $_POST['codeMinistere'];
-    $role = $_POST['role'];
-    
-    $mdpTemp='c355c70cca980e819a59f9d34f71460b6f207c950bccc62965b0da3669442fb9';
-
-    // echo $prenom.'</br>';
-    // echo $nom.'</br>';
-    // echo $email.'</br>';
-    // echo $codeDirection.'</br>';
-    // echo $codeMinistere.'</br>';
-    // echo $role.'</br>';
+//Load Composer's autoloader
+require '../vendor2/autoload.php';
 
 
-    $verifDoublon = mysqli_query($con, "SELECT * FROM users where email='$email'");
+// Your Account SID and Auth Token from twilio.com/console
+$account_sid = 'AC7bff5efabe2de67bcbfd6f1a3692e526';
+$auth_token = '9d69d8010cbc54fb5805968e6cbe9a25';
+$client = new Client($account_sid, $auth_token);
+
+require __DIR__ . '/vendor/autoload.php';
+
+if (isset($_POST['addUser'])) {
+
+	$prenom = $_POST['prenom'];
+	$nom = $_POST['nom'];
+	$email = $_POST['email'];
+	$telephone = $_POST['telephone'];
+	$codeDirection = $_POST['codeDirection'];
+	$codeMinistere = $_POST['codeMinistere'];
+	$role = $_POST['role'];
+
+	$mdpTemp = 'c355c70cca980e819a59f9d34f71460b6f207c950bccc62965b0da3669442fb9';
+
+	// echo $prenom.'</br>';
+	// echo $nom.'</br>';
+	// echo $email.'</br>';
+	// echo $codeDirection.'</br>';
+	// echo $codeMinistere.'</br>';
+	// echo $role.'</br>';
 
 
-    if (mysqli_num_rows($verifDoublon ) > 0) 
-    {
+	$verifDoublon = mysqli_query($con, "SELECT * FROM users where email='$email'");
 
-        $_SESSION['errorMsg']=true;
-        $_SESSION['successMsg']=false;
-        $_SESSION['message'] ="Erreur ! L'utilisateur existe deja ! ";
-        header("Location: utilisateurs");
-    }
-    else
-    {
-        $sql = $con->query("INSERT INTO `users` (`prenom`, `nom`, `email`, `password`, `role`, `date_c`) 
+
+	if (mysqli_num_rows($verifDoublon) > 0) {
+
+		$_SESSION['errorMsg'] = true;
+		$_SESSION['successMsg'] = false;
+		$_SESSION['message'] = "Erreur ! L'utilisateur existe deja ! ";
+		header("Location: utilisateurs");
+	} else {
+		$sql = $con->query("INSERT INTO `users` (`prenom`, `nom`, `email`, `password`, `role`, `date_c`) 
         VALUES ('$prenom', '$nom', '$email', '$mdpTemp', '$role', '$dateDuJour')");
 
-        $sql = $con->query("INSERT INTO `acteurs_directions` (`codeDirection`, `acteur`, `telephone`) 
+		$sql = $con->query("INSERT INTO `acteurs_directions` (`codeDirection`, `acteur`, `telephone`) 
         VALUES ('$codeDirection', '$email', '$telephone')");
 
-    	// $message ="Bonjour $prenom $nom,\nVous êtes convoqué(e) au $nomConcours, le $dateConcours de $debut à $fin au centre $nomCentre .\nLes epreuves se dérouleront dans la salle $nomSalle et votre table porte le numéro $numero_table. \nVous recevez la convocation sur votre adresse courriel $email.\n\nCordialement \nCentre Formation Judiciaire";
-    	$message ="Bonjour $prenom $nom,\nVous avez maintenant accès à la plateforme de gestion des avantages de la DTAI.\nVos code d'acces sont envoyés par email. \nDirection du Traitement Automatique de l'information";
+		// $message ="Bonjour $prenom $nom,\nVous êtes convoqué(e) au $nomConcours, le $dateConcours de $debut à $fin au centre $nomCentre .\nLes epreuves se dérouleront dans la salle $nomSalle et votre table porte le numéro $numero_table. \nVous recevez la convocation sur votre adresse courriel $email.\n\nCordialement \nCentre Formation Judiciaire";
+		$message = "Bonjour $prenom $nom,\nVous avez maintenant accès à la plateforme de gestion des avantages de la DTAI.\nVos code d'acces sont envoyés par email. \nDirection du Traitement Automatique de l'information";
 
-            
-    // Persistance SMS
-    $sql = $con->query("INSERT INTO historique_sms (matricule,numero,message,date_saisie) VALUES ('$email','$telephone','$message','$date_saisie')");
-    // Envoi du SMS
-    $client->messages->create($telephone,
-        array(
-            // "from" => "CFJ",
-            "messagingServiceSid" => 'MGf3c9896cbe7d180452fade5013466a98',
-            'body' => $message
-            )
-    );
 
-	// MAIL...
+		// Persistance SMS
+		$sql = $con->query("INSERT INTO historique_sms (matricule,numero,message,date_saisie) VALUES ('$email','$telephone','$message','$date_saisie')");
+		// Envoi du SMS
+		$client->messages->create(
+			$telephone,
+			array(
+				// "from" => "CFJ",
+				"messagingServiceSid" => 'MGf3c9896cbe7d180452fade5013466a98',
+				'body' => $message
+			)
+		);
 
-    //Create an instance; passing `true` enables exceptions
-$mail = new PHPMailer(true);
+		// MAIL...
 
-try {
-    $htmlversion='
+		//Create an instance; passing `true` enables exceptions
+		$mail = new PHPMailer(true);
+
+		try {
+			$htmlversion = '
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<html lang="fr">
 
@@ -157,7 +155,7 @@ try {
 									<tr class="one-col">
 										<td class="inner type" align="center" style="font-family:Arial,sans-serif;padding-right:30px;padding-left:30px;padding-top:26px;padding-bottom:24px;">
 											<div class="mktEditable" id="logo">
-												<p style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;"><a href="#" style="text-decoration:none;color:inherit;"><img src="https://sedif.sn/dtai/pgav/dev/symbole.png" alt="DTAI" width="185" style="border-width:0;height:auto;-ms-interpolation-mode:bicubic;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;max-width:70%;" /></a></p>
+												<p style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;"><a href="#" style="text-decoration:none;color:inherit;"><img src="http://localhost/sri/sri_admin/dashboardsymbole.png" alt="DTAI" width="185" style="border-width:0;height:auto;-ms-interpolation-mode:bicubic;display:block;margin-top:0;margin-bottom:0;margin-right:auto;margin-left:auto;max-width:70%;" /></a></p>
 											</div>
 										</td>
 									</tr>
@@ -167,13 +165,13 @@ try {
 									<tr class="one-col">
 										<td class="inner type" style="font-family:Arial,sans-serif;padding-top:30px;padding-bottom:30px;padding-right:30px;padding-left:30px;">
 											<div class="mktEditable" id="main-content">
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour '.$prenom.' '.$nom.', </p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Bonjour ' . $prenom . ' ' . $nom . ', </p>
 	
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Nous vous informons de la creation de vos accès à la plateforme de gestion des avantages des ministeres des finances, de l\'économie et du Commerce.</br></p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">Vous trouverez ci-dessous vos accès. Vous serez invité lors de votre premiere connexion à creer un nouveau mot de passe.</p>
-												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px; text-align:center;">Identifiant : <strong style="color:red">'.$email.'</strong></p>
+												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px; text-align:center;">Identifiant : <strong style="color:red">' . $email . '</strong></p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px; text-align:center;">Mot de passe (temporaire) : <strong style="color:red">dtai@2022</strong></p>
-                        <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center"><button style="background-color:#146132"><a style="color:white"href="https://sedif.sn/dtai/pgav/dev/">Acceder a la plateforme</a></button></p>
+                        <p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;text-align:center"><button style="background-color:#146132"><a style="color:white"href="http://localhost/sri/sri_admin/dashboard">Acceder a la plateforme</a></button></p>
 												<p style="margin-top:0;margin-right:0;margin-left:0;margin-bottom:8px;">&nbsp;</p>
 												<p style="text-align:center;font-size:12px;margin-bottom:10px;margin-top:0;margin-right:0;margin-left:0;">
 													<img src="https://placehold.it/75x75" border="0" alt="" style="max-width:100%;border-width:0;height:auto;-ms-interpolation-mode:bicubic;" />
@@ -230,56 +228,51 @@ try {
 </body>
 </html>';
 
-    // $htmlversion=include('mail/mail.php');
+			// $htmlversion=include('mail/mail.php');
 
-    $textversion="This is the text version";
-    //Server settings
-    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'mail.sedif.sn';                     //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'contact@sedif.sn';                     //SMTP username
-    $mail->Password   = 'Sedif@2022';                               //SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+			$textversion = "This is the text version";
+			//Server settings
+			// $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+			$mail->isSMTP();                                            //Send using SMTP
+			$mail->Host       = 'mail.sedif.sn';                     //Set the SMTP server to send through
+			$mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+			$mail->Username   = 'contact@sedif.sn';                     //SMTP username
+			$mail->Password   = 'Sedif@2022';                               //SMTP password
+			$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+			$mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-    //Recipients
-	$utilisateur=$prenom.' '.$nom;
-    $mail->setFrom('contact@sedif.sn', 'MFB/DTAI');
-    $mail->addAddress($email, $utilisateur);     //Add a recipient
-    // $mail->addAddress('ametsene21@gmail.com');               //Name is optional
-    // $mail->addReplyTo('support@sedif.sn', 'Information');
-    // $mail->addCC('ametsene0304@gmail.com');
-    // $mail->addBCC('bcc@example.com');
-    // /Applications/MAMP/htdocs/cfj/admin/Documents/Listes/2204/Convocation_22001.pdf
-    // $convocationFIle='../Documents/listes/'.$codeConcours.'/Convocation_'.$matricule.'.pdf';
-    // $convocationFIle='Convocation_22008.pdf';
+			//Recipients
+			$utilisateur = $prenom . ' ' . $nom;
+			$mail->setFrom('sri@minfinances.sn', 'MFB/DTAI');
+			$mail->addAddress($email, $utilisateur);     //Add a recipient
+			// $mail->addAddress('ametsene21@gmail.com');               //Name is optional
+			// $mail->addReplyTo('support@sedif.sn', 'Information');
+			// $mail->addCC('ametsene0304@gmail.com');
+			// $mail->addBCC('bcc@example.com');
+			// /Applications/MAMP/htdocs/cfj/admin/Documents/Listes/2204/Convocation_22001.pdf
+			// $convocationFIle='../Documents/listes/'.$codeConcours.'/Convocation_'.$matricule.'.pdf';
+			// $convocationFIle='Convocation_22008.pdf';
 
-    // $convocationFIle='../Etats/FC/'.$codeFc.'/Etats_initiaux_'.$codeFc.'_'.$codeDirection.'.pdf';
+			// $convocationFIle='../Etats/FC/'.$codeFc.'/Etats_initiaux_'.$codeFc.'_'.$codeDirection.'.pdf';
 
-    // //Attachments
-    // $mail->addAttachment($convocationFIle);         //Add attachments
-    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+			// //Attachments
+			// $mail->addAttachment($convocationFIle);         //Add attachments
+			// $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
 
-    //Content
-    $mail->isHTML();                                  //Set email format to HTML
-    $mail->Subject = 'Inscription a la plateforme de Gestion des Avantages ';
-    $mail->Body    = $htmlversion;
-    $mail->AltBody = $textversion;
+			//Content
+			$mail->isHTML();                                  //Set email format to HTML
+			$mail->Subject = 'Inscription a la plateforme de Gestion des Avantages ';
+			$mail->Body    = $htmlversion;
+			$mail->AltBody = $textversion;
 
-    $mail->send();
+			$mail->send();
+		} catch (Exception $e) {
+			echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+		}
 
-
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+		$_SESSION['errorMsg'] = false;
+		$_SESSION['successMsg'] = true;
+		$_SESSION['message'] = "Utilisateur ajouté avec succès ! ";
+		header("Location: utilisateurs");
+	}
 }
-
-$_SESSION['errorMsg']=false;
-$_SESSION['successMsg']=true;
-$_SESSION['message'] ="Utilisateur ajouté avec succès ! ";
-header("Location: utilisateurs");
-}
-
-}
-
-

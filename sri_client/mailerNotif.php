@@ -50,7 +50,7 @@ function sendNotification($recipients, $mail, $smsFile, $mailContentFile, $links
       $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
       $mail->Port = 465;
       $mail->CharSet = 'UTF-8';
-      $mail->setFrom('contact@sedif.sn', 'MFB/DAGE');
+      $mail->setFrom('sri@minfinances.sn', 'MFB/DAGE');
       $mail->addAddress(${$variableMapping['email']}, 'Utilisateur');
       if (isset($links)) {
         foreach ($links as $link) {

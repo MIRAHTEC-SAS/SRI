@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PHPMailer RFC821 SMTP email transport class.
  * PHP Version 5.5.
@@ -48,7 +49,7 @@ class SMTP
      *
      * @var int
      */
-    const DEFAULT_PORT = 25;
+    const DEFAULT_PORT = 465;
 
     /**
      * The maximum line length allowed by RFC 5321 section 4.5.3.1.6,
@@ -286,7 +287,7 @@ class SMTP
                 $str = preg_replace('/\r\n|\r/m', "\n", $str);
                 echo gmdate('Y-m-d H:i:s'),
                 "\t",
-                    //Trim trailing space
+                //Trim trailing space
                 trim(
                     //Indent for readability, except for trailing break
                     str_replace(
@@ -326,7 +327,7 @@ class SMTP
         // Connect to the SMTP server
         $this->edebug(
             "Connection: opening to $host:$port, timeout=$timeout, options=" .
-            (count($options) > 0 ? var_export($options, true) : 'array()'),
+                (count($options) > 0 ? var_export($options, true) : 'array()'),
             self::DEBUG_CONNECTION
         );
 
@@ -406,7 +407,7 @@ class SMTP
             );
             $this->edebug(
                 'SMTP ERROR: ' . $this->error['error']
-                . ": $errstr ($errno)",
+                    . ": $errstr ($errno)",
                 self::DEBUG_CLIENT
             );
 
@@ -543,8 +544,7 @@ class SMTP
                     'User & Password',
                     base64_encode("\0" . $username . "\0" . $password),
                     235
-                )
-                ) {
+                )) {
                     return false;
                 }
                 break;
@@ -982,7 +982,7 @@ class SMTP
             // Cut off error code from each response line
             $detail = preg_replace(
                 "/{$code}[ -]" .
-                ($code_ex ? str_replace('.', '\\.', $code_ex) . ' ' : '') . '/m',
+                    ($code_ex ? str_replace('.', '\\.', $code_ex) . ' ' : '') . '/m',
                 '',
                 $this->last_reply
             );
@@ -1086,8 +1086,10 @@ class SMTP
     {
         //If SMTP transcripts are left enabled, or debug output is posted online
         //it can leak credentials, so hide credentials in all but lowest level
-        if (self::DEBUG_LOWLEVEL > $this->do_debug &&
-            in_array($command, ['User & Password', 'Username', 'Password'], true)) {
+        if (
+            self::DEBUG_LOWLEVEL > $this->do_debug &&
+            in_array($command, ['User & Password', 'Username', 'Password'], true)
+        ) {
             $this->edebug('CLIENT -> SERVER: [credentials hidden]', self::DEBUG_CLIENT);
         } else {
             $this->edebug('CLIENT -> SERVER: ' . $data, self::DEBUG_CLIENT);
@@ -1251,7 +1253,7 @@ class SMTP
             if ($endtime && time() > $endtime) {
                 $this->edebug(
                     'SMTP -> get_lines(): timelimit reached (' .
-                    $this->Timelimit . ' sec)',
+                        $this->Timelimit . ' sec)',
                     self::DEBUG_LOWLEVEL
                 );
                 break;

@@ -31,10 +31,6 @@ $getUsers = mysqli_query($con, "SELECT * FROM `users` order by id desc");
 					<td><?php echo $row['email']; ?></td>
 					<td><?php echo $row['role']; ?></td>
 					<td style="text-align:center">
-						<!-- <a href="utilisateurs?edit=<?php //echo $row['email']; 
-																						?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
-				        <i class="fa fa-edit" style="font-size:16px;color:orange"></i>
-					</a> -->
 						<a href="utilisateurs?upd=<?php echo $row['email']; ?>&statut=<?php echo $statut; ?>" class="text-info me-10" data-bs-toggle="tooltip" data-bs-original-title="Edit">
 							<?php if ($statut == 1) { ?><i class="fa fa-toggle-on " style="font-size:22px;color:#1C9E74"></i> <?php } else { ?>
 								<i class="fa fa-toggle-off" style="font-size:22px;color:#65647C"></i>

@@ -147,7 +147,7 @@ if (isset($_POST['relancerIntervenant'])) {
         }
 
         // Notifier intervenant
-        //  include('notification_relance');
+        // include('notification_relance');
 
         $_SESSION['errorMsg'] = false;
         $_SESSION['successMsg'] = true;
@@ -176,7 +176,6 @@ if (isset($_POST['relancerIntervenant'])) {
         $sql = mysqli_query($con, "INSERT INTO `historique_statuts_intervention` (`code_intervention`, `statut`, `date_statut`, `auteur`) 
             VALUES ('$code_intervention', 'planifiee', '$date_saisie', '$auteur')");
         if (!$reqPersistIntervention) {
-            // echo 'Pas persisté !';
             $_SESSION['errorMsg'] = true;
             $_SESSION['successMsg'] = false;
             $_SESSION['message'] = "L'intervention n'a pas pu etre enregistrée !";

@@ -1283,7 +1283,7 @@ class Worksheet extends BIFFwriter
         // convert to twips
         $defaultRowHeight = (int) 20 * $defaultRowHeight;
 
-        $record = 0x0225; // Record identifier
+        $record = 0x02465; // Record identifier
         $length = 0x0004; // Number of bytes to follow
 
         $header = pack('vv', $record, $length);
@@ -2817,7 +2817,7 @@ class Worksheet extends BIFFwriter
                     $operatorType = 0x01;
 
                     break;
-                // not OPERATOR_NOTBETWEEN 0x02
+                    // not OPERATOR_NOTBETWEEN 0x02
             }
         }
 
@@ -2865,13 +2865,13 @@ class Worksheet extends BIFFwriter
         }
         // Border
         $bBorderLeft = ($conditional->getStyle()->getBorders()->getLeft()->getColor()->getARGB() == Color::COLOR_BLACK
-        && $conditional->getStyle()->getBorders()->getLeft()->getBorderStyle() == Border::BORDER_NONE ? 1 : 0);
+            && $conditional->getStyle()->getBorders()->getLeft()->getBorderStyle() == Border::BORDER_NONE ? 1 : 0);
         $bBorderRight = ($conditional->getStyle()->getBorders()->getRight()->getColor()->getARGB() == Color::COLOR_BLACK
-        && $conditional->getStyle()->getBorders()->getRight()->getBorderStyle() == Border::BORDER_NONE ? 1 : 0);
+            && $conditional->getStyle()->getBorders()->getRight()->getBorderStyle() == Border::BORDER_NONE ? 1 : 0);
         $bBorderTop = ($conditional->getStyle()->getBorders()->getTop()->getColor()->getARGB() == Color::COLOR_BLACK
-        && $conditional->getStyle()->getBorders()->getTop()->getBorderStyle() == Border::BORDER_NONE ? 1 : 0);
+            && $conditional->getStyle()->getBorders()->getTop()->getBorderStyle() == Border::BORDER_NONE ? 1 : 0);
         $bBorderBottom = ($conditional->getStyle()->getBorders()->getBottom()->getColor()->getARGB() == Color::COLOR_BLACK
-        && $conditional->getStyle()->getBorders()->getBottom()->getBorderStyle() == Border::BORDER_NONE ? 1 : 0);
+            && $conditional->getStyle()->getBorders()->getBottom()->getBorderStyle() == Border::BORDER_NONE ? 1 : 0);
         if ($bBorderLeft == 0 || $bBorderRight == 0 || $bBorderTop == 0 || $bBorderBottom == 0) {
             $bFormatBorder = 1;
         } else {

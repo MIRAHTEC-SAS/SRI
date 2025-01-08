@@ -4,6 +4,7 @@
 include('../config/app.php');
 
 require __DIR__ . '/vendor/autoload.php';
+
 use Twilio\Rest\Client;
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -22,28 +23,29 @@ $client = new Client($account_sid, $auth_token);
 // $service='DTAI';
 // $categorie='Electricite';
 
-$messageDageMain ="Bonjour,\nNous vous informons que l'intervention planifiée au $service est annulée.\nLes raisons vous sont envoyées par mail.\n\nDAGE - MFB";
+$messageDageMain = "Bonjour,\nNous vous informons que l'intervention planifiée au $service est annulée.\nLes raisons vous sont envoyées par mail.\n\nDAGE - MFB";
 // Description: $description\n
 // Service: $service\n
 // Categorie: $categorie\n
 
 // $telephone='+15145741304';
 
-$client->messages->create($telephone,
+$client->messages->create(
+    $telephone,
     array(
         // "from" => "CFJ",
         "messagingServiceSid" => 'MGf3c9896cbe7d180452fade5013466a98',
         'body' => $messageDageMain
-        )
+    )
 );
 
 // Enovoi du MAIL
 $mail = new PHPMailer(true);
 try {
-	include('content_mail_affectation.php');
+    include('content_mail_affectation.php');
 
-// GOO MAIL DAGE
-    $textversion="This is the text version";
+    // GOO MAIL DAGE
+    $textversion = "This is the text version";
     // $textversion='<p>TEst</p>';
     //Server settings
     // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
@@ -56,12 +58,12 @@ try {
     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
-	// $utilisateur=$prenom.' '.$nom;
-	$utilisateur='DAGE MFB';
-    $mail->setFrom('contact@sedif.sn', 'MFB/DAGE');
+    // $utilisateur=$prenom.' '.$nom;
+    $utilisateur = 'DAGE MFB';
+    $mail->setFrom('sri@minfinances.sn', 'MFB/DAGE');
     $mail->addAddress($email, $utilisateur);     //Add a recipient
     // $pieceJointe=$photo;
-    $link='../sri_dage/notifications/'.$photo;
+    $link = '../sri_dage/notifications/' . $photo;
     // //Attachments
     $mail->addAttachment($link);         //Add attachments
     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
@@ -72,13 +74,8 @@ try {
     $mail->Body    = $htmlversion;
     $mail->AltBody = $textversion;
     $mail->send();
-
-
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
 
 // echo 'done !';
-
-
-

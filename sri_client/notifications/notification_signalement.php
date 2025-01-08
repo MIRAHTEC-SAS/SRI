@@ -135,7 +135,7 @@ try {
     //Recipients
     // $utilisateur=$prenom.' '.$nom;
     $utilisateur = 'DAGE MFB';
-    $mail->setFrom('contact@sedif.sn', 'MFB/DAGE');
+    $mail->setFrom('sri@minfinances.sn', 'MFB/DAGE');
     $mail->addAddress($emailDage, $utilisateur);     //Add a recipient
     // $pieceJointe='../Signalements/44DC432/NOUYOO4.png';
 
@@ -178,7 +178,7 @@ for ($i = 0; $i < count($emailsResponsables); $i++) {
         //Recipients
         // $utilisateur=$prenom.' '.$nom;
         $utilisateur = 'DAGE MFB';
-        $mailResp->setFrom('contact@sedif.sn', 'MFB/DAGE');
+        $mailResp->setFrom('sri@minfinances.sn', 'MFB/DAGE');
         // $pieceJointe='../Signalements/44DC432/NOUYOO4.png';
 
         // //Attachments
@@ -225,7 +225,7 @@ for ($i = 0; $i < count($emailsGestionnaires); $i++) {
         //Recipients
         // $utilisateur=$prenom.' '.$nom;
         $utilisateur = 'DAGE MFB';
-        $mailGest->setFrom('contact@sedif.sn', 'MFB/DAGE');
+        $mailGest->setFrom('sri@minfinances.sn', 'MFB/DAGE');
         // $pieceJointe='../Signalements/44DC432/NOUYOO4.png';
 
         // //Attachments

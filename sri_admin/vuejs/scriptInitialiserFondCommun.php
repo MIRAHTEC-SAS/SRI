@@ -23,21 +23,21 @@
             urlUPDATE: "API/api_pgav.php?action=updateHierarchie",
             urlDELETE: "API/api_pgav.php?action=deleteHierarchie",
             hierarchies: [],
-            ministeres:[],
-            directionsGenerales:[],
-            directions:[],
-            fcs:[],
+            ministeres: [],
+            directionsGenerales: [],
+            directions: [],
+            fcs: [],
             agences: [],
             banques: [],
-            reductions:[],
-            agents:[],
-            baremes:[],
-            situations_m:[],
-            corps:[],
+            reductions: [],
+            agents: [],
+            baremes: [],
+            situations_m: [],
+            corps: [],
             newHierarchie: {},
-            newFcInit:{},
+            newFcInit: {},
             currentHierarchie: {},
-            currentAgent:{}
+            currentAgent: {}
         },
         computed: {
             fcParMinistere() {
@@ -69,45 +69,57 @@
             },
             newPart() {
                 switch (this.currentAgent.situation_matrimoniale) {
-                    case 'Célibataire' :
-                        if (this.currentAgent.nb_enfant==0) return 1;
-                        if (this.currentAgent.nb_enfant==1) return 1.5;
-                        if (this.currentAgent.nb_enfant==2) return 2.5;
-                        if (this.currentAgent.nb_enfant==3) return 2.5;
-                        if (this.currentAgent.nb_enfant==4) return 3;
+                    case 'Célibataire':
+                        if (this.currentAgent.nb_enfant == 0) return 1;
+                        if (this.currentAgent.nb_enfant == 1) return 1.5;
+                        if (this.currentAgent.nb_enfant == 2) return 2.5;
+                        if (this.currentAgent.nb_enfant == 3) return 2.5;
+                        if (this.currentAgent.nb_enfant == 4) return 3;
 
-                    break;
-                    case 'Marié' :
-                        if (this.currentAgent.nb_enfant==0) return 1.5;
-                        if (this.currentAgent.nb_enfant==1) return 2;
-                        if (this.currentAgent.nb_enfant==2) return 2.5;
-                        if (this.currentAgent.nb_enfant==3) return 3;
-                        if (this.currentAgent.nb_enfant==4) return 3;
-                    break;
-                    case 'Divorcé' :
-                        if (this.currentAgent.nb_enfant==0) return 1;
-                        if (this.currentAgent.nb_enfant==1) return 1.5;
-                        if (this.currentAgent.nb_enfant==2) return 2;
-                        if (this.currentAgent.nb_enfant==3) return 2.5;
-                        if (this.currentAgent.nb_enfant==4) return 3;
-                    break;
-                    case 'Veuf' :
-                        if (this.currentAgent.nb_enfant==0) return 1;
-                        if (this.currentAgent.nb_enfant==1) return 1.5;
-                        if (this.currentAgent.nb_enfant==2) return 2;
-                        if (this.currentAgent.nb_enfant==3) return 2.5;
-                        if (this.currentAgent.nb_enfant==4) return 3;
-                    break;
+                        break;
+                    case 'Marié':
+                        if (this.currentAgent.nb_enfant == 0) return 1.5;
+                        if (this.currentAgent.nb_enfant == 1) return 2;
+                        if (this.currentAgent.nb_enfant == 2) return 2.5;
+                        if (this.currentAgent.nb_enfant == 3) return 3;
+                        if (this.currentAgent.nb_enfant == 4) return 3;
+                        break;
+                    case 'Divorcé':
+                        if (this.currentAgent.nb_enfant == 0) return 1;
+                        if (this.currentAgent.nb_enfant == 1) return 1.5;
+                        if (this.currentAgent.nb_enfant == 2) return 2;
+                        if (this.currentAgent.nb_enfant == 3) return 2.5;
+                        if (this.currentAgent.nb_enfant == 4) return 3;
+                        break;
+                    case 'Veuf':
+                        if (this.currentAgent.nb_enfant == 0) return 1;
+                        if (this.currentAgent.nb_enfant == 1) return 1.5;
+                        if (this.currentAgent.nb_enfant == 2) return 2;
+                        if (this.currentAgent.nb_enfant == 3) return 2.5;
+                        if (this.currentAgent.nb_enfant == 4) return 3;
+                        break;
                 }
             },
             newTaux() {
                 switch (this.currentAgent.codeBareme) {
-                    case 'B1' : return 0; break;
-                    case 'B2' : return 0.2; break;
-                    case 'B3' : return 0.3; break;
-                    case 'B4' : return 0.35; break;
-                    case 'B5' : return 0.37; break;
-                    case 'B6' : return 0.4; break;
+                    case 'B1':
+                        return 0;
+                        break;
+                    case 'B2':
+                        return 0.2;
+                        break;
+                    case 'B3':
+                        return 0.3;
+                        break;
+                    case 'B4':
+                        return 0.35;
+                        break;
+                    case 'B5':
+                        return 0.37;
+                        break;
+                    case 'B6':
+                        return 0.4;
+                        break;
 
 
                 }
@@ -117,23 +129,45 @@
             // }
             newTauxReduit() {
                 switch (this.newPart) {
-                    case 1 : return 0; break;
-                    case 1.5 : return 0.1; break;
-                    case 2 : return 0.15; break;
-                    case 2.5 : return 0.2; break;
-                    case 3 : return 0.25; break;
-                    case 3.5 : return 0.3; break;
-                    case 4 : return 0.34; break;
+                    case 1:
+                        return 0;
+                        break;
+                    case 1.5:
+                        return 0.1;
+                        break;
+                    case 2:
+                        return 0.15;
+                        break;
+                    case 2.5:
+                        return 0.2;
+                        break;
+                    case 3:
+                        return 0.465;
+                        break;
+                    case 3.5:
+                        return 0.3;
+                        break;
+                    case 4:
+                        return 0.34;
+                        break;
 
                 }
             },
             newPartHierarchie() {
                 switch (this.currentAgent.hierarchie) {
-                    case 'A' : return 5; break;
-                    case 'B' : return 4; break;
-                    case 'C' : return 3; break;
-                    case 'D' : return 3; break;
-                   
+                    case 'A':
+                        return 5;
+                        break;
+                    case 'B':
+                        return 4;
+                        break;
+                    case 'C':
+                        return 3;
+                        break;
+                    case 'D':
+                        return 3;
+                        break;
+
 
                 }
             }
@@ -312,7 +346,7 @@
 
                     })
             },
-          
+
             addHierarchie() {
 
                 // On prepare le form pour insertion les champs dans le variable global POST
@@ -322,8 +356,7 @@
                 axios.post(this.urlPOST, formData)
                     .then((resultat) => resultat.data)
                     .then((resultat) => {
-                        this.newHierarchie = {
-                        }
+                        this.newHierarchie = {}
                         if (resultat.error) {
                             this.errorMsg = resultat.error;
                         } else {
@@ -393,8 +426,8 @@
                 this.currentHierarchie = hierarchie;
             },
 
-              // Methode pour recuperer le periodes selectionné 
-              selectedAgent(agent) {
+            // Methode pour recuperer le periodes selectionné 
+            selectedAgent(agent) {
                 this.currentAgent = agent;
             }
 

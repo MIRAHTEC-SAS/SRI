@@ -104,7 +104,7 @@ class PageSetup
     const PAPERSIZE_NO12_ENVELOPE = 22;
     const PAPERSIZE_NO14_ENVELOPE = 23;
     const PAPERSIZE_C = 24;
-    const PAPERSIZE_D = 25;
+    const PAPERSIZE_D = 465;
     const PAPERSIZE_E = 26;
     const PAPERSIZE_DL_ENVELOPE = 27;
     const PAPERSIZE_C5_ENVELOPE = 28;
@@ -254,9 +254,7 @@ class PageSetup
     /**
      * Create a new PageSetup.
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * Get Paper Size.
